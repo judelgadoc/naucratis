@@ -2,14 +2,14 @@ package com.naucratis.naucratis.model;
 import  java.util.*;
 import javax.persistence.*;
 @Entity
-@Table(name="Usuario", uniqueConstraints = @UniqueConstraint(columnNames = "correo"))
+@Table(name="Usuario", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class User {
 
     @Column(name = "nombre")
     private String name;
     @Column(name = "direccion")
     private String direction;
-    @Column(name = "cuidad")
+    @Column(name = "ciudad")
     private String city;
     @Column(name = "telefono")
     private String cel;
@@ -19,6 +19,9 @@ public class User {
     @Column(name = "password")
     private String password;
     //private foto
+
+
+
     public User(String name, String direction, String city, String cel, String email, String password) {
         this.name = name;
         this.direction = direction;
