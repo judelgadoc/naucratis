@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Table(name="Cliente", uniqueConstraints = @UniqueConstraint(columnNames = "id"))
 public class Client {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @JoinColumn(name = "user_key", unique = true)
