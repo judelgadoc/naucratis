@@ -1,9 +1,14 @@
 package com.naucratis.naucratis.model;
-import  java.util.*;
+import ch.qos.logback.classic.db.names.ColumnName;
+
 import javax.persistence.*;
 @Entity
-@Table(name="Usuario", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
+@Table(name="Usuario")
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long Id;
+
 
     @Column(name = "nombre")
     private String name;
@@ -13,7 +18,7 @@ public class User {
     private String city;
     @Column(name = "telefono")
     private String cel;
-    @Id
+    @Column(name= "email")
     private String email;
 
     @Column(name = "password")
@@ -21,8 +26,8 @@ public class User {
     //private foto
 
 
-
     public User(String name, String direction, String city, String cel, String email, String password) {
+        super();
         this.name = name;
         this.direction = direction;
         this.city = city;
@@ -31,6 +36,13 @@ public class User {
         this.password = password;
     }
 
+    public Long getId() {
+        return Id;
+    }
+
+    public void setId(Long id_user) {
+        this.Id = id_user;
+    }
     public String getName() {
         return name;
     }

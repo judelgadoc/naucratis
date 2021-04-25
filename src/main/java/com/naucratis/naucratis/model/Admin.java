@@ -1,4 +1,3 @@
-
 package com.naucratis.naucratis.model;
 
 import javax.persistence.*;
@@ -13,5 +12,5 @@ public class Admin {
     @JoinColumn(name="user_key",unique = true)
     @OneToOne( cascade = CascadeType.ALL)
     private User user;
-   // @OneToOne @JoinColumn(name = "email" )  private User email;
+    // @OneToOne @JoinColumn(name = "email" )  private User email;
 }
