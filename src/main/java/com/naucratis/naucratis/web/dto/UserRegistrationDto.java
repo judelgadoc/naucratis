@@ -16,6 +16,8 @@ public class UserRegistrationDto {
     private String password;
     //private foto
 
+    public UserRegistrationDto() {}
+
     public UserRegistrationDto(String name, String direction, String city, String cel, String email, String password) {
         this.name = name;
         this.direction = direction;

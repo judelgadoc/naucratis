@@ -3,6 +3,7 @@ import ch.qos.logback.classic.db.names.ColumnName;
 
 import javax.persistence.*;
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name="Usuario")
 public class User {
     @Id

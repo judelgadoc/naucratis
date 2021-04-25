@@ -1,7 +1,7 @@
 package com.naucratis.naucratis.service;
 
 
-import com.naucratis.naucratis.model.User;
+import com.naucratis.naucratis.model.Client;
 import com.naucratis.naucratis.repository.UserRepository;
 import com.naucratis.naucratis.web.dto.UserRegistrationDto;
 import org.springframework.stereotype.Service;
@@ -17,14 +17,14 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User save(UserRegistrationDto userRegistrationDto) {  //TODO: Consultar como manejaremos lo de roles bajo la implementación de herencia
-        User user = new User(
+    public Client save(UserRegistrationDto userRegistrationDto) {
+        Client client = new Client(
                 userRegistrationDto.getName(),
                 userRegistrationDto.getDirection(),
                 userRegistrationDto.getCity(),
                 userRegistrationDto.getCel(),
                 userRegistrationDto.getEmail(),
                 userRegistrationDto.getPassword());
-        return userRepository.save(user);
+        return userRepository.save(client);
     }
 }
