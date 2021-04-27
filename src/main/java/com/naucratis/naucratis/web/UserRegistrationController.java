@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/registration")
+@RequestMapping("/registro")
 public class UserRegistrationController {
 
     private UserService userService;
@@ -22,13 +22,13 @@ public class UserRegistrationController {
 
     @GetMapping
     public String showRegistrationForm() {
-        return "registration";
+        return "registro";
     }
 
     @PostMapping
     public String registerUserAccount(@ModelAttribute("client") UserRegistrationDto userRegistrationDto) {
         userService.save(userRegistrationDto);
-        return "redirect:registration?success";
+        return "redirect:registro?success";
     }
 
     @ModelAttribute("client")

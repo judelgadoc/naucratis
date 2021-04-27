@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/registro-login.css">
+    <title>Registro</title>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-10 col-xl-9 mx-auto">
+            <div class="card card-signin flex-row my-5">
+                <div class="card-img-left d-none d-md-flex">
+                    <!-- Background image for card set in CSS! -->
+
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title text-center">Registro - Naucratis</h5>
+                    <form class="form-signin" th:action="@{/registro}" method="post">
+                        <hr class="my-4">
+                        <div class="form-label-group">
+                            <input type="text" id="inputUserame" class="form-control" placeholder="Username" required autofocus>
+                            <label for="inputUserame">Nombre</label>
+                        </div>
+
+                        <div class="form-label-group">
+                            <input type="text" id="inputCity" class="form-control" placeholder="City" required>
+                            <label for="inputCity">Ciudad</label>
+                        </div>
+
+                        <div class="form-label-group">
+                            <input type="text" id="inputDirection" class="form-control" placeholder="Direction" required>
+                            <label for="inputDirection">Dirección</label>
+                        </div>
+
+                        <div class="form-label-group">
+                            <input type="text" id="inputPhone" class="form-control" placeholder="Phone" required>
+                            <label for="inputPhone">Telefono</label>
+                        </div>
+
+                        <div class="form-label-group">
+                            <input type="email" id="inputMail" class="form-control" placeholder="Mail" required>
+                            <label for="inputMail">Correo</label>
+                        </div>
+
+                        <div class="form-label-group">
+                            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                            <label for="inputPassword">Contraseña</label>
+                        </div>
+
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <label>Rol:</label>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="dtype" id="customer" value="Customer">
+                        <label for="customer">Cliente</label>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="dtype" id="administrator" value="Administrator">
+                        <label for="administrator">Administrador</label>
+
+                        <hr class="my-4">
+
+                        <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Registrar</button>
+                        <a class="d-block text-center mt-2 small" href="/" th:href="@{/login}">Iniciar Sesión</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
