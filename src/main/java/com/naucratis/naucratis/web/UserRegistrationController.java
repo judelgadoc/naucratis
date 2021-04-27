@@ -31,7 +31,7 @@ public class UserRegistrationController {
         return "redirect:registro?success";
     }
 
-    @ModelAttribute("client")
+    @ModelAttribute("user")
     public UserRegistrationDto userRegistrationDto() {
         return new UserRegistrationDto();
     }

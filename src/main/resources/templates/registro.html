@@ -17,35 +17,40 @@
                 </div>
                 <div class="card-body">
                     <h5 class="card-title text-center">Registro - Naucratis</h5>
-                    <form class="form-signin" th:action="@{/registro}" method="post">
+
+                    <div th:if="${param.success}">
+                        <div class="alert alert-info">Te has registrado correctamente en la aplicación.</div>
+                    </div>
+
+                    <form class="form-signin" th:action="@{/registro}" method="post" th:object="${user}">
                         <hr class="my-4">
                         <div class="form-label-group">
-                            <input type="text" id="inputUserame" class="form-control" placeholder="Username" required autofocus>
+                            <input type="text" id="inputUserame" class="form-control" placeholder="Username" th:field="*{name}" required autofocus>
                             <label for="inputUserame">Nombre</label>
                         </div>
 
                         <div class="form-label-group">
-                            <input type="text" id="inputCity" class="form-control" placeholder="City" required>
+                            <input type="text" id="inputCity" class="form-control" placeholder="City" th:field="*{city}" required>
                             <label for="inputCity">Ciudad</label>
                         </div>
 
                         <div class="form-label-group">
-                            <input type="text" id="inputDirection" class="form-control" placeholder="Direction" required>
+                            <input type="text" id="inputDirection" class="form-control" placeholder="Direction" th:field="*{direction}" required>
                             <label for="inputDirection">Dirección</label>
                         </div>
 
                         <div class="form-label-group">
-                            <input type="text" id="inputPhone" class="form-control" placeholder="Phone" required>
-                            <label for="inputPhone">Telefono</label>
+                            <input type="text" id="inputPhone" class="form-control" placeholder="Phone" th:field="*{cel}" required>
+                            <label for="inputPhone">Teléfono</label>
                         </div>
 
                         <div class="form-label-group">
-                            <input type="email" id="inputMail" class="form-control" placeholder="Mail" required>
+                            <input type="email" id="inputMail" class="form-control" placeholder="Mail" th:field="*{email}" required>
                             <label for="inputMail">Correo</label>
                         </div>
 
                         <div class="form-label-group">
-                            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                            <input type="password" id="inputPassword" class="form-control" placeholder="Password" th:field="*{password}" required>
                             <label for="inputPassword">Contraseña</label>
                         </div>
 
@@ -61,7 +66,7 @@
                         <hr class="my-4">
 
                         <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Registrar</button>
-                        <a class="d-block text-center mt-2 small" href="/" th:href="@{/login}">Iniciar Sesión</a>
+                        <span class="d-block text-center mt-2 small">¿Ya posees una cuenta? <a href="/" th:href="@{/login}">Inicia sesión</a></span>
                     </form>
                 </div>
             </div>
