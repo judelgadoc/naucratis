@@ -22,6 +22,10 @@
                         <div class="alert alert-info">Te has registrado correctamente en la aplicación.</div>
                     </div>
 
+                    <div th:if="${errorEmail}">
+                        <div class="alert alert-danger">Ese correo electrónico ya está registrado</div>
+                    </div>
+
                     <form class="form-signin" th:action="@{/registro}" method="post" th:object="${user}">
                         <hr class="my-4">
                         <div class="form-label-group">
@@ -42,6 +46,7 @@
                         <div class="form-label-group">
                             <input type="text" id="inputPhone" class="form-control" placeholder="Phone" th:field="*{cel}" required>
                             <label for="inputPhone">Teléfono</label>
+                            <p th:if="${celError}">Número de teléfono inválido</p>
                         </div>
 
                         <div class="form-label-group">
@@ -52,6 +57,15 @@
                         <div class="form-label-group">
                             <input type="password" id="inputPassword" class="form-control" placeholder="Password" th:field="*{password}" required>
                             <label for="inputPassword">Contraseña</label>
+                            <div th:if="${passError}">
+                                <div>
+                                    <p>Mínimo 8 caracteres</p>
+                                    <p>Mínimo 2 caracteres especiales</p>
+                                    <p>Mínimo 2 números</p>
+                                    <p>Mínimo 2 letras mayúsculas</p>
+                                    <p>Mínimo 3 letras minúsculas</p>
+                                </div>
+                            </div>
                         </div>
 
                         &nbsp;&nbsp;&nbsp;&nbsp;
