@@ -1,15 +1,23 @@
 package com.naucratis.naucratis.model;
-import ch.qos.logback.classic.db.names.ColumnName;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+import java.util.Arrays;
+import java.util.Collection;
+
 @Entity
-@Table(name="Usuario")
-public class User {
+@Inheritance(strategy = InheritanceType.JOINED)
+@Table(name="Usuario", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
-
+    @NotEmpty
     @Column(name = "nombre")
     private String name;
     @Column(name = "direccion")
@@ -17,14 +25,23 @@ public class User {
     @Column(name = "ciudad")
     private String city;
     @Column(name = "telefono")
+    @Pattern(regexp="^[0-9]{8}$|^[0-9]{10}$")
     private String cel;
     @Column(name= "email")
     private String email;
-
     @Column(name = "password")
+    @Pattern(regexp="^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{8,}$")
     private String password;
     //private foto
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
+    }
+
+    public User() {
+
+    }
 
     public User(String name, String direction, String city, String cel, String email, String password) {
         super();
@@ -85,6 +102,31 @@ public class User {
 
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 
     public void setPassword(String password) {
