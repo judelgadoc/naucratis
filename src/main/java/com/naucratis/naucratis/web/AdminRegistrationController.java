@@ -14,42 +14,42 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/registro")
-public class UserRegistrationController {
+@RequestMapping("/register_admin")
+public class AdminRegistrationController {
 
     private UserService userService;
 
-    public UserRegistrationController(UserService userService) {
+    public AdminRegistrationController(UserService userService) {
         super();
         this.userService = userService;
     }
 
     @GetMapping
     public String showRegistrationForm() {
-        return "registro";
+        return "register_admin";
     }
 
     @PostMapping
-    public String registerClientAccount(@Valid @ModelAttribute("client") UserRegistrationDto userRegistrationDto, BindingResult result, Model model) {
+    public String registerClientAccount(@Valid @ModelAttribute("admin") UserRegistrationDto userRegistrationDto, BindingResult result, Model model) {
         if (!userRegistrationDto.getCel().matches("^[0-9]{8}$|^[0-9]{10}$")) {
             model.addAttribute("celError", userRegistrationDto);
-            return "/registro";
+            return "/register_admin";
         }
         if (!userRegistrationDto.getPassword().matches("^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{8,}$")) {
             model.addAttribute("passError", userRegistrationDto);
-            return "/registro";
+            return "/register_admin";
         }
         try {
-            userService.save(userRegistrationDto, "client");
-            return "redirect:registro?success";
+            userService.save(userRegistrationDto, "admin");
+            return "redirect:register_admin?success";
         } catch (DataIntegrityViolationException e) {
             model.addAttribute("errorEmail", userRegistrationDto);
-            return "/registro";
+            return "/register_admin";
         }
 
     }
 
-    @ModelAttribute("client")
+    @ModelAttribute("admin")
     public UserRegistrationDto userRegistrationDto() {
         return new UserRegistrationDto();
     }

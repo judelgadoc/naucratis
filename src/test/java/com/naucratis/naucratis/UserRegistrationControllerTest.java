@@ -33,7 +33,7 @@ public class UserRegistrationControllerTest {
         userDto.setCel("0123456789");
         userDto.setEmail("roherrerap@unal.edu.co");
         userDto.setPassword("AB@12abc");
-        String test = userRegistrationController.registerUserAccount(userDto, result, model);
+        String test = userRegistrationController.registerClientAccount(userDto, result, model);
         assert test.equals("redirect:registro?success");
     }
 
@@ -49,7 +49,7 @@ public class UserRegistrationControllerTest {
         userDto.setCel("0123456789");
         userDto.setEmail("roherrerap@unal.edu.co");
         userDto.setPassword("AB@12ab");
-        String test = userRegistrationController.registerUserAccount(userDto, result, model);
+        String test = userRegistrationController.registerClientAccount(userDto, result, model);
         assert !test.equals("redirect:registro?success");
     }
 
@@ -65,7 +65,7 @@ public class UserRegistrationControllerTest {
         userDto.setCel("0123456789a");
         userDto.setEmail("roherrerap@unal.edu.co");
         userDto.setPassword("AB@12abc");
-        String test = userRegistrationController.registerUserAccount(userDto, result, model);
+        String test = userRegistrationController.registerClientAccount(userDto, result, model);
         assert !test.equals("redirect:registro?success");
     }
 
@@ -73,7 +73,7 @@ public class UserRegistrationControllerTest {
     public void validateRegisterFour() {
         UserRegistrationController userRegistrationController = new UserRegistrationController(userService);
 
-        System.out.println("Prueba controlador de registro # 3: cel malo");
+        System.out.println("Prueba controlador de registro # 3: nombre malo");
         UserRegistrationDto userDto = new UserRegistrationDto();
         userDto.setName("");
         userDto.setCity("Bogotá");
@@ -81,7 +81,7 @@ public class UserRegistrationControllerTest {
         userDto.setCel("0123456789a");
         userDto.setEmail("roherrerap@unal.edu.co");
         userDto.setPassword("AB@12abc");
-        String test = userRegistrationController.registerUserAccount(userDto, result, model);
+        String test = userRegistrationController.registerClientAccount(userDto, result, model);
         assert !test.equals("redirect:registro?success");
     }
 }

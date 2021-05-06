@@ -13,6 +13,11 @@ public class Client extends User {
     /*@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;*/
+
+    public Client() {
+
+    }
+
     public Client(String name, String direction, String city, String cel, String email, String password) {
         super(name, direction, city, cel, email, password);
     }

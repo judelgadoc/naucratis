@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Nacrutis</title>
 </head>
 <body>
     <h1>Bienvenido</h1>
+    <a href="/" th:href="@{/admin}">Panel de control admin</a>
+
+    <div sec:authorize="hasRole('ADMINISTRATOR')">Holaaaaaa esto solo se mostrará en admins ^_^</div>
 </body>
 </html>

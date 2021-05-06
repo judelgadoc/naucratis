@@ -6,5 +6,5 @@ import com.naucratis.naucratis.web.dto.UserRegistrationDto;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 public interface UserService extends UserDetailsService {
-    User save(UserRegistrationDto registrationDto);
+    User save(UserRegistrationDto registrationDto, String role);
 }

@@ -16,17 +16,17 @@
 
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title text-center">Registro - Naucratis</h5>
+                    <h5 class="card-title text-center">Nuevo admin - Naucratis</h5>
 
                     <div th:if="${param.success}">
-                        <div class="alert alert-info">Te has registrado correctamente en la aplicación.</div>
+                        <div class="alert alert-info">Admin registrado correctamente en la aplicación.</div>
                     </div>
 
                     <div th:if="${errorEmail}">
                         <div class="alert alert-danger">Ese correo electrónico ya está registrado</div>
                     </div>
 
-                    <form class="form-signin" th:action="@{/registro}" method="post" th:object="${client}" lang="es">
+                    <form class="form-signin" th:action="@{/register_admin}" method="post" th:object="${admin}">
                         <hr class="my-4">
                         <div class="form-label-group">
                             <input type="text" id="inputUserame" class="form-control" placeholder="Username" th:field="*{name}" required autofocus>
@@ -64,7 +64,6 @@
                         <hr class="my-4">
 
                         <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Registrar</button>
-                        <span class="d-block text-center mt-2 small">¿Ya posees una cuenta? <a href="/" th:href="@{/login}">Inicia sesión</a></span>
                     </form>
                 </div>
             </div>

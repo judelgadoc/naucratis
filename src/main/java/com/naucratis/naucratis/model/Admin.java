@@ -11,6 +11,10 @@ import java.util.Collection;
 @Table(name="Admin") //uniqueConstraints = @UniqueConstraint(columnNames = "id"))
 public class Admin extends User{
 
+    public Admin() {
+
+    }
+
     public Admin(String name, String direction, String city, String cel, String email, String password) {
         super(name, direction, city, cel, email, password);
     }

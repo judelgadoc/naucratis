@@ -1,6 +1,7 @@
 package com.naucratis.naucratis.service;
 
 
+import com.naucratis.naucratis.model.Admin;
 import com.naucratis.naucratis.model.Client;
 import com.naucratis.naucratis.model.User;
 import com.naucratis.naucratis.repository.UserRepository;
@@ -32,14 +33,25 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User save(UserRegistrationDto userRegistrationDto) {
-        User user = new User(
-                userRegistrationDto.getName(),
-                userRegistrationDto.getDirection(),
-                userRegistrationDto.getCity(),
-                userRegistrationDto.getCel(),
-                userRegistrationDto.getEmail(),
-                passwordEncoder.encode(userRegistrationDto.getPassword()));
+    public User save(UserRegistrationDto userRegistrationDto, String role) {
+        User user;
+
+        if (role.equals("client"))
+            user = new Client(
+                    userRegistrationDto.getName(),
+                    userRegistrationDto.getDirection(),
+                    userRegistrationDto.getCity(),
+                    userRegistrationDto.getCel(),
+                    userRegistrationDto.getEmail(),
+                    passwordEncoder.encode(userRegistrationDto.getPassword()));
+        else
+            user = new Admin(
+                    userRegistrationDto.getName(),
+                    userRegistrationDto.getDirection(),
+                    userRegistrationDto.getCity(),
+                    userRegistrationDto.getCel(),
+                    userRegistrationDto.getEmail(),
+                    passwordEncoder.encode(userRegistrationDto.getPassword()));
         return userRepository.save(user);
     }
 }
