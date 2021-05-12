@@ -1,10 +1,43 @@
 package com.naucratis.naucratis.service;
 
+import com.naucratis.naucratis.model.library.Library;
+import com.naucratis.naucratis.model.user.Administrator;
+import com.naucratis.naucratis.model.user.User;
+import com.naucratis.naucratis.repository.UserRepository;
+import org.springframework.stereotype.Service;
 
-import com.naucratis.naucratis.model.User;
-import com.naucratis.naucratis.web.dto.UserRegistrationDto;
-import org.springframework.security.core.userdetails.UserDetailsService;
+@Service
+public class UserService
+{
+    private UserRepository userRepository;
+    private LibraryService libraryService;
 
-public interface UserService extends UserDetailsService {
-    User save(UserRegistrationDto registrationDto);
+    public UserService(UserRepository userRepository,
+                       LibraryService libraryService)
+    {
+        this.userRepository = userRepository;
+        this.libraryService = libraryService;
+    }
+
+    public void save(User user)
+    {
+        userRepository.save(user);
+    }
+
+    public User findByEmail(String email)
+    {
+        return userRepository.findByEmail(email);
+    }
+
+    public void eliminateLibrary(String nameLibrary, String email)
+    {
+        Administrator administrator =
+                (Administrator) userRepository.findByEmail(email);
+
+        Library library = libraryService.findByName(nameLibrary);
+
+        administrator.getLibraries().remove(library);
+
+        libraryService.eliminate(library);
+    }
 }
