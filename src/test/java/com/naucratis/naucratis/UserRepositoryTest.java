@@ -1,6 +1,6 @@
 package com.naucratis.naucratis;
 
-import com.naucratis.naucratis.model.User;
+import com.naucratis.naucratis.model.user.User;
 import com.naucratis.naucratis.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

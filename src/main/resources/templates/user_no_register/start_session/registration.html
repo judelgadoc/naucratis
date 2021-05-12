@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+  <head>
+      <title>Registro</title>
+      <meta charset="UTF-8">
+  </head>
+  <body>
+  <header>
+    <table>
+      <td>
+        <img width="100px" th:src="@{/images/Naucratis.png}">
+      </td>
+      <td>
+        <h1> Naucratis </h1>
+      </td>
+    </table>
+  </header>
+    <h1>¿Que tipo de usuario eres?</h1>
+    <a th:href="@{/register/administrator}">Administrador</a>
+    <br>
+    <br>
+    <a th:href="@{/register/customer}">Cliente</a>
+  </body>
+</html>
