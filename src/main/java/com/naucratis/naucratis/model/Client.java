@@ -10,9 +10,7 @@ import java.util.Collection;
 @Entity
 @Table(name="Cliente")  //uniqueConstraints = @UniqueConstraint(columnNames = "id"))
 public class Client extends User {
-    /*@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;*/
+
     public Client(String name, String direction, String city, String cel, String email, String password) {
         super(name, direction, city, cel, email, password);
     }
@@ -22,9 +20,6 @@ public class Client extends User {
         return Arrays.asList(new SimpleGrantedAuthority("ROLE_CUSTOMER"));
     }
 
-    /*@JoinColumn(name = "user_key", unique = true)
-    @OneToOne(cascade = CascadeType.ALL)
-    private User user;*/
 
 }
 

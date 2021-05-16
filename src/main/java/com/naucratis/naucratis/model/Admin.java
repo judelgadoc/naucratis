@@ -8,8 +8,11 @@ import java.util.Arrays;
 import java.util.Collection;
 
 @Entity
-@Table(name="Admin") //uniqueConstraints = @UniqueConstraint(columnNames = "id"))
+@Table(name="Admin")
 public class Admin extends User{
+    public Admin() {
+
+    }
 
     public Admin(String name, String direction, String city, String cel, String email, String password) {
         super(name, direction, city, cel, email, password);
@@ -28,4 +31,14 @@ public class Admin extends User{
     @OneToOne( cascade = CascadeType.ALL)
     private User user;*/
     // @OneToOne @JoinColumn(name = "email" )  private User email;
+    @ManyToMany(cascade = CascadeType.ALL)
+    private Collection<Biblioteca> IdAdmin;
+
+    public Collection<Biblioteca> getIdAdmin() {
+        return IdAdmin;
+    }
+
+    public void setIdAdmin(Collection<Biblioteca> idAdmin) {
+        IdAdmin = idAdmin;
+    }
 }
