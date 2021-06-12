@@ -1,5 +1,6 @@
 package com.naucratis.naucratis.service;
 
+import com.naucratis.naucratis.model.dto.LibraryRequestDto;
 import com.naucratis.naucratis.model.library.Book;
 import com.naucratis.naucratis.model.library.Library;
 import com.naucratis.naucratis.repository.LibraryRepository;
@@ -20,6 +21,14 @@ public class LibraryService
 
     public void save(Library library)
     {
+        libraryRepository.save(library);
+    }
+
+    public void save(LibraryRequestDto libraryRequest) {
+        Library library = new Library();
+        library.setName(libraryRequest.getName());
+        library.setAddress(libraryRequest.getAddress());
+        library.setContactPhone(libraryRequest.getContactPhone());
         libraryRepository.save(library);
     }
 

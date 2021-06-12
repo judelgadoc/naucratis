@@ -16,6 +16,10 @@ public class Library
     @Column(unique = true)
     private String name;
 
+    private String address;
+
+    private String contactPhone;
+
     @OneToMany(targetEntity = Book.class)
     @JoinTable(name = "inventory")
     private List<Book> inventory;
