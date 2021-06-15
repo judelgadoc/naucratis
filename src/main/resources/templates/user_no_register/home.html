@@ -78,7 +78,7 @@
             </li>
 
             <!--Funcionalidad sedes-->
-            <li class="nav-item">
+            <li class="nav-item" sec:authorize="hasRole('ROLE_ADMINISTRATOR')">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSedePages"
                    aria-expanded="true" aria-controls="collapseSedePages">
                     <i class="far fa-building"></i>
