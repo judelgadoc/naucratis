@@ -1,3 +1,0 @@
-# naucratis
-
-Biblioteca naucratis
