@@ -45,7 +45,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
         ).permitAll().anyRequest().authenticated()
                 .and().formLogin().loginPage("/login").permitAll()
                 .and().logout().invalidateHttpSession(true).clearAuthentication(true)
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login?logout").permitAll()
-                .and().csrf().disable().cors();
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login?logout").permitAll();
     }
 }

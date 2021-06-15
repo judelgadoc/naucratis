@@ -2,6 +2,7 @@ package com.naucratis.naucratis.controller;
 
 import com.naucratis.naucratis.model.dto.LibraryRequestDto;
 import com.naucratis.naucratis.service.LibraryService;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -33,7 +34,12 @@ public class LibraryController {
     public String addLibrary(@ModelAttribute("library") LibraryRequestDto libraryRequest) {
         try {
             libraryService.save(libraryRequest);
+        }catch (ConstraintViolationException exception) {
+            System.out.println(exception.getConstraintName());
+            return "redirect:/library/new?namealreadyexists";
         } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+            System.out.println("" + e.getCause());
             return "redirect:/library/new?failure";
         }
         return "redirect:/library/new?success";

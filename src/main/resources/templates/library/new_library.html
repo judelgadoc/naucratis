@@ -22,7 +22,7 @@
         <!--Barra de herramientas-->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
             <!--Titulo y icono-->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="pagina-principal.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" th:href="@{/}">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-book"></i>
                 </div>
@@ -162,7 +162,7 @@
                             <!--Nombre y icono-->
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small" sec:authentication="principal.username"></span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small" th:text = "${#authentication.getPrincipal().getName()}"></span>
                                 <img class="img-profile rounded-circle"
                                      src="/img/undraw_profile.svg">
                             </a>
@@ -197,9 +197,13 @@
                         <div class="alert alert-info">Se añadió correctamente la sede.</div>
                     </div>
 
+                    <!--aviso registro de libraria constraint violation-->
+                    <div th:if="${param.namealreadyexists}">
+                        <div class="alert alert-warning">Ya existe una librería con el mismo nombre</div>
+                    </div>
                     <!--aviso registro de libreria fallido-->
                     <div th:if="${param.failure}">
-                        <div class="alert alert-danger">Ocurrió un error al guardar la sede. Por favor reintente.</div>
+                        <div class="alert alert-danger">Ocurrió un error al guardar la sede. Por favor reintente de nuevo.</div>
                     </div>
 
                     <!--Titulo de pagina-->
