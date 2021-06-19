@@ -6,6 +6,7 @@ import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -21,7 +22,8 @@ public class LibraryController {
     }
 
     @GetMapping(path = "/edit")
-    public String getEditLibrary() {
+    public String getEditLibrary(Model model) {
+        model.addAttribute("libraries", libraryService.findAll());
         return "library/edit_library";
     }
 
@@ -52,6 +54,7 @@ public class LibraryController {
 
     @DeleteMapping(path = "/edit")
     public ResponseEntity<?> deleteLibrary() {
+        System.out.println("Deleting the library");
         return null;
     }
 
