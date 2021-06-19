@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--Especificaiones de la pantalla-->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Naucratis</title>
+
+    <!--Configuración de estilos-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="static/css/estilos-Naucratis.css" rel="stylesheet">
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+</head>
+
+<body id="page-top">
+
+    <div id="wrapper">
+
+        <!--Barra de herramientas-->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+            <!--Titulo y icono-->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="pagina-principal.html">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-book"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">Naucratis</div>
+            </a>
+
+            <!--División-->
+            <hr class="sidebar-divider my-0">
+
+            <!--Subtiutlo: "Funcionalidades"-->
+            <li class="nav-item active">
+                <a class="nav-link" href="#">
+                    <i class="fas fa-address-book"></i>
+                    <span>Funcionalidades</span></a>
+            </li>
+
+            <!--División-->
+            <hr class="sidebar-divider">
+
+            <!--Subtitulo: "Usuario"-->
+            <div class="sidebar-heading">Usuario</div>
+
+            <!--Funcionalidad buscar-->
+            <li class="nav-item">
+                <a class="nav-link" href="blanco.html">
+                    <i class="fas fa-search"></i>
+                    <span>Buscar</span></a>
+            </li>
+
+            <!--División-->
+            <hr class="sidebar-divider">
+
+            <!--Subtitulo: "Administrador"-->
+            <div class="sidebar-heading">Administrador</div>
+
+            <!--Funcionalidad inventario-->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+                   aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-list-ul"></i>
+                    <span>Inventario</span>
+                </a>
+                <!--Dos enlaces con cada una de las funcionalidades del inventario-->
+                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="blanco.html">Añadir libro</a>
+                        <a class="collapse-item" href="inventario.html">Editar libro</a>
+                    </div>
+                </div>
+            </li>
+
+            <!--Funcionalidad estadisticas-->
+            <li class="nav-item">
+                <a class="nav-link" href="estadisticas.html">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Estadísticas</span></a>
+            </li>
+
+            <!--División-->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!--Boton para minimizar la barra de herramientas-->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+            <!--Opcion Pro (solo decorativo)-->
+            <div class="sidebar-card d-none d-lg-flex">
+                <img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="...">
+                <p class="text-center mb-2"><strong>Pásate a Pro: </strong>Consigue una experiencia mas personalizada y amigable.</p>
+                <a class="btn btn-success btn-sm" href="#">Adquirir Pro!</a>
+            </div>
+
+        </ul>
+        <!-- Fin barra de herramientas-->
+
+        <!--Barra de contenido-->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <div id="content">
+
+                <!--Barra de busqueda -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!--Icono-->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <!--Barra-->
+                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <div class="input-group">
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar..."
+                                   aria-label="Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!--Menu desplegable (dispositivos moviles)-->
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item dropdown no-arrow d-sm-none">
+                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-search fa-fw"></i>
+                            </a>
+                            <!--Barra de busqueda (dispositivos moviles)-->
+                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                                 aria-labelledby="searchDropdown">
+                                <form class="form-inline mr-auto w-100 navbar-search">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control bg-light border-0 small"
+                                               placeholder="Buscar..." aria-label="Search"
+                                               aria-describedby="basic-addon2">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button">
+                                                <i class="fas fa-search fa-sm"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+
+                        <!--Notificaciones (no funciona es obcional)-->
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <!--Icono en la barra-->
+                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-bell fa-fw"></i>
+                                <span class="badge badge-danger badge-counter">3+</span>
+                            </a>
+                            <!--Titulo-->
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                 aria-labelledby="alertsDropdown">
+                                <h6 class="dropdown-header">Notificaciones</h6>
+                                <!--icono de notificacion1-->
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-primary">
+                                            <i class="fas fa-file-alt text-white"></i>
+                                        </div>
+                                    </div>
+                                    <!--descripción notificación1-->
+                                    <div>
+                                        <div class="small text-gray-500">Junio 5, 2021</div>
+                                        <span class="font-weight-bold">Tu autor favorito ha publicado un nuevo libro!</span>
+                                    </div>
+                                </a>
+                                <!--icono de notificacion2-->
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-success">
+                                            <i class="fas fa-donate text-white"></i>
+                                        </div>
+                                    </div>
+                                    <!--descripción notificación2-->
+                                    <div>
+                                        <div class="small text-gray-500">Abril 7, 2021</div>
+                                        El libro que reservaste ha sido vendido!
+                                    </div>
+                                </a>
+                                <!--icono de notificacion3-->
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-warning">
+                                            <i class="fas fa-exclamation-triangle text-white"></i>
+                                        </div>
+                                    </div>
+                                    <!--descripción notificación3-->
+                                    <div>
+                                        <div class="small text-gray-500">Junio 2, 2021</div>
+                                        llego a la librería el libro que pediste!
+                                    </div>
+                                </a>
+                                <a class="dropdown-item text-center small text-gray-500" href="#">Mas notifcaciones</a>
+                            </div>
+                        </li>
+
+                        <!--Mensajes (no funciona es obcional)-->
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <!--Icono en la barra-->
+                            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-envelope fa-fw"></i>
+                                <span class="badge badge-danger badge-counter">7</span>
+                            </a>
+                            <!--Titulo-->
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                 aria-labelledby="messagesDropdown">
+                                <h6 class="dropdown-header">Mensajes</h6>
+                                <!--Mensajes predefinidos con icono, contenido, fecha y usuraio que lo envia-->
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="img/undraw_profile_1.svg"
+                                             alt="...">
+                                        <div class="status-indicator bg-success"></div>
+                                    </div>
+                                    <div class="font-weight-bold">
+                                        <div class="text-truncate">Hola encontré el libro que buscabas.</div>
+                                        <div class="small text-gray-500">María Jiménez· 58m</div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="img/undraw_profile_2.svg"
+                                             alt="...">
+                                        <div class="status-indicator"></div>
+                                    </div>
+                                    <div>
+                                        <div class="text-truncate">Te recomiendo este libro</div>
+                                        <div class="small text-gray-500">Julián casallas· 1d</div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="img/undraw_profile_3.svg"
+                                             alt="...">
+                                        <div class="status-indicator bg-warning"></div>
+                                    </div>
+                                    <div>
+                                        <div class="text-truncate">Lo siento no encuentro el libro</div>
+                                        <div class="small text-gray-500">Fabián Torres· 2d</div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
+                                             alt="...">
+                                        <div class="status-indicator bg-success"></div>
+                                    </div>
+                                    <div>
+                                        <div class="text-truncate">Ya vendí el libro</div>
+                                        <div class="small text-gray-500">·Sonny Niño· 2w</div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item text-center small text-gray-500" href="#">Mas mensajes</a>
+                            </div>
+                        </li>
+
+                        <!--División-->
+                        <div class="topbar-divider d-none d-sm-block"></div>
+
+                        <!--Informacion de usuraio-->
+                        <li class="nav-item dropdown no-arrow">
+                            <!--Nombre y icono-->
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Carlos Rubio</span>
+                                <img class="img-profile rounded-circle"
+                                     src="img/undraw_profile.svg">
+                            </a>
+                            <!--Obciones de perfil, configuración y cerrar sesión-->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                 aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Perfil
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Configuarción
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <!--Cerrar sesión es la unica que funciona, despliega una tarjeta para validar el cierre de sesión-->
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Cerrar Sesión
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                    <!--Fin barra de contenido-->
+                </nav>
+
+                <!--Trabajar adentro de la pagina-->
+                <div class="container-fluid">
+
+                    <!--Titulo de pagina-->
+                    <h1 class="h3 mb-2 text-gray-800">Biblioteca</h1>
+
+                    <!--Tabla de libros (inventario)-->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Libros</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <!--Titulos de columnas al inico y al final-->
+                                    <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Editorial</th>
+                                        <th>Categoria</th>
+                                        <th>Estado</th>
+                                        <th>Precio</th>
+                                    </tr>
+                                    </thead>
+                                    <tfoot>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Editorial</th>
+                                        <th>Categoria</th>
+                                        <th>Estado</th>
+                                        <th>Precio</th>
+                                    </tr>
+                                    </tfoot>
+                                    <!--datos de 25 libros de prueba-->
+                                    <tbody>
+                                    <tr>
+                                        <td>Nomen liber</td>
+                                        <td>Book edition</td>
+                                        <td>Liber genus</td>
+                                        <td>Statu liber</td>
+                                        <td>Pretium libri</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nomen liber</td>
+                                        <td>Book edition</td>
+                                        <td>Liber genus</td>
+                                        <td>Statu liber</td>
+                                        <td>Pretium libri</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nomen liber</td>
+                                        <td>Book edition</td>
+                                        <td>Liber genus</td>
+                                        <td>Statu liber</td>
+                                        <td>Pretium libri</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nomen liber</td>
+                                        <td>Book edition</td>
+                                        <td>Liber genus</td>
+                                        <td>Statu liber</td>
+                                        <td>Pretium libri</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nomen liber</td>
+                                        <td>Book edition</td>
+                                        <td>Liber genus</td>
+                                        <td>Statu liber</td>
+                                        <td>Pretium libri</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nomen liber</td>
+                                        <td>Book edition</td>
+                                        <td>Liber genus</td>
+                                        <td>Statu liber</td>
+                                        <td>Pretium libri</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nomen liber</td>
+                                        <td>Book edition</td>
+                                        <td>Liber genus</td>
+                                        <td>Statu liber</td>
+                                        <td>Pretium libri</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nomen liber</td>
+                                        <td>Book edition</td>
+                                        <td>Liber genus</td>
+                                        <td>Statu liber</td>
+                                        <td>Pretium libri</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nomen liber</td>
+                                        <td>Book edition</td>
+                                        <td>Liber genus</td>
+                                        <td>Statu liber</td>
+                                        <td>Pretium libri</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nomen liber</td>
+                                        <td>Book edition</td>
+                                        <td>Liber genus</td>
+                                        <td>Statu liber</td>
+                                        <td>Pretium libri</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nomen liber</td>
+                                        <td>Book edition</td>
+                                        <td>Liber genus</td>
+                                        <td>Statu liber</td>
+                                        <td>Pretium libri</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nomen liber</td>
+                                        <td>Book edition</td>
+                                        <td>Liber genus</td>
+                                        <td>Statu liber</td>
+                                        <td>Pretium libri</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nomen liber</td>
+                                        <td>Book edition</td>
+                                        <td>Liber genus</td>
+                                        <td>Statu liber</td>
+                                        <td>Pretium libri</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nomen liber</td>
+                                        <td>Book edition</td>
+                                        <td>Liber genus</td>
+                                        <td>Statu liber</td>
+                                        <td>Pretium libri</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nomen liber</td>
+                                        <td>Book edition</td>
+                                        <td>Liber genus</td>
+                                        <td>Statu liber</td>
+                                        <td>Pretium libri</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nomen liber</td>
+                                        <td>Book edition</td>
+                                        <td>Liber genus</td>
+                                        <td>Statu liber</td>
+                                        <td>Pretium libri</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nomen liber</td>
+                                        <td>Book edition</td>
+                                        <td>Liber genus</td>
+                                        <td>Statu liber</td>
+                                        <td>Pretium libri</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nomen liber</td>
+                                        <td>Book edition</td>
+                                        <td>Liber genus</td>
+                                        <td>Statu liber</td>
+                                        <td>Pretium libri</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nomen liber</td>
+                                        <td>Book edition</td>
+                                        <td>Liber genus</td>
+                                        <td>Statu liber</td>
+                                        <td>Pretium libri</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nomen liber</td>
+                                        <td>Book edition</td>
+                                        <td>Liber genus</td>
+                                        <td>Statu liber</td>
+                                        <td>Pretium libri</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nomen liber</td>
+                                        <td>Book edition</td>
+                                        <td>Liber genus</td>
+                                        <td>Statu liber</td>
+                                        <td>Pretium libri</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nomen liber</td>
+                                        <td>Book edition</td>
+                                        <td>Liber genus</td>
+                                        <td>Statu liber</td>
+                                        <td>Pretium libri</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nomen liber</td>
+                                        <td>Book edition</td>
+                                        <td>Liber genus</td>
+                                        <td>Statu liber</td>
+                                        <td>Pretium libri</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nomen liber</td>
+                                        <td>Book edition</td>
+                                        <td>Liber genus</td>
+                                        <td>Statu liber</td>
+                                        <td>Pretium libri</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Unius libri</td>
+                                        <td>Book edition</td>
+                                        <td>Liber genus</td>
+                                        <td>Statu liber</td>
+                                        <td>Pretium libri</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Fin de tabla-->
+            </div>
+        </div>
+    </div>
+
+
+    <!--Boton de subida rapido-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!--Tarjeta de cierre de sesión-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Seguro que quiere cerrar sesión?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <!--Precionar cancelar disminuye la tarjeta, precioanar cerrar sesión lleva al usuario a login-->
+                <div class="modal-body">Seleccione cerrar sesión para salir de la pagina principal</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                    <a class="btn btn-primary" href="login.html">Cerrar sesión</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Fin tarjeta de cierre de sesión-->
+
+    <!--Bootstrap complementado con JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!--Complemento JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!--Scripts personalizados para todas las páginas-->
+    <script src="js/naucratis.js"></script>
+
+    <!--Complementos de nivel de página-->
+    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!--Secuencias de comandos personalizadas a nivel de página-->
+    <script src="js/demo/datatables-demo.js"></script>
+
+</body>
+
+</html>
