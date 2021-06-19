@@ -56,8 +56,8 @@
   </component>
   <component name="RunManager">
     <configuration name="NaucratisApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <module name="TRABAJO_ISW" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.naucratis.naucratis.NaucratisApplication" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
