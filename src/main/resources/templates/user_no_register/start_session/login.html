@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Naucratis - Login</title>
+
+    <!--Fuentes personalizadas para esta plantilla-->
+    <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link th:href="@{/css/estilos-Naucratis.css}" rel="stylesheet">
+
+</head>
+
+<body class="bg-gradient-primary">
+
+    <div class="container">
+
+        <!--Cuerpo de pagina-->
+        <div class="row justify-content-center">
+
+            <div class="col-xl-10 col-lg-12 col-md-9">
+
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!--Tarjeta dentro de pagina-->
+                        <div class="row">
+                            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                            <div class="col-lg-6">
+                                <div class="p-5">
+                                    <div th:if="${param.error}">
+                                        <div class="alert alert-danger">Nombre de usuario o contraseña incorrectos.</div>
+                                    </div>
+                                    <div th:if="${param.logout}">
+                                        <div class="alert alert-warning">Se ha cerrado la sesión correctamente.</div>
+                                    </div>
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">¡Bienvenido!</h1>
+                                    </div>
+                                    <form class="user" method="POST" th:action="@{/login}">
+                                        <div class="form-group">
+                                            <input type="email" class="form-control form-control-user"
+                                                id="username" name="username" aria-describedby="emailHelp"
+                                                placeholder="Introduzca la dirección de correo electrónico">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" class="form-control form-control-user"
+                                                id="password" name = "password" placeholder="Contraseña">
+                                        </div>
+                                        <input type="submit" value="Ingresar" class="btn btn-primary btn-user btn-block"/>
+                                        <hr>
+                                    </form>
+                                    <hr>
+                                    <div class="text-center">
+                                        <a class="small" href="#">¿Has olvidado tu contraseña?</a>
+                                    </div>
+                                    <div class="text-center">
+                                        <a class="small" th:href="@{/register}">¡Crea una cuenta!</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Fin tarjeta dentro de pagina-->
+            </div>
+        </div>
+    </div>
+    <!--Fin cuerpo de pagina-->
+
+    <!--Bootstrap complementado con JavaScript-->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!--Complemento JavaScript-->
+    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!--Complementos de nivel de página-->
+    <script src="/js/naucratis.js"></script>
+
+</body>
+
+</html>

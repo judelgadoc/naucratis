@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="Book/base :: head"></head>
+<body>
+    <div class="row justify-content-center">
+        <div class="col-md-4 mt-s">
+            <div class="alert alert-success" th:if="${succes !=null}" th:text="${succes}"></div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="card mt-5">
+                <div class="card-header text-center"><h4>Subida imagenes</h4></div>
+                <div class="card-body">
+                    <form th:action="@{/}" th:object="${book}" method="POST" enctype="multipart/form-data">
+                        <div clas="form-group">
+                            <label>ISBN</label>
+                            <input type="long" th:field="*{isbn}" class="form-control"/>
+                        </div>
+                        <div clas="form-group">
+                            <label>Author</label>
+                            <input type="List" th:field="*{authors,}" class="form-control"/>
+                        </div>
+                        <div clas="form-group">
+                            <label>Nombre</label>
+                            <input type="text" th:field="*{name}" class="form-control"/>
+                        </div>
+                        <div clas="form-group">
+                            <label>Editorial</label>
+                            <input type="text" th:field="*{editorial}" class="form-control"/>
+                        </div>
+                        <div clas="form-group">
+                            <label>Edicion</label>
+                            <input type="text" th:field="*{edition}" class="form-control"/>
+                        </div>
+                        <div clas="form-group">
+                            <label>Condicion</label>
+                            <input type="text" th:field="*{condition}" class="form-control"/>
+                        </div>
+                        <div clas="form-group">
+                            <label>Categoria</label>
+                            <input type="text" th:field="*{category}" class="form-control"/>
+                        </div>
+                        <div clas="form-group">
+                            <label>Precio</label>
+                            <input type="Long" th:field="*{price}" class="form-control"/>
+                        </div>
+                            <div class="row form-group">
+                                <input type="file" name="file" class="m-2"/>
+                            </div>
+                            <button type="submit" class="btn btn-sucess">Guardar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+            <div class="m-5">
+                <a th:href="@{/listar}"><button class="btn btn-primary">Ver Fotos</button></a>
+            </div>
+    </div>
+</body>
+</html>

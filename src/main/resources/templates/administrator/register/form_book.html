@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <title>Formulario registro libro</title>
+  </head>
+  <body>
+  <header>
+      <table>
+          <td>
+              <img width="100px" th:src="@{/images/Naucratis.png}">
+          </td>
+          <td>
+              <h1> Naucratis </h1>
+          </td>
+      </table>
+  </header>
+  <nav>
+      <ul>
+          <li th:if="${#strings.equals(role,'administrator')}">
+              <a th:href="@{/administrator/libraries}"><button type="button">Librerias</button> </a>
+          </li>
+          <li th:if="${role != null}">
+              <a th:href="@{'/' + ${role}}"> <button type="button"> Ver perfil </button></a>
+          </li>
+          <li th:if="${role != null}">
+              <form method="POST" th:action="@{/logout}">
+                  <input type="submit" value="Cerrar sesión"/>
+              </form>
+          </li>
+      </ul>
+  </nav>
+    <form method="POST" th:action="@{/register/book}" id="registrationBookForm">
+        <input type="hidden" th:value="${nameLibrary}" name="nameLibrary">
+        <table>
+            <tr>
+                <td><label for="isbn">ISBN: </label></td>
+                <td><input type="text" name="isbn"/></td>
+            </tr>
+            <tr>
+                <td><label for="cover">Portada: </label></td>
+                <td><input type="text" cover="cover"/></td>
+            </tr>
+            <tr>
+                <td><label for="name">Nombre: </label></td>
+                <td><input type="text" name="name"/></td>
+            </tr>
+            <tr>
+                <td><label for="list_authors">Autores: </label></td>
+                <td><input type="text" name="list_authors"/></td>
+            </tr>
+            <tr>
+                <td><label for="editorial">Editorial: </label></td>
+                <td><input type="text" name="editorial"/></td>
+            </tr>
+            <tr>
+                <td><label for="category">Categoria: </label></td>
+                <td><input type="text" name="category"/></td>
+            </tr>
+            <tr>
+                <td><label for="edition">Edición: </label></td>
+                <td><input type="text" name="edition"/></td>
+            </tr>
+            <tr>
+                <td><label for="condition">Condición: </label></td>
+                <td><input type="text" name="condition"/></td>
+            </tr>
+            <tr>
+                <td><label for="length">Largo: </label></td>
+                <td><input type="text" name="length"/></td>
+            </tr>
+            <tr>
+                <td><label for="width">Ancho: </label></td>
+                <td><input type="text" name="width"/></td>
+            </tr>
+            <tr>
+                <td><label for="height">Alto: </label></td>
+                <td><input type="text" name="height"/></td>
+            </tr>
+            <tr>
+                <td><label for="price">Precio: </label></td>
+                <td><input type="text" name="price"/></td>
+            </tr>
+            <tr>
+                <td><button type="submit"> Registrar</button></td>
+            </tr>
+        </table>
+    </form>
+  </body>
+</html>

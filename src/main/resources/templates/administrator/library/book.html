@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> Libro </title>
+</head>
+<body>
+<header>
+    <table>
+        <td>
+            <img width="100px" th:src="@{/images/Naucratis.png}">
+        </td>
+        <td>
+            <h1> Naucratis </h1>
+        </td>
+    </table>
+</header>
+<nav>
+    <ul>
+        <li th:if="${#strings.equals(role,'administrator')}">
+            <a th:href="@{/administrator/libraries}"><button type="button">Librerias</button> </a>
+        </li>
+        <li th:if="${role != null}">
+            <a th:href="@{'/' + ${role}}"> <button type="button"> Ver perfil </button></a>
+        </li>
+        <li th:if="${role != null}">
+            <form method="POST" th:action="@{/logout}">
+                <input type="submit" value="Cerrar sesión"/>
+            </form>
+        </li>
+    </ul>
+</nav>
+<h1>
+    <span th:text="${book.name}">NOMBRE LIBRO </span>
+    [<span th:text="${book.price == 0.0? 'Libro de prestamo': 'Libro para venta'}"> TIPO DE LIBRO</span>]
+</h1>
+<ul>
+    <li>
+        Autores:
+        <ul>
+            <li th:each="author: ${book.authors}">
+                <span th:text="${author.name}"> AUTOR </span>
+            </li>
+        </ul>
+    </li>
+    <li>ISBN: <span th:text="${book.isbn}"> ISBN </span></li>
+    <li>Editorial: <span th:text="${book.editorial}"> EDITORIAL </span></li>
+    <li>Edición: <span th:text="${book.edition}"> EDICIÓN </span></li>
+    <li>Categoria: <span th:text="${book.category}"> CATEGORIA </span></li>
+    <li>Condición: <span th:text="${book.condition}"> CONDICIÓN </span></li>
+    <li>Largo: <span th:text="${book.length}"> LARGO </span></li>
+    <li>Ancho: <span th:text="${book.width}"> ANCHO </span></li>
+    <li>Alto: <span th:text="${book.height}"> ALTO </span></li>
+    <li th:if="${book.price > 0.0}">Precio: <span th:text="${book.price}"> PRECIO </span></li>
+    <li> <span th:text="${book.available?'Disponible':'No Disponible'}"> ¿DISPONIBLE? </span> </li>
+</ul>
+
+<a th:href="@{'/modify/'+${name_library}+'/book/'+${book.id}}"> <button type="button"> Modificar </button> </a>
+<a th:href="@{'/eliminate/'+${name_library}+'/book/'+${book.id}}"> <button type="button"> Eliminar </button> </a>
+<br>
+</body>
+</html>
