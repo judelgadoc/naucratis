@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8">
     <title> Modificar libreria </title>
@@ -32,12 +32,45 @@
   </nav>
   <h1> <span th:text="${library.name}"> Nombre libraria </span> </h1>
   <br>
-  Numero de libros: <span th:text="${library.getInventory().size()}"> Numero de libros </span>
+  <img width="200px" th:src="'data:image/png;base64,'+${library.getImageBase64()}">
   <br>
   <br>
   <a th:href="@{'/administrator/libraries/'+${library.name}+'/books'}"> Ver lista de libros </a>
   <br>
   <br>
+  <h2> Sitios </h2>
+  <ul>
+    <li th:each="site: ${library.sites}">
+      <a th:href="@{'/administrator/libraries/'+${library.name}+'/site/'+${site.address}}"> <span th:text="${site.type}">TIPO</span> <span th:text="${site.address}"> DIRECCIÓN </span> </a>
+    </li>
+  </ul>
+  <br>
+  <a th:href="@{'/register/'+${library.name}+'/site'}"> <button type="button"> Agregar sitio </button> </a>
+  <br>
+  <br>
+  <br>
+  <h2> Ventas </h2>
+
+  <table>
+    <tr>
+      <td>Fecha</td>
+      <td> ID </td>
+      <td>ISBN</td>
+      <td>Cliente</td>
+      <td>Estado</td>
+      <td>Valor</td>
+    </tr>
+    <tr th:each="sale: ${library.sales}">
+      <td> <span th:text="${sale.getCreatedAt()}"> FECHA </span> </td>
+      <td> <span th:text="${sale.id}"> ID </span> </td>
+      <td> <span th:text="${sale.copyBook.isbn}">  ISBN </span> </td>
+      <td> <span th:text="${sale.email}"> NOMBRE LIBRERIA </span> </td>
+      <td> <span th:text="${sale.status.toString()}"> ESTADO COMPRA </span> </td>
+      <td> <span th:text="${sale.copyBook.price}"> VALOR </span> </td>
+      <td th:if="${sale.status.toString().equals('PROCESSING')}"><a th:href="@{'/transaction/finishing/' + ${library.name} + '/' + ${sale.id}}"><button>Finalizar</button></a></td>
+      <td th:if="${sale.status.toString().equals('PROCESSING')}"><a th:href="@{'/transaction/cancelling/' + ${library.name} + '/' + ${sale.id}}"><button>Cancelar</button></a></td>
+    </tr>
+  </table>
   <br>
   <br>
   <a th:href="@{'/eliminate/library/'+${library.name}}"> <button type="button"> Eliminar </button> </a>

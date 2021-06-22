@@ -1,6 +1,7 @@
 package com.naucratis.naucratis.model.form;
 
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 @Data
 public class RegistrationUserForm
@@ -11,5 +12,6 @@ public class RegistrationUserForm
     private String phone;
     private String email;
     private String password;
+    private MultipartFile image;
 
 }

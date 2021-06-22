@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <title> Agregar copia </title>
+  </head>
+  <body>
+    <h1> Formulario copia </h1>
+    <form method="POST" th:action="@{/register/copyBookProcess}" id="copyBookForm">
+        <input type="hidden" th:value="${isbn}" name="isbn">
+        <input type="hidden" th:value="${nameLibrary}" name="nameLibrary">
+        <table>
+            <tr>
+                <td><label for="condition">Condición: </label></td>
+                <td><input type="text" name="condition"/></td>
+            </tr>
+            <tr>
+                <td><label for="price">Precio: </label></td>
+                <td><input type="text" name="price"/></td>
+            </tr>
+            <tr>
+                <td><label for="site">Sitio: </label></td>
+                <td>
+                    <select name="site">
+                        <div th:each="site: ${sites}">
+                            <option th:value="${site.address}">
+                                <span th:text="${site.address}"> DIRECCIÓN </span>
+                            </option>
+                        </div>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <input type="radio" id="status" name="status" th:value="${'AVAILABLE'}">
+                        <label for="status"> Disponible </label>
+                    </div>
+                    <div>
+                        <input type="radio" id="status" name="status" th:value="${'NOAVAILABLE'}">
+                        <label for="status"> No disponible </label>
+                    </div>
+                    <div>
+                        <input type="radio" id="status" name="status" th:value="${'SOLD'}">
+                        <label for="status"> Vendido </label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="description">Descripción: </label></td>
+                <td><textarea name="description"/> </textarea> </td>
+            </tr>
+            <tr>
+                <td><button type="submit"> Registrar</button></td>
+            </tr>
+        </table>
+    </form>
+  </body>
+</html>

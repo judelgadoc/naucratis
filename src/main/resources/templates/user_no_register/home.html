@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
       <meta charset="UTF-8">
       <title>Naucratis</title>
   </head>
   <body>
+
     <header>
       <table>
         <td>
@@ -15,6 +16,7 @@
         </td>
       </table>
     </header>
+
     <nav>
       <ul>
         <li th:if="${role == null}">
@@ -25,7 +27,7 @@
           <a th:href="@{/administrator/libraries}"><button type="button">Librerias</button> </a>
         </li>
         <li th:if="${#strings.equals(role,'customer')}">
-          <a th:href="@{/administrator/libraries}"><button type="button">Libros</button> </a>
+          <a th:href="@{/customer/shoppingCart}"><button type="button">Carrito</button> </a>
         </li>
         <li th:if="${role != null}">
           <a th:href="@{'/' + ${role}}"> <button type="button"> Ver perfil </button></a>
@@ -37,6 +39,11 @@
         </li>
       </ul>
     </nav>
+
     ¡Bienvenido!
+    <br>
+    <a th:href="@{/libraries}"> Librerias </a>
+
+
   </body>
 </html>

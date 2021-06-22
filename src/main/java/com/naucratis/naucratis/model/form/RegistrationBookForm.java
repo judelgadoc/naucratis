@@ -3,6 +3,7 @@ package com.naucratis.naucratis.model.form;
 import com.naucratis.naucratis.model.library.Author;
 import com.naucratis.naucratis.model.library.Book;
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,9 +12,6 @@ import java.util.List;
 @Data
 public class RegistrationBookForm
 {
-
-    private Long id;
-
     private String  nameLibrary;
 
     private long    isbn;
@@ -34,16 +32,28 @@ public class RegistrationBookForm
     private boolean available;
     private double  price;
 
-    public Book toBook() throws IOException {
+    private int numPages;
+
+    private int quantity;
+
+    private String site;
+
+    private MultipartFile cover;
+
+    public Book toBook() {
 
         stringToListAuthors();
 
-        Book book = new Book(isbn, authors, name, editorial, category, edition,
-                condition, price);
+        Book book = new Book(isbn, name, editorial, category, edition,
+                length, width, height, numPages);
 
-        book.setLength(length);
-        book.setWidth(width);
-        book.setHeight(height);
+        book.setAuthors(authors);
+
+        try {
+            book.setCoverImage(cover.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         return book;
     }

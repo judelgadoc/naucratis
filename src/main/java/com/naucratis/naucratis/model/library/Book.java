@@ -3,6 +3,7 @@ package com.naucratis.naucratis.model.library;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Base64;
 import java.util.List;
 
 @Data
@@ -10,9 +11,6 @@ import java.util.List;
 public class Book
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
-
     private long isbn;
 
     @ManyToMany(targetEntity = Author.class)
@@ -23,30 +21,35 @@ public class Book
     private String category;
     private String edition;
 
-    @Column(name = "condition_book")
-    private String condition;
-
     private double length;
     private double width;
     private double height;
 
-    private boolean available = true;
-    private double  price;
+    private int numPages;
 
-    public Book(long isbn, List<Author> authors, String name, String editorial,
-                String category, String edition, String condition, double price) {
+    @Lob
+    private byte[] coverImage;
+
+    public Book(long isbn, String name, String editorial, String category, String edition,
+                double length, double width, double height, int numPages) {
         this.isbn = isbn;
-        this.authors = authors;
         this.name = name;
         this.editorial = editorial;
         this.category = category;
-        this.condition = condition;
         this.edition = edition;
-        this.price = price;
+        this.length = length;
+        this.width = width;
+        this.height = height;
+        this.numPages = numPages;
     }
 
     public Book() {
 
+    }
+
+    public String getImageBase64()
+    {
+        return Base64.getEncoder().encodeToString(coverImage);
     }
 
     public String convertListAuthorsToString()

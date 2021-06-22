@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title> Libreria </title>
+</head>
+<body>
+    <header>
+        <table>
+            <td>
+                <img width="100px" th:src="@{/images/Naucratis.png}">
+            </td>
+            <td>
+                <h1> Naucratis </h1>
+            </td>
+        </table>
+    </header>
+
+    <nav>
+        <ul>
+            <li th:if="${role == null}">
+                <a th:href="@{/login}"> <button type="button">Iniciar Sesión</button></a>
+                <a th:href="@{/register}"> <button type="button">Registrarse</button></a>
+            </li>
+            <li th:if="${#strings.equals(role,'administrator')}">
+                <a th:href="@{/administrator/libraries}"><button type="button">Librerias</button> </a>
+            </li>
+            <li th:if="${#strings.equals(role,'customer')}">
+                <a th:href="@{/customer/shoppingCart}"><button type="button">Carrito</button> </a>
+            </li>
+            <li th:if="${role != null}">
+                <a th:href="@{'/' + ${role}}"> <button type="button"> Ver perfil </button></a>
+            </li>
+            <li th:if="${role != null}">
+                <form method="POST" th:action="@{/logout}">
+                    <input type="submit" value="Cerrar sesión"/>
+                </form>
+            </li>
+        </ul>
+    </nav>
+
+    <h1> <span th:text="${nameLibrary}"> NOMBRE LIBRERIA </span> </h1>
+    <img width="200px" th:src="'data:image/png;base64,'+${image}">
+    <h2> Libros </h2>
+    <ul>
+        <div th:each="book: ${books}">
+            <li> <a th:href="@{'/libraries/'+${nameLibrary}+'/'+${book.isbn}}"><span th:text="${book.name}"> NOMBRE </span> </a></li>
+        </div>
+    </ul>
+</body>
+</html>

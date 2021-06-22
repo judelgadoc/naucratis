@@ -27,6 +27,7 @@
 <h1> Administrador </h1>
 <h2> Datos personales:</h2>
 <table>
+    <tr><img width="200px" th:src="'data:image/png;base64,'+${administrator.getImageBase64()}"></tr>
     <tr>
         <td>Nombre: </td>
         <td><span th:text="${administrator.name}">NOMBRE</span></td>
