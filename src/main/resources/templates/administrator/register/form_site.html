@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> Formulario sucursal </title>
+</head>
+<body>
+<form method="POST" th:action="@{'/register/'+${name_library}+'/site'}" id="registrationSiteForm">
+    <table>
+        <tr>
+            <div>
+                <input type="radio" id="cellar" name="type" value="cellar">
+                <label for="cellar"> Bodega </label>
+            </div>
+            <div>
+                <input type="radio" id="branch" name="type"  value="brach">
+                <label for="branch"> Sucursal </label>
+            </div>
+        </tr>
+        <tr>
+            <td><label for="address">Dirección: </label></td>
+            <td><input type="text" name="address"/></td>
+        </tr>
+        <tr>
+            <td><label for="open">Horario de apertura: </label></td>
+            <td><input type="time" name="open"/></td>
+        </tr>
+        <tr>
+            <td><label for="closed">Horario de cierre: </label></td>
+            <td><input type="time" name="closed"/></td>
+        </tr>
+        <tr>
+            <td><button type="submit"> Registrar </button></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

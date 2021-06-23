@@ -1,14 +1,8 @@
 package com.naucratis.naucratis.controller;
 
-import com.naucratis.naucratis.model.form.RegistrationAdministratorForm;
-import com.naucratis.naucratis.model.form.RegistrationBookForm;
-import com.naucratis.naucratis.model.form.RegistrationCustomerForm;
-import com.naucratis.naucratis.model.form.RegistrationLibraryForm;
-import com.naucratis.naucratis.model.library.Author;
+import com.naucratis.naucratis.model.form.*;
 import com.naucratis.naucratis.model.library.Book;
-import com.naucratis.naucratis.model.library.Library;
 import com.naucratis.naucratis.model.user.Administrator;
-import com.naucratis.naucratis.service.AuthorService;
 import com.naucratis.naucratis.service.BookService;
 import com.naucratis.naucratis.service.LibraryService;
 import com.naucratis.naucratis.service.UserService;
@@ -17,8 +11,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.io.IOException;
 import java.security.Principal;
 
 @Controller
@@ -29,17 +21,16 @@ public class RegistrationController
     private UserService    userService;
     private LibraryService libraryService;
     private BookService    bookService;
-    private AuthorService  authorService;
 
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public RegistrationController(UserService userService, LibraryService libraryService, BookService bookService, AuthorService authorService, PasswordEncoder passwordEncoder) {
-        this.userService = userService;
-        this.libraryService = libraryService;
-        this.bookService = bookService;
-        this.authorService = authorService;
+    public RegistrationController(UserService userService, LibraryService libraryService,
+                                  PasswordEncoder passwordEncoder, BookService bookService) {
+        this.userService     = userService;
+        this.libraryService  = libraryService;
         this.passwordEncoder = passwordEncoder;
+        this.bookService     = bookService;
     }
 
     @GetMapping
@@ -89,13 +80,9 @@ public class RegistrationController
     @PostMapping("/library")
     public String processRegistrationLibrary(RegistrationLibraryForm registrationLibraryForm, Principal principal)
     {
-        Administrator admin
-                = (Administrator) userService.findByEmail(principal.getName());
+        libraryService.addLibrary(registrationLibraryForm.toLibrary(),
+                                  (Administrator) userService.findByEmail(principal.getName()));
 
-        Library library = registrationLibraryForm.toLibrary();
-
-        admin.getLibraries().add(library);
-        libraryService.save(library);
         return "redirect:/administrator";
     }
 
@@ -103,27 +90,63 @@ public class RegistrationController
     public String registerFormBook(@PathVariable String nameLibrary, Model model)
     {
         model.addAttribute("nameLibrary", nameLibrary);
+        model.addAttribute("sites", libraryService.findByName(nameLibrary).getSites());
         return "administrator/register/form_book";
     }
 
     @PostMapping("/book")
     public String processRegistrationBook(RegistrationBookForm registrationBookForm)
     {
-
-        Book book = null;
-        try {
-            book = registrationBookForm.toBook();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        for(Author author: book.getAuthors())
-            if(!authorService.existsByName(author.getName()))
-                authorService.save(author);
-
-        libraryService.findByName(registrationBookForm.getNameLibrary()).getInventory().add(book);
-        bookService.save(book);
+        libraryService.addBooks(registrationBookForm);
         return"redirect:/administrator/libraries/"+registrationBookForm.getNameLibrary();
     }
 
+    @GetMapping("/copyBook/{nameLibrary}/{isbn}")
+    public String registerCopyBook(@PathVariable String nameLibrary,
+                                   @PathVariable String isbn,
+                                   Model model)
+    {
+        model.addAttribute("nameLibrary", nameLibrary);
+        model.addAttribute("isbn", isbn);
+        model.addAttribute("sites", libraryService.findByName(nameLibrary).getSites());
+
+        return "administrator/register/form_copyBook";
+    }
+
+    @PostMapping("/copyBookProcess")
+    public String processRegistrarionCopyBook(CopyBookForm copyBookForm)
+    {
+        libraryService.addBook(copyBookForm);
+        return "redirect:/administrator/libraries/" + copyBookForm.getNameLibrary() + "/" + copyBookForm.getIsbn();
+    }
+
+    @PostMapping("/search_book/{nameLibrary}")
+    public String searchBook(@PathVariable String nameLibrary, String isbn, Model model)
+    {
+        Book book = bookService.exitsByIsbn(Long.parseLong(isbn))? bookService.findById(isbn):null;
+
+        model.addAttribute("nameLibrary", nameLibrary);
+        model.addAttribute("sites", libraryService.findByName(nameLibrary).getSites());
+        model.addAttribute("book", book);
+
+        return "administrator/register/form_book";
+    }
+
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    @GetMapping("/{name_library}/site")
+    public String site(@PathVariable(name = "name_library") String nameLibrary,
+                       Model model)
+    {
+        model.addAttribute("name_library", nameLibrary);
+        return "administrator/register/form_site";
+    }
+
+    @PostMapping("/{name_library}/site")
+    public String siteProcess(@PathVariable(name = "name_library") String nameLibrary,
+                              RegisterSiteForm registerSiteForm)
+    {
+        libraryService.addSite(nameLibrary, registerSiteForm.toSite());
+        return "redirect:/administrator/libraries/" + nameLibrary;
+    }
 }

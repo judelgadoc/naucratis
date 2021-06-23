@@ -2,9 +2,11 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Formulario registro biblioteca</title>
+    <title>Librerias</title>
+    <link rel="stylesheet" th:href="@{css/login.css}">
 </head>
 <body>
+
 <header>
     <table>
         <td>
@@ -15,10 +17,18 @@
         </td>
     </table>
 </header>
+
 <nav>
     <ul>
+        <li th:if="${role == null}">
+            <a th:href="@{/login}"> <button type="button">Iniciar Sesión</button></a>
+            <a th:href="@{/register}"> <button type="button">Registrarse</button></a>
+        </li>
         <li th:if="${#strings.equals(role,'administrator')}">
             <a th:href="@{/administrator/libraries}"><button type="button">Librerias</button> </a>
+        </li>
+        <li th:if="${#strings.equals(role,'customer')}">
+            <a th:href="@{/customer/shoppingCart}"><button type="button">Carrito</button> </a>
         </li>
         <li th:if="${role != null}">
             <a th:href="@{'/' + ${role}}"> <button type="button"> Ver perfil </button></a>
@@ -30,20 +40,14 @@
         </li>
     </ul>
 </nav>
-<form method="POST" th:action="@{/register/library}" id="registrationLibraryForm" enctype="multipart/form-data">
-    <table>
-        <tr>
-            <td><label for="name">Nombre: </label></td>
-            <td><input type="text" name="name"/></td>
-        </tr>
-        <tr>
-            <td><label for="name">Logo: </label></td>
-            <td><input type="file" name="image"/></td>
-        </tr>
-        <tr>
-            <td><button type="submit"> Registrar </button></td>
-        </tr>
-    </table>
-</form>
+
+<h1> Lista de librerias </h1>
+
+<div th:each="library: ${libraries}">
+    <a th:href="@{'/libraries/'+${library.name}}"> <span th:text="${library.name}"> </span> </a>
+    <br>
+    <br>
+</div>
+
 </body>
 </html>

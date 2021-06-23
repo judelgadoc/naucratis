@@ -1,7 +1,9 @@
 package com.naucratis.naucratis.controller;
 
+import com.naucratis.naucratis.model.form.CopyBookForm;
 import com.naucratis.naucratis.model.form.RegistrationBookForm;
 import com.naucratis.naucratis.model.library.Book;
+import com.naucratis.naucratis.model.library.CopyBook;
 import com.naucratis.naucratis.service.BookService;
 import com.naucratis.naucratis.service.LibraryService;
 import org.springframework.stereotype.Controller;
@@ -15,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("modify")
 public class ModifyController
 {
-    private BookService bookService;
+    private BookService    bookService;
     private LibraryService libraryService;
 
     public ModifyController(BookService bookService,
@@ -29,22 +31,21 @@ public class ModifyController
                            @PathVariable(name = "id_book") String idBook,
                            Model model)
     {
-        Book book = bookService.findById(idBook);
+        CopyBook copyBook = bookService.findCopyBookById(Long.parseLong(idBook));
 
-
-        model.addAttribute("book", book);
-        model.addAttribute("listAuthors", book.convertListAuthorsToString());
+        model.addAttribute("copyBook", copyBook );
         model.addAttribute("name_library", nameLibrary);
+        model.addAttribute("sites", libraryService.findByName(nameLibrary).getSites());
 
         return "administrator/modify/form_book";
     }
 
     @PostMapping("/{name_library}/book/{id_book}")
     public String processBook(@PathVariable(name = "name_library") String nameLibrary,
-                              RegistrationBookForm registrationBookForm)
+                              CopyBookForm copyBookForm)
     {
-        bookService.update(registrationBookForm);
-        return"redirect:/administrator/libraries/" + nameLibrary + "/" + registrationBookForm.getId();
+        bookService.updateCopy(copyBookForm);
+        return"redirect:/administrator/libraries/" + nameLibrary + "/" + copyBookForm.getIsbn();
     }
 }
 

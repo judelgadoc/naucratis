@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.Collection;
 
 @Entity
@@ -20,6 +21,9 @@ public class User implements UserDetails {
 
     @Id
     private String email;
+
+    @Lob
+    private byte[] image;
 
     private String password;
 
@@ -39,6 +43,11 @@ public class User implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
+    }
+
+    public String getImageBase64()
+    {
+        return image == null ?"": Base64.getEncoder().encodeToString(image);
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.naucratis.naucratis.model.user;
 
+import com.naucratis.naucratis.model.transaction.Order;
+import com.naucratis.naucratis.model.transaction.Purchase;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -7,10 +9,17 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import javax.persistence.*;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Data
 public class Customer extends User {
+
+    @OneToMany
+    private List<Purchase> purchases;
+
+    @OneToMany
+    private List<Order> shoppingCart;
 
     public Customer() {
     }

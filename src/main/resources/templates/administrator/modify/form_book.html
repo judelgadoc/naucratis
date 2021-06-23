@@ -1,98 +1,91 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <title> Formulario modificacion libro </title>
-</head>
-<body>
-<header>
-    <table>
-        <td>
-            <img width="100px" th:src="@{/images/Naucratis.png}">
-        </td>
-        <td>
-            <h1> Naucratis </h1>
-        </td>
-    </table>
-</header>
-<nav>
-    <ul>
-        <li th:if="${#strings.equals(role,'administrator')}">
-            <a th:href="@{/administrator/libraries}"><button type="button">Librerias</button> </a>
-        </li>
-        <li th:if="${role != null}">
-            <a th:href="@{'/' + ${role}}"> <button type="button"> Ver perfil </button></a>
-        </li>
-        <li th:if="${role != null}">
-            <form method="POST" th:action="@{/logout}">
-                <input type="submit" value="Cerrar sesión"/>
-            </form>
-        </li>
-    </ul>
-</nav>
-<form method="POST" th:action="@{'/modify/'+${name_library}+'/book/'+${book.id}}" id="registrationBookForm">
-    <input type="hidden" th:value="${book.id}" name="id">
-    <table>
-        <tr>
-            <td><label for="isbn">ISBN: </label></td>
-            <td><input type="text" name="isbn" th:value="${book.isbn}"/></td>
-        </tr>
-        <tr>
-            <td><label for="name">Nombre: </label></td>
-            <td><input type="text" name="name" th:value="${book.name}"/></td>
-        </tr>
-        <tr>
-            <td><label for="list_authors">Autores: </label></td>
-            <td><input type="text" name="list_authors" th:value="${book.convertListAuthorsToString()}"/></td>
-        </tr>
-        <tr>
-            <td><label for="editorial">Editorial: </label></td>
-            <td><input type="text" name="editorial" th:value="${book.editorial}"/></td>
-        </tr>
-        <tr>
-            <td><label for="category">Categoria: </label></td>
-            <td><input type="text" name="category" th:value="${book.category}"/></td>
-        </tr>
-        <tr>
-        <tr>
-            <td><label for="edition">Edición: </label></td>
-            <td><input type="text" name="edition" th:value="${book.edition}"/></td>
-        </tr>
-            <td><label for="condition">Condición: </label></td>
-            <td><input type="text" name="condition" th:value="${book.condition}"/></td>
-        </tr>
-        <tr>
-            <td><label for="length">Largo: </label></td>
-            <td><input type="text" name="length" th:value="${book.length}"/></td>
-        </tr>
-        <tr>
-            <td><label for="width">Ancho: </label></td>
-            <td><input type="text" name="width" th:value="${book.width}"/></td>
-        </tr>
-        <tr>
-            <td><label for="height">Alto: </label></td>
-            <td><input type="text" name="height" th:value="${book.height}"/></td>
-        </tr>
-        <tr>
-            <td><label for="price">Precio: </label></td>
-            <td><input type="text" name="price" th:value="${book.price}"/></td>
-        </tr>
-        <tr>
-            <td>
-                <div>
-                    <input type="radio" id="available" name="available" th:value="${true}">
-                    <label for="available"> Disponible </label>
-                </div>
-                <div>
-                    <input type="radio" id="no_available" name="available" th:value="${false}">
-                    <label for="no_available"> No disponible </label>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td><button type="submit"> Registrar</button></td>
-        </tr>
-    </table>
-</form>
-</body>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+            <meta charset="UTF-8">
+            <title> Formulario modificacion libro </title>
+    </head>
+    <body>
+
+
+        <header>
+            <table>
+                <td>
+                    <img width="100px" th:src="@{/images/Naucratis.png}">
+                </td>
+                <td>
+                    <h1> Naucratis </h1>
+                </td>
+            </table>
+        </header>
+
+
+        <nav>
+            <ul>
+                <li th:if="${#strings.equals(role,'administrator')}">
+                    <a th:href="@{/administrator/libraries}"><button type="button">Librerias</button> </a>
+                </li>
+                <li th:if="${role != null}">
+                    <a th:href="@{'/' + ${role}}"> <button type="button"> Ver perfil </button></a>
+                </li>
+                <li th:if="${role != null}">
+                    <form method="POST" th:action="@{/logout}">
+                        <input type="submit" value="Cerrar sesión"/>
+                    </form>
+                </li>
+            </ul>
+        </nav>
+
+
+        <form method="POST" th:action="@{'/modify/'+${name_library}+'/book/'+${copyBook.id}}" id="copyBookForm">
+            <input type="hidden" th:value="${copyBook.id}" name="id">
+            <input type="hidden" th:value="${copyBook.isbn}" name="isbn">
+            <table>
+                <tr>
+                    <td><label for="condition">Condición: </label></td>
+                    <td><input type="text" name="condition" th:value="${copyBook.condition}"/></td>
+                </tr>
+                <tr>
+                    <td><label for="price">Precio: </label></td>
+                    <td><input type="text" name="price" th:value="${copyBook.price}"/></td>
+                </tr>
+                <tr>
+                    <td><label for="site">Sitio: </label></td>
+                    <td>
+                        <select name="site">
+                            <div th:each="site: ${sites}">
+                                <option th:value="${site.address}">
+                                    <span th:text="${site.address}"> DIRECCIÓN </span>
+                                </option>
+                            </div>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div>
+                            <input type="radio" id="status" name="status" th:value="${'AVAILABLE'}">
+                            <label for="status"> Disponible </label>
+                        </div>
+                        <div>
+                            <input type="radio" id="status" name="status" th:value="${'NOAVAILABLE'}">
+                            <label for="status"> No disponible </label>
+                        </div>
+                        <div>
+                            <input type="radio" id="status" name="status" th:value="${'SOLD'}">
+                            <label for="status"> Vendido </label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="description"> Descripción: </label></td>
+                    <td>
+                        <textarea name="description" th:value="${copyBook.description}"/></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td><button type="submit"> Registrar</button></td>
+                </tr>
+            </table>
+        </form>
+    </body>
 </html>

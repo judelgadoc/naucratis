@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> Sitio </title>
+</head>
+<body>
+<table>
+    <tr>
+        <td> Dirección: </td>
+        <td> <span th:text="${site.address}"> DIRECCIÓN </span> </td>
+    </tr>
+    <tr>
+        <td>Horario de apertura: </td>
+        <td> <span th:text="${#dates.format(site.open, 'hh:mm a')}"> HORARIO DE APERTURA </span> </td>
+    </tr>
+    <tr>
+        <td>Horario de cierre: </td>
+        <td> <span th:text="${#dates.format(site.closed, 'hh:mm a')}"> HORARIO DE CIERRE </span> </td>
+    </tr>
+</table>
+<a th:href="@{'/eliminate/site?address=' + ${site.address} + '&library=' + ${name_library}}"> <button type="button"> Eliminar </button> </a>
+</body>
+</html>
