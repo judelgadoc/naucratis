@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.ui.Model;
 
 import com.naucratis.naucratis.model.Book;
-import com.naucratis.naucratis.access.BookAccess;
+import com.naucratis.naucratis.repository.BookRepository;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -19,7 +19,7 @@ import java.nio.file.Paths;
 @Controller
 public class BookController{
     @Autowired
-    private BookAccess datosLibro;
+    private BookRepository datosLibro;
 
     @GetMapping("/")
     public String form(Model model){
@@ -49,7 +49,7 @@ public class BookController{
     @GetMapping("/listar")
     public String listar(Model model) {
         model.addAttribute("libro", datosLibro.findAll());
-        return "listar";
+        return "inventario";
     }
 }
 

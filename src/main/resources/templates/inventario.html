@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <!--Especificaiones de la pantalla-->
     <meta charset="utf-8">
@@ -316,202 +316,35 @@
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <!--Titulos de columnas al inico y al final-->
-                                    <thead>
-                                    <tr>
-                                        <th>Nombre</th>
-                                        <th>Editorial</th>
-                                        <th>Categoria</th>
-                                        <th>Estado</th>
-                                        <th>Precio</th>
-                                    </tr>
-                                    </thead>
-                                    <tfoot>
-                                    <tr>
-                                        <th>Nombre</th>
-                                        <th>Editorial</th>
-                                        <th>Categoria</th>
-                                        <th>Estado</th>
-                                        <th>Precio</th>
-                                    </tr>
-                                    </tfoot>
-                                    <!--datos de 25 libros de prueba-->
-                                    <tbody>
-                                    <tr>
-                                        <td>Nomen liber</td>
-                                        <td>Book edition</td>
-                                        <td>Liber genus</td>
-                                        <td>Statu liber</td>
-                                        <td>Pretium libri</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Nomen liber</td>
-                                        <td>Book edition</td>
-                                        <td>Liber genus</td>
-                                        <td>Statu liber</td>
-                                        <td>Pretium libri</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Nomen liber</td>
-                                        <td>Book edition</td>
-                                        <td>Liber genus</td>
-                                        <td>Statu liber</td>
-                                        <td>Pretium libri</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Nomen liber</td>
-                                        <td>Book edition</td>
-                                        <td>Liber genus</td>
-                                        <td>Statu liber</td>
-                                        <td>Pretium libri</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Nomen liber</td>
-                                        <td>Book edition</td>
-                                        <td>Liber genus</td>
-                                        <td>Statu liber</td>
-                                        <td>Pretium libri</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Nomen liber</td>
-                                        <td>Book edition</td>
-                                        <td>Liber genus</td>
-                                        <td>Statu liber</td>
-                                        <td>Pretium libri</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Nomen liber</td>
-                                        <td>Book edition</td>
-                                        <td>Liber genus</td>
-                                        <td>Statu liber</td>
-                                        <td>Pretium libri</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Nomen liber</td>
-                                        <td>Book edition</td>
-                                        <td>Liber genus</td>
-                                        <td>Statu liber</td>
-                                        <td>Pretium libri</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Nomen liber</td>
-                                        <td>Book edition</td>
-                                        <td>Liber genus</td>
-                                        <td>Statu liber</td>
-                                        <td>Pretium libri</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Nomen liber</td>
-                                        <td>Book edition</td>
-                                        <td>Liber genus</td>
-                                        <td>Statu liber</td>
-                                        <td>Pretium libri</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Nomen liber</td>
-                                        <td>Book edition</td>
-                                        <td>Liber genus</td>
-                                        <td>Statu liber</td>
-                                        <td>Pretium libri</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Nomen liber</td>
-                                        <td>Book edition</td>
-                                        <td>Liber genus</td>
-                                        <td>Statu liber</td>
-                                        <td>Pretium libri</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Nomen liber</td>
-                                        <td>Book edition</td>
-                                        <td>Liber genus</td>
-                                        <td>Statu liber</td>
-                                        <td>Pretium libri</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Nomen liber</td>
-                                        <td>Book edition</td>
-                                        <td>Liber genus</td>
-                                        <td>Statu liber</td>
-                                        <td>Pretium libri</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Nomen liber</td>
-                                        <td>Book edition</td>
-                                        <td>Liber genus</td>
-                                        <td>Statu liber</td>
-                                        <td>Pretium libri</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Nomen liber</td>
-                                        <td>Book edition</td>
-                                        <td>Liber genus</td>
-                                        <td>Statu liber</td>
-                                        <td>Pretium libri</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Nomen liber</td>
-                                        <td>Book edition</td>
-                                        <td>Liber genus</td>
-                                        <td>Statu liber</td>
-                                        <td>Pretium libri</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Nomen liber</td>
-                                        <td>Book edition</td>
-                                        <td>Liber genus</td>
-                                        <td>Statu liber</td>
-                                        <td>Pretium libri</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Nomen liber</td>
-                                        <td>Book edition</td>
-                                        <td>Liber genus</td>
-                                        <td>Statu liber</td>
-                                        <td>Pretium libri</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Nomen liber</td>
-                                        <td>Book edition</td>
-                                        <td>Liber genus</td>
-                                        <td>Statu liber</td>
-                                        <td>Pretium libri</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Nomen liber</td>
-                                        <td>Book edition</td>
-                                        <td>Liber genus</td>
-                                        <td>Statu liber</td>
-                                        <td>Pretium libri</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Nomen liber</td>
-                                        <td>Book edition</td>
-                                        <td>Liber genus</td>
-                                        <td>Statu liber</td>
-                                        <td>Pretium libri</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Nomen liber</td>
-                                        <td>Book edition</td>
-                                        <td>Liber genus</td>
-                                        <td>Statu liber</td>
-                                        <td>Pretium libri</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Nomen liber</td>
-                                        <td>Book edition</td>
-                                        <td>Liber genus</td>
-                                        <td>Statu liber</td>
-                                        <td>Pretium libri</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Unius libri</td>
-                                        <td>Book edition</td>
-                                        <td>Liber genus</td>
-                                        <td>Statu liber</td>
-                                        <td>Pretium libri</td>
-                                    </tr>
-                                    </tbody>
+                                        <thead>
+                                        <tr>
+                                            <th>Nombre</th>
+                                            <th>Editorial</th>
+                                            <th>Categoria</th>
+                                            <th>Estado</th>
+                                            <th>Precio</th>
+                                        </tr>
+                                        </thead>
+                                        <tfoot>
+                                        <tr>
+                                            <th>Nombre</th>
+                                            <th>Editorial</th>
+                                            <th>Categoria</th>
+                                            <th>Estado</th>
+                                            <th>Precio</th>
+                                        </tr>
+                                        </tfoot>
+                                        <tbody>
+                                            <div th:each="book: ${libro}">
+                                                <tr>
+                                                    <td th:text="${book.name}"></td>
+                                                    <td th:text="${book.edition}"></td>
+                                                    <td th:text="${book.category}"></td>
+                                                    <td th:text="${book.status}"></td>
+                                                    <!--<td>th:text="${book.price}"</td>-->
+                                                </tr>
+                                            </div>
+                                        </tbody>
                                 </table>
                             </div>
                         </div>
