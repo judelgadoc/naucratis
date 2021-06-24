@@ -1,21 +1,19 @@
 package com.naucratis.naucratis.model;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Pattern;
-import java.util.Arrays;
-import java.util.Collection;
+import java.io.Serializable;
+
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@Table(name="Libro")
-public class Book {
+@Table(name="libro")
+public class Book implements Serializable {
     @Id
     private String Isbn;
 
     @NotEmpty
+    @Column(name = "portada")
+    private String cover;
     @Column(name = "nombre")
     private String name;
     @Column(name = "editorial")
@@ -27,21 +25,19 @@ public class Book {
     @Column(name = "disponible")
     private boolean avalible;
 
-    public Book(String isbn, String name, String editorial, String category, String status, boolean avalible) {
-        Isbn = isbn;
+    public Book(String isbn, String cover, String name, String editorial, String category, String status, boolean avalible) {
+        this.Isbn = isbn;
+        this.cover = cover;
         this.name = name;
-        this.editorial = editorial;
+        this.editorial =editorial;
         this.category = category;
         this.status = status;
         this.avalible = avalible;
     }
 
-
-
     public Book() {
-
+        super();
     }
-
 
 
     public String getIsbn() {
@@ -50,6 +46,14 @@ public class Book {
 
     public void setIsbn(String isbn) {
         Isbn = isbn;
+    }
+
+    public String getCover() {
+        return cover;
+    }
+
+    public void setCover(String cover) {
+        this.cover = cover;
     }
 
     public String getName() {
@@ -84,11 +88,14 @@ public class Book {
         this.status = status;
     }
 
-    public boolean isAvalible() {
+    public boolean getAvalible() {
         return avalible;
     }
 
     public void setAvalible(boolean avalible) {
         this.avalible = avalible;
     }
+
+
+    private static final long serialVersionUID = 1L;
 }

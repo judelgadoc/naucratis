@@ -8,12 +8,6 @@
         <outputRelativeToContentRoot value="true" />
         <module name="TRABAJO_ISW" />
       </profile>
-      <profile name="Annotation profile for Unknown" enabled="true">
-        <sourceOutputDir name="../../target/generated-sources/annotations" />
-        <sourceTestOutputDir name="../../target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <module name="wrapper" />
-      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="TRABAJO_ISW" target="1.8" />

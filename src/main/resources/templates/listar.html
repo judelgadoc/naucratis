@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="base :: head"></head>
+
+<body>
+<div class="container mt-5">
+    <div th:each="book: ${book}">
+        <div class="row justiy-content-center">
+            <div class="card m-1 p-1" style="width:30%">
+                <div class="row">
+                    <div class="col-md-7">
+                        <img class="float-left ml-1" th:src="@{'/uploads/'+${book.cover}}"
+                             th:alt="${book.cover}" style="max-width: 90%;max-height: 100%"/>
+                    </div>
+                    <div class="col-md-5 mt-3">
+                        <h3 th:text="${book.name}"></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a th:href="@{/}"><button class="btn btn-primary m-5">&laquo;Volver</button></a>
+</div>
+</body>
+</html>
