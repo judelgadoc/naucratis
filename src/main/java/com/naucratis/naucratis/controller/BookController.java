@@ -20,17 +20,10 @@ import java.nio.file.Paths;
 public class BookController{
     @Autowired
     private BookAccess datosLibro;
-    private String isbn;
-    private String cover;
-    private String name;
-    private String editorial;
-    private String category;
-    private String status;
-    private boolean avalible;
 
     @GetMapping("/")
     public String form(Model model){
-        model.addAttribute("libro", new Book(isbn, cover, name, editorial, category, status, avalible));
+        model.addAttribute("libro", new Book());
         return "form";
     }
 
@@ -55,7 +48,7 @@ public class BookController{
 
     @GetMapping("/listar")
     public String listar(Model model) {
-        model.addAttribute("book", datosLibro.findAll());
+        model.addAttribute("libro", datosLibro.findAll());
         return "listar";
     }
 }

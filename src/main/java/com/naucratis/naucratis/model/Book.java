@@ -12,8 +12,6 @@ public class Book implements Serializable {
     private String Isbn;
 
     @NotEmpty
-    @Column(name = "portada")
-    private String cover;
     @Column(name = "nombre")
     private String name;
     @Column(name = "editorial")
@@ -24,15 +22,18 @@ public class Book implements Serializable {
     private String status;
     @Column(name = "disponible")
     private boolean avalible;
+    @Column(name = "portada")
+    private String cover;
 
-    public Book(String isbn, String cover, String name, String editorial, String category, String status, boolean avalible) {
+    public Book(String isbn, String name, String editorial, String category, String status, boolean avalible, String cover) {
+        super();
         this.Isbn = isbn;
-        this.cover = cover;
         this.name = name;
         this.editorial =editorial;
         this.category = category;
         this.status = status;
         this.avalible = avalible;
+        this.cover = cover;
     }
 
     public Book() {

@@ -5,39 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="76c293cb-e000-4f13-8cd8-2369bb1b26b3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/naucratis/naucratis/MvcConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/naucratis/naucratis/NaucratisApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/naucratis/naucratis/access/BookAccess.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/naucratis/naucratis/controller/BookController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/base.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/form.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/listar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TRABAJO_ISW.iml" beforeDir="false" afterPath="$PROJECT_DIR$/TRABAJO_ISW.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/naucratis/naucratis/NaucratisApplication" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/naucratis/naucratis/controller/BookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/naucratis/naucratis/controller/BookController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/naucratis/naucratis/model/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/naucratis/naucratis/model/Book.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/naucratis/naucratis/model/Libro_prestamo.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/naucratis/naucratis/model/Libro_venta.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/naucratis/naucratis/model/Libro_venta.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/naucratis/naucratis/NaucratisApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/base.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/form.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/form.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/listar.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/listar.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/naucratis/naucratis/model/Book.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/naucratis/naucratis/model/Book.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/naucratis/naucratis/model/Libro_prestamo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/naucratis/naucratis/model/Libro_venta.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/naucratis/naucratis/model/Prestamo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/naucratis/naucratis/model/Venta.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/naucratis/naucratis/repository/UserRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/naucratis/naucratis/service/UserServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/naucratis/naucratis/web/MainController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/naucratis/naucratis/web/UserRegistrationController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/pagina-principal.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/pagina-principal.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/registro.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/registro.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/naucratis/naucratis/NaucratisApplicationTests.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/naucratis/naucratis/UserRegistrationControllerTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/naucratis/naucratis/UserRepositoryTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/vendor/fontawesome-free/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/vendor/fontawesome-free/svgs/brands/prueba.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,15 +71,13 @@
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.NaucratisApplication (1)">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -153,6 +127,7 @@
       <workItem from="1624317419874" duration="11914000" />
       <workItem from="1624461042751" duration="9934000" />
       <workItem from="1624484148772" duration="8093000" />
+      <workItem from="1624533225130" duration="3649000" />
     </task>
     <servers />
   </component>
@@ -170,16 +145,5 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/naucratis/naucratis/controller/BookController.java</url>
-          <line>38</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
