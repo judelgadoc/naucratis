@@ -10,6 +10,6 @@ public class LoginController {
 
     @GetMapping
     public String login(){
-        return "user_no_register/start_session/login";
+        return "login(1)";
     }
 }

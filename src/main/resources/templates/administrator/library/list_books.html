@@ -5,7 +5,6 @@
     <title>Libros</title>
 </head>
 <body>
-
 <header>
     <table>
         <td>
@@ -16,7 +15,6 @@
         </td>
     </table>
 </header>
-
 <nav>
     <ul>
         <li th:if="${#strings.equals(role,'administrator')}">
@@ -32,15 +30,14 @@
         </li>
     </ul>
 </nav>
-
 <h1> Lista de libros</h1>
 <br>
 <ul>
-    <li th:each="book: ${library.books}">
-        <a th:href="@{'/administrator/libraries/'+${library.name}+'/'+${book.isbn}}"><spam th:text="${book.name}"> NOMBRE LIBRO</spam></a>
+    <li th:each="book: ${books}">
+        <a th:href="@{'/administrator/libraries/'+${library}+'/'+${book.id}}"><spam th:text="${book.name}"> NOMBRE LIBRO</spam></a>
     </li>
 </ul>
 <br>
-<a th:href="@{'/register/book/'+${library.name}}"><button type="button">Agregar libro</button> </a>
+<a th:href="@{'/register/book/'+${library}}"><button type="button">Agregar libro</button> </a>
 </body>
 </html>

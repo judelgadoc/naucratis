@@ -17,7 +17,7 @@
     </table>
 </header>
 <h1>Registro administrador</h1>
-<form method="POST" th:action="@{/register/administrator}" id="registerAdministratorForm" enctype="multipart/form-data">
+<form method="POST" th:action="@{/register/administrator}" id="registerAdministratorForm">
     <table>
         <tr>
             <td><label for="name">Nombre: </label></td>
@@ -42,10 +42,6 @@
         <tr>
             <td><label for="password">Contraseña: </label></td>
             <td><input type="password" name="password"/></td>
-        </tr>
-        <tr>
-            <td><label for="image">Foto de perfil: </label></td>
-            <td><input type="file" name="image"/></td>
         </tr>
         <tr>
             <td> <input type="submit" value="Registrar"/> </td>

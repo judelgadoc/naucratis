@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Profile</title>
@@ -15,32 +15,9 @@
         </td>
     </table>
 </header>
-<nav>
-    <ul>
-        <li th:if="${role == null}">
-            <a th:href="@{/login}"> <button type="button">Iniciar Sesión</button></a>
-            <a th:href="@{/register}"> <button type="button">Registrarse</button></a>
-        </li>
-        <li th:if="${#strings.equals(role,'administrator')}">
-            <a th:href="@{/administrator/libraries}"><button type="button">Librerias</button> </a>
-        </li>
-        <li th:if="${#strings.equals(role,'customer')}">
-            <a th:href="@{/customer/shoppingCart}"><button type="button">Carrito</button> </a>
-        </li>
-        <li th:if="${role != null}">
-            <a th:href="@{'/' + ${role}}"> <button type="button"> Ver perfil </button></a>
-        </li>
-        <li th:if="${role != null}">
-            <form method="POST" th:action="@{/logout}">
-                <input type="submit" value="Cerrar sesión"/>
-            </form>
-        </li>
-    </ul>
-</nav>
 <h1> Perfil cliente <span th:text="${customer.name}">NOMBRE</span></h1>
 
 <table>
-    <tr><img width="200px" th:src="'data:image/png;base64,'+${customer.getImageBase64()}"></tr>
     <tr>
         <td>Nombre: </td>
         <td><span th:text="${customer.name}">NOMBRE</span></td>
@@ -60,31 +37,6 @@
     <tr>
         <td>Correo: </td>
         <td><span th:text="${customer.email}">CORREO</span></td>
-    </tr>
-</table>
-
-<h2> Compras </h2>
-
-<table>
-    <tr>
-        <td> Fecha </td>
-        <td> Id orden </td>
-        <td> Libro </td>
-        <td> Nombre libro </td>
-        <td> ISBN </td>
-        <td> Nombre libreria </td>
-        <td> Estado </td>
-        <td> Valor </td>
-    </tr>
-    <tr th:each="purchase: ${customer.getPurchases()}">
-        <td> <span th:text="${purchase.createdAt}">            </span> </td>
-        <td> <span th:text="${purchase.id}"> </span> </td>
-        <td> <img width="70px" th:src="'data:image/png;base64,'+${purchase.book.getImageBase64()}"> </td>
-        <td> <span th:text="${purchase.book.name}">   </span> </td>
-        <td> <span th:text="${purchase.book.isbn}"> </span> </td>
-        <td> <span th:text="${purchase.nameLibrary}"> </span> </td>
-        <td> <span th:text="${purchase.status}"> </span> </td>
-        <td> <span th:text="${purchase.value}">   </span> </td>
     </tr>
 </table>
 </body>
