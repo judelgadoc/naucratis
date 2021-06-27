@@ -18,7 +18,9 @@ import java.util.Optional;
 public class LibraryController {
 
     private final String EDIT_LIBRARY_MESSAGE_MODEL = "editLibraryMessage";
-    private final String DELETE_LIBRARY_MESSAGE_MODEL = "deleteLibraryMessage";
+    private final String EDIT_LIBRARY_SUCCESS = "Librería actualizada con éxito";
+    private final String DELETE_LIBRARY_SUCCESS = "Librería eliminada con éxito";
+    private final String UNEXPECTED_ERROR = "Error no esperado";
 
     @Autowired
     LibraryService libraryService;
@@ -46,6 +48,18 @@ public class LibraryController {
         return "library/update_library";
     }
 
+    @GetMapping(path="/delete", params="libraryId")
+    public String getDeleteLibrary(@RequestParam(name="libraryId") long libraryId, Model model) {
+        try {
+            libraryService.deleteLibraryById(libraryId);
+            model.addAttribute(EDIT_LIBRARY_MESSAGE_MODEL, DELETE_LIBRARY_SUCCESS);
+            return "redirect:/library/edit?success";
+        } catch (Exception e) {
+            model.addAttribute(EDIT_LIBRARY_MESSAGE_MODEL, UNEXPECTED_ERROR);
+            return "redirect:/library/edit?failure";
+        }
+    }
+
     @PostMapping(path = "/new")
     public String addLibrary(@ModelAttribute("library") LibraryRequestDto libraryRequest) {
         try {
@@ -61,29 +75,20 @@ public class LibraryController {
         return "redirect:/library/new?success";
     }
 
-    @PutMapping(path = "/update")
-    public String updateLibrary(@ModelAttribute("library") LibraryRequestDto libraryRequest) {
+    @PostMapping(path = "/update")
+    public String updateLibrary(@ModelAttribute("library") LibraryRequestDto libraryRequest, Model model) {
         try {
-            System.out.println("Trying update on library");
-            System.out.println("Request: ");
-            System.out.println(libraryRequest.toString());
             libraryService.updateLibrary(libraryRequest);
-            //model.addAttribute(EDIT_LIBRARY_MESSAGE_MODEL, new String("Librería actualizada con éxito"));
+            model.addAttribute(EDIT_LIBRARY_MESSAGE_MODEL, EDIT_LIBRARY_SUCCESS);
             return "redirect:/library/edit?success";
         } catch (LibraryNotFoundException e) {
-            //model.addAttribute(EDIT_LIBRARY_MESSAGE_MODEL, e.getMessage());
+            model.addAttribute(EDIT_LIBRARY_MESSAGE_MODEL, e.getMessage());
             return "redirect:/library/edit?failure";
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
-            //model.addAttribute(EDIT_LIBRARY_MESSAGE_MODEL, new String("Error no esperado"));
+            model.addAttribute(EDIT_LIBRARY_MESSAGE_MODEL, UNEXPECTED_ERROR);
             return "redirect:/library/edit?failure";
         }
-    }
-
-    @DeleteMapping(path = "/edit", params = "libraryId")
-    public String deleteLibrary(@PathVariable(name="libraryId") Long libraryId, Model model) {
-        model.addAttribute(DELETE_LIBRARY_MESSAGE_MODEL, new String("Librería eliminada con éxito"));
-        return "redirect:/library/edit?success";
     }
 
     @ModelAttribute("library")

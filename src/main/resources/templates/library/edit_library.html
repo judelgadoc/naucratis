@@ -34,11 +34,11 @@
 
                     <!--aviso proceso exitoso-->
                     <div th:if="${param.success}">
-                        <div class="alert alert-success" th:text="${editLibraryMessage}"></div>
+                        <div class="alert alert-success">Operación realizada con éxito</div>
                     </div>
                     <!--aviso proceso fallido-->
                     <div th:if="${param.failure}">
-                        <div class="alert alert-success" th:text="${editLibraryMessage}"></div>
+                        <div class="alert alert-warning">Ocurrió un error al procesar la operación</div>
                     </div>
                     <!--Titulo de pagina-->
                     <h1 class="h3 mb-2 text-gray-800">Listado de sedes</h1>
@@ -57,7 +57,6 @@
                                         <th>Nombre</th>
                                         <th>Dirección</th>
                                         <th>Teléfono</th>
-                                        <th>Administrador</th>
                                         <th>Editar</th>
                                         <th>Borrar</th>
                                     </tr>
@@ -67,10 +66,8 @@
                                             <td th:text="${library.name}"/>
                                             <td th:text="${library.address}"/>
                                             <td th:text="${library.contactPhone}"/>
-                                            <td>Admin</td>
                                             <td class="text-center"><a th:href="@{/library/update(libraryId=${library.id})}" id="editLibraryButton"><i class="far fa-edit"></i></a></td>
-                                            <!--<td class="text-center"><a href="#" th:attr="data-library-id=${library.id}, data-library-name=${library.name}, data-library-address=${library.address}, data-library-contactphone=${library.contactPhone}" data-toggle="modal" data-target="#editLibraryModal" id="editLibraryButton"><i class="far fa-edit"></i></a></td>-->
-                                            <td class="text-center"><a href="#" th:attr="data-library-id=${library.id}, data-library-name=${library.name}" data-toggle="modal" data-target="#deleteLibraryModal" id="deleteLibraryButton"><i class="fas fa-trash"></i></a></td>
+                                            <td class="text-center"><a th:href="@{/library/delete(libraryId=${library.id})}" id="deleteLibraryButton"><i class="fas fa-trash"></i></a></td>
                                         </tr>
                                     </tbody>
                                 </table>

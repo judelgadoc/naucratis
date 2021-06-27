@@ -51,7 +51,7 @@
                         </div>
                         <div class="card-body">
                             <p>Por favor modifique los datos de la sede</p>
-                            <form class="user" th:action="@{/library/update}" th:method="put" th:object="${library}">
+                            <form class="user" th:action="@{/library/update}" method="post" th:object="${library}">
 
                                 <input type="hidden" id="libraryId" name="libraryId" th:field="*{id}"/>
 
@@ -69,7 +69,7 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="submit" name="new-library-submit" id="new-library-submit" class="btn btn-primary btn-user btn-block" value="Añadir sede">
+                                        <input type="submit" name="new-library-submit" id="new-library-submit" class="btn btn-primary btn-user btn-block" value="Editar sede">
                                     </div>
                                     <div class="col-sm-6">
                                         <a class="btn btn-secondary btn-user btn-block" th:href="@{/}">Cancelar</a>
@@ -82,66 +82,6 @@
             </div>
         </div>
     </div>
-
-    <!--Modal edición de sede-->
-    <div class="modal fade" id="editLibraryModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edición de sede</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <form id="editLibraryModalForm" th:action="@{/library/edit}" method="PUT" th:object="${library}">
-                    <div class="modal-body">
-                        <input type="hidden" id="libraryIdEditModal" name="id" th:field="*{id}"/>
-                        <div class="form-group">
-                            <input type="text" class="form-control form-control-user" id="libraryNameEditModal" name="name"
-                                   placeholder="Nombre de la sede" th:field="*{name}" required autofocus/>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control form-control-user" id="libraryAddressEditModal" name="address"
-                                   placeholder="Dirección de la sede" th:field="*{address}" required/>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control form-control-user" id="libraryContactPhoneEditModal" name="contactPhone"
-                                   placeholder="Teléfono de la sede" th:field="*{contactPhone}" required/>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <a class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</a>
-                        <input type="submit" class="btn btn-primary" value="Aceptar"/>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <!--Fin modal edición de sede-->
-
-    <!--Modal confirmación de eliminación sede-->
-    <div class="modal fade" id="deleteLibraryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">¿Seguro que desea eliminar la sede?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Seleccione aceptar para eliminar la sede</div>
-                <div class="modal-footer">
-                    <form method="delete" id="deleteLibraryModalForm">
-                        <a class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</a>
-                        <input type="submit" class="btn btn-primary" value="Aceptar"/>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--Fin modal confirmación de eliminación sede-->
 
     <div th:replace="/user_no_register/home :: utils"/>
 
