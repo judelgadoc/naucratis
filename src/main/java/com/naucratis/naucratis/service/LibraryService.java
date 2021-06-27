@@ -1,10 +1,13 @@
 package com.naucratis.naucratis.service;
 
+import com.naucratis.naucratis.exception.LibraryNotFoundException;
 import com.naucratis.naucratis.model.dto.LibraryRequestDto;
 import com.naucratis.naucratis.model.library.Book;
 import com.naucratis.naucratis.model.library.Library;
 import com.naucratis.naucratis.repository.LibraryRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class LibraryService
@@ -30,6 +33,26 @@ public class LibraryService
         library.setAddress(libraryRequest.getAddress());
         library.setContactPhone(libraryRequest.getContactPhone());
         libraryRepository.save(library);
+    }
+
+    public Optional<Library> getLibraryById(long libraryId){
+        return libraryRepository.findById(libraryId);
+    }
+
+    public void updateLibrary(LibraryRequestDto libraryRequest) throws LibraryNotFoundException {
+        Optional<Library> library = libraryRepository.findById(libraryRequest.getId());
+        if(!library.isPresent()) {
+            throw new LibraryNotFoundException("Librería no encontrada");
+        }
+        Library updatedLibrary = library.get();
+        updatedLibrary.setName(libraryRequest.getName());
+        updatedLibrary.setAddress(libraryRequest.getAddress());
+        updatedLibrary.setContactPhone(libraryRequest.getContactPhone());
+        libraryRepository.save(updatedLibrary);
+    }
+
+    public void deleteLibraryById(Long libraryId){
+        libraryRepository.deleteById(libraryId);
     }
 
     public Library findByName(String name)

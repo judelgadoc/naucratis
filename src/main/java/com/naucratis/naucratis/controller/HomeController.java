@@ -26,7 +26,6 @@ public class HomeController
     @GetMapping
     public String home(Model model, Principal principal)
     {
-        System.out.println("Entering home xD");
         if(principal != null)
         {
             User user = userService.findByEmail(principal.getName());

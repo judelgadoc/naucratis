@@ -9,10 +9,12 @@
     <title>Naucratis</title>
 
     <!--Configuración de estilos-->
-    <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-    <link th:href="@{/css/estilos-Naucratis.css}" rel="stylesheet">
-    <link th:href="@{/vendor/datatables/dataTables.bootstrap4.min.css}" rel="stylesheet">
+    <link href="/css/estilos-Naucratis.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <script type="text/javascript" src="../static/js/naucratis.js" th:src="@{/js/naucratis.js}"></script>
 </head>
 
 <body id="page-top">
@@ -20,190 +22,27 @@
     <div id="wrapper">
 
         <!--Barra de herramientas-->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-            <!--Titulo y icono-->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="pagina-principal.html">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-book"></i>
-                </div>
-                <div class="sidebar-brand-text mx-3">Naucratis</div>
-            </a>
-
-            <!--División-->
-            <hr class="sidebar-divider my-0">
-
-            <!--Subtitulo: "Funcionalidades"-->
-            <li class="nav-item active">
-                <a class="nav-link" href="#">
-                    <i class="fas fa-address-book"></i>
-                    <span>Funcionalidades</span></a>
-            </li>
-
-            <!--División-->
-            <hr class="sidebar-divider">
-
-            <!--Subtitulo: "Usuario"-->
-            <div class="sidebar-heading">Usuario</div>
-
-            <!--Funcionalidad buscar-->
-            <li class="nav-item">
-                <a class="nav-link" href="blanco.html">
-                    <i class="fas fa-search"></i>
-                    <span>Buscar</span></a>
-            </li>
-
-            <!--División-->
-            <hr class="sidebar-divider">
-
-            <!--Subtitulo: "Administrador"-->
-            <div class="sidebar-heading">Administrador</div>
-
-            <!--Funcionalidad inventario-->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                   aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-list-ul"></i>
-                    <span>Inventario</span>
-                </a>
-                <!--Dos enlaces con cada una de las funcionalidades del inventario-->
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="blanco.html">Añadir libro</a>
-                        <a class="collapse-item" href="inventario.html">Editar libro</a>
-                    </div>
-                </div>
-            </li>
-
-            <!--Funcionalidad sedes-->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSedePages"
-                    aria-expanded="true" aria-controls="collapseSedePages">
-                    <i class="far fa-building"></i>
-                    <span>Sedes</span>
-                </a>
-                <!--Enlaces con el CRUD de las sedes-->
-                <div id="collapseSedePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" th:href="@{library/new}">Nueva sede</a>
-                        <a class="collapse-item" th:href="@{library/edit}">Ver y editar sedes</a>
-                    </div>
-                </div>
-            </li>
-
-            <!--Funcionalidad estadisticas-->
-            <li class="nav-item">
-                <a class="nav-link" href="blanco.html">
-                    <i class="fas fa-chart-bar"></i>
-                    <span>Estadísticas</span></a>
-            </li>
-
-            <!--División-->
-            <hr class="sidebar-divider d-none d-md-block">
-
-        </ul>
-        <!-- Fin barra de herramientas-->
-
+        <div th:replace="/user_no_register/home :: toolbar"/>
         <!--Barra de contenido-->
         <div id="content-wrapper" class="d-flex flex-column">
 
             <div id="content">
 
-                <!--Barra de busqueda -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-                    <!--Icono-->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                        <i class="fa fa-bars"></i>
-                    </button>
-
-                    <!--Barra-->
-                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar..."
-                                   aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-
-                    <!--Menu desplegable (dispositivos moviles)-->
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
-                            </a>
-                            <!--Barra de busqueda (dispositivos moviles)-->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                                 aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small"
-                                               placeholder="Buscar..." aria-label="Search"
-                                               aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
-                                                <i class="fas fa-search fa-sm"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </li>
-
-                        <!--División-->
-                        <div class="topbar-divider d-none d-sm-block"></div>
-
-                        <!--Informacion de usuraio-->
-                        <li class="nav-item dropdown no-arrow">
-                            <!--Nombre y icono-->
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Admin</span>
-                                <img class="img-profile rounded-circle"
-                                     src="/img/undraw_profile.svg">
-                            </a>
-                            <!--Obciones de perfil, configuración y cerrar sesión-->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Perfil
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Configuarción
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <!--Cerrar sesión es la unica que funciona, despliega una tarjeta para validar el cierre de sesión-->
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Cerrar Sesión
-                                </a>
-                            </div>
-                        </li>
-                    </ul>
-                    <!--Fin barra de contenido-->
-                </nav>
-
+                <div th:replace="/user_no_register/home :: contentbar"/>
                 <!--Trabajar adentro de la pagina-->
                 <div class="container-fluid">
 
-                    <!--aviso registro de libreria exitoso-->
+                    <!--aviso proceso exitoso-->
                     <div th:if="${param.success}">
-                        <div class="alert alert-info">Se añadió correctamente la sede.</div>
+                        <div class="alert alert-success" th:text="${editLibraryMessage}"></div>
                     </div>
-
-                    <!--aviso registro de libreria fallido-->
+                    <!--aviso proceso fallido-->
                     <div th:if="${param.failure}">
-                        <div class="alert alert-danger">Ocurrió un error al guardar la sede. Por favor reintente.</div>
+                        <div class="alert alert-success" th:text="${editLibraryMessage}"></div>
                     </div>
 
                     <!--Titulo de pagina-->
-                    <h1 class="h3 mb-2 text-gray-800">Actualización de datos - Sede</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Edición de sede</h1>
 
                     <!--Formulario de nueva sede-->
                     <div class="card shadow mb-4">
@@ -212,63 +51,99 @@
                         </div>
                         <div class="card-body">
                             <p>Por favor modifique los datos de la sede</p>
-                            <form class="user" th:action="@{/library/new}" method="post" th:object="${library}">
+                            <form class="user" th:action="@{/library/update}" th:method="put" th:object="${library}">
+
+                                <input type="hidden" id="libraryId" name="libraryId" th:field="*{id}"/>
+
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-user" id="libraryName" name="libraryName"
-                                    placeholder="Nombre de la sede" th:field="*{name}" required autofocus>
+                                           placeholder="Nombre de la sede" th:field="*{name}" required autofocus>
                                 </div>
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-user" id="libraryAddress" name="libraryAddress"
-                                    placeholder="Dirección de la sede" th:field="*{address}" required>
+                                           placeholder="Dirección de la sede" th:field="*{address}" required>
                                 </div>
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-user" id="libraryContactPhone" name="libraryContactPhone"
-                                    placeholder="Teléfono de la sede" th:field="*{contactPhone}" required>
+                                           placeholder="Teléfono de la sede" th:field="*{contactPhone}" required>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="submit" name="new-library-submit" id="new-library-submit" class="btn btn-primary btn-user btn-block" value="Añadir sede">
                                     </div>
                                     <div class="col-sm-6">
-                                        <a class="btn btn-secondary btn-user btn-block" href="pagina-principal.html">Cancelar</a>
+                                        <a class="btn btn-secondary btn-user btn-block" th:href="@{/}">Cancelar</a>
                                     </div>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
-                <!--Fin de tabla-->
             </div>
         </div>
     </div>
 
-
-    <!--Boton de subida rapido-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-
-    <!--Tarjeta de cierre de sesión-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <!--Modal edición de sede-->
+    <div class="modal fade" id="editLibraryModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Seguro que quiere cerrar sesión?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Edición de sede</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <!--Precionar cancelar disminuye la tarjeta, precioanar cerrar sesión lleva al usuario a login-->
-                <div class="modal-body">Seleccione cerrar sesión para salir de la pagina principal</div>
+                <form id="editLibraryModalForm" th:action="@{/library/edit}" method="PUT" th:object="${library}">
+                    <div class="modal-body">
+                        <input type="hidden" id="libraryIdEditModal" name="id" th:field="*{id}"/>
+                        <div class="form-group">
+                            <input type="text" class="form-control form-control-user" id="libraryNameEditModal" name="name"
+                                   placeholder="Nombre de la sede" th:field="*{name}" required autofocus/>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control form-control-user" id="libraryAddressEditModal" name="address"
+                                   placeholder="Dirección de la sede" th:field="*{address}" required/>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control form-control-user" id="libraryContactPhoneEditModal" name="contactPhone"
+                                   placeholder="Teléfono de la sede" th:field="*{contactPhone}" required/>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</a>
+                        <input type="submit" class="btn btn-primary" value="Aceptar"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--Fin modal edición de sede-->
+
+    <!--Modal confirmación de eliminación sede-->
+    <div class="modal fade" id="deleteLibraryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">¿Seguro que desea eliminar la sede?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Seleccione aceptar para eliminar la sede</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                    <a class="btn btn-primary" href="login.html">Cerrar sesión</a>
+                    <form method="delete" id="deleteLibraryModalForm">
+                        <a class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</a>
+                        <input type="submit" class="btn btn-primary" value="Aceptar"/>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-    <!--Fin tarjeta de cierre de sesión-->
+    <!--Fin modal confirmación de eliminación sede-->
+
+    <div th:replace="/user_no_register/home :: utils"/>
 
     <!--Bootstrap complementado con JavaScript-->
     <script src="/vendor/jquery/jquery.min.js"></script>
@@ -277,15 +152,38 @@
     <!--Complemento JavaScript-->
     <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-    <!--Scripts personalizados para todas las páginas-->
-    <script src="/js/naucratis.min.js"></script>
-
     <!--Complementos de nivel de página-->
     <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
     <!--Secuencias de comandos personalizadas a nivel de página-->
     <script src="/js/demo/datatables-demo.js"></script>
+
+<script th:inline="javascript">
+    //Carga los datos de la biblioteca en la modal de edición
+    $('#editLibraryModal').on('show.bs.modal', event => {
+        let button = $(event.relatedTarget);
+        const libraryId = button.data('library-id');
+        const libraryName = button.data('library-name');
+        const libraryAddress = button.data('library-address');
+        const libraryContactPhone = button.data('library-contactphone');
+        $('#libraryIdEditModal').val(libraryId);
+        $('#libraryNameEditModal').val(libraryName);
+        $('#libraryAddressEditModal').val(libraryAddress);
+        $('#libraryContactPhoneEditModal').val(libraryContactPhone);
+    });
+
+    $('#deleteLibraryModal').on('show.bs.modal', event => {
+        let button = $(event.relatedTarget);
+        const libraryId = button.data('library-id');
+        const libraryName = button.data('library-name');
+        let action = "@{/library/edit?libraryId=" + libraryId + "}";
+        $('deleteLibraryModalForm').attr('th:action', action)
+        $('#libraryIdEditModal').val(libraryId);
+        $('#libraryNameEditModal').val(libraryName);
+
+    });
+</script>
 
 </body>
 

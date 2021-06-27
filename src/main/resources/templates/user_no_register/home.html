@@ -172,7 +172,7 @@
                                 <img class="img-profile rounded-circle"
                                      src="/img/undraw_profile.svg">
                             </a>
-                            <!--Obciones de perfil, configuración y cerrar sesión-->
+                            <!--Opciones de perfil, configuración y cerrar sesión-->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                  aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="#">
@@ -236,21 +236,21 @@
     <!--Fin tarjeta de cierre de sesión-->
 </div>
 <!--Bootstrap complementado con JavaScript-->
-<script src="/vendor/jquery/jquery.min.js"></script>
-<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
 
 <!--Complemento JavaScript-->
-<script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+<script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
 
 <!--Scripts personalizados para todas las páginas-->
-<script src="/js/naucratis.min.js"></script>
+<script th:src="@{/js/naucratis.min.js}"></script>
 
 <!--Complementos de nivel de página-->
-<script src="/vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<script th:src="@{/vendor/datatables/jquery.dataTables.min.js}"></script>
+<script th:src="@{/vendor/datatables/dataTables.bootstrap4.min.js}"></script>
 
 <!--Secuencias de comandos personalizadas a nivel de página-->
-<script src="/js/demo/datatables-demo.js"></script>
+<script th:src="@{/js/demo/datatables-demo.js}"></script>
 
 </body>
 
