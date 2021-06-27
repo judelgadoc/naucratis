@@ -32,33 +32,34 @@
                         <form class="user" method="POST" th:action="@{/register/customer}" id="registerCustomerForm" enctype="multipart/form-data">
                             <div class="form-group">
                                 <input type="text" name="name" class="form-control form-control-user"
-                                       id="exampleName" placeholder="Nombre">
+                                       id="name" placeholder="Nombre">
                             </div>
                             <div class="form-group">
                                 <input type="text" name="city" class="form-control form-control-user"
-                                       id="exampleCity" placeholder="Ciudad">
+                                       id="city" placeholder="Ciudad">
                             </div>
                             <div class="form-group">
                                 <input type="text" name="address" class="form-control form-control-user"
-                                       id="exampleAddress" placeholder="Dirección">
+                                       id="address" placeholder="Dirección">
                             </div>
                             <div class="form-group">
                                 <input type="text" name="phone" class="form-control form-control-user"
-                                       id="examplePhone" placeholder="Teléfono">
+                                       id="phone" placeholder="Teléfono">
                             </div>
                             <div class="form-group">
                                 <input type="text" name="email" class="form-control form-control-user"
-                                       id="exampleEmail" placeholder="Correo electrónico">
+                                       id="email" placeholder="Correo electrónico">
                             </div>
                             <div class="form-group">
                                 <input type="password" name="password" class="form-control form-control-user"
-                                       id="examplePassword" placeholder="Contraseña">
+                                       id="password" placeholder="Contraseña">
                             </div>
                             <div class="form-group">
                                 <label for="image">Foto de perfil: </label>
-                                <input type="file" name="image" class="form-control form-control-file"
+                                <input type="file" name="image" class="form-control-file"
                                        id="image" placeholder="Foto de perfil">
                             </div>
+
                             <input type="submit" class="btn btn-primary btn-user btn-block" value="Registrar"/>
                         </form>
                         <hr>
