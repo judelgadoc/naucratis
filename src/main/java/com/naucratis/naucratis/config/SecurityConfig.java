@@ -40,13 +40,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                 antMatchers("/books","/welcome").
                 hasAnyRole("CUSTOMER", "ADMINISTRATOR").
                 antMatchers("/users").
-                hasRole("ADMINISTRATOR").
-                and().
-                formLogin().
-                loginPage("/login").
-                defaultSuccessUrl("/",true).
-                and().
-                logout().
-                logoutSuccessUrl("/");
+                hasRole("ADMINISTRATOR")
+                .antMatchers(
+                "/register**",
+                "/register/customer**",
+                "/register/administrator**",
+                "/js/**",
+                "/css/**",
+                "/img/**")
+                .permitAll()
+                .anyRequest().authenticated()
+                .and().formLogin().loginPage("/login").defaultSuccessUrl("/", true).permitAll()
+                .and().logout().invalidateHttpSession(true).clearAuthentication(true)
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login?logout").permitAll();
+        http.csrf().disable();
     }
 }
