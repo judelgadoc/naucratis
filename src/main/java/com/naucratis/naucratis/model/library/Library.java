@@ -18,6 +18,10 @@ public class Library
     @Column(unique = true)
     private String name;
 
+    private String address;
+
+    private String contactPhone;
+
     @Lob
     private byte[] image;
 

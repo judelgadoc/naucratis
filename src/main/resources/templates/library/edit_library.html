@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <!--Especificaiones de la pantalla-->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Naucratis</title>
+
+    <!--Configuración de estilos-->
+    <link href="../../../static/vendor/fontawesome-free/css/all.min.css" th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="../../../static/css/estilos-Naucratis.css" th:href="@{/css/estilos-Naucratis.css}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="../../../static/vendor/datatables/dataTables.bootstrap4.min.css" th:href="@{/vendor/datatables/dataTables.bootstrap4.min.css}" rel="stylesheet">
+    <script type="text/javascript" src="../static/js/naucratis.js" th:src="@{/js/naucratis.js}"></script>
+</head>
+
+<body id="page-top">
+
+    <div id="wrapper">
+
+        <!--Barra de herramientas-->
+        <div th:replace="/user_no_register/home :: toolbar"/>
+        <!--Barra de contenido-->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <div id="content">
+
+                <div th:replace="/user_no_register/home :: contentbar"/>
+                <!--Trabajar adentro de la pagina-->
+                <div class="container-fluid">
+
+                    <!--aviso proceso exitoso-->
+                    <div th:if="${param.success}">
+                        <div class="alert alert-success">Operación realizada con éxito</div>
+                    </div>
+                    <!--aviso proceso fallido-->
+                    <div th:if="${param.failure}">
+                        <div class="alert alert-warning">Ocurrió un error al procesar la operación</div>
+                    </div>
+                    <!--Titulo de pagina-->
+                    <h1 class="h3 mb-2 text-gray-800">Listado de sedes</h1>
+
+                    <!--Tabla de sedes-->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Sedes</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <!--Titulos de columnas al inico y al final-->
+                                    <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Dirección</th>
+                                        <th>Teléfono</th>
+                                        <th>Editar</th>
+                                        <th>Borrar</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="library: ${libraries}">
+                                            <td th:text="${library.name}"/>
+                                            <td th:text="${library.address}"/>
+                                            <td th:text="${library.contactPhone}"/>
+                                            <td class="text-center"><a th:href="@{/library/update(libraryId=${library.id})}" id="editLibraryButton"><i class="far fa-edit"></i></a></td>
+                                            <td class="text-center"><a th:href="@{/library/delete(libraryId=${library.id})}" id="deleteLibraryButton"><i class="fas fa-trash"></i></a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Fin de tabla-->
+            </div>
+        </div>
+    </div>
+
+    <!--Modal edición de sede-->
+    <div class="modal fade" id="editLibraryModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edición de sede</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <form id="editLibraryModalForm" th:action="@{/library/edit}" method="PUT" th:object="${library}">
+                    <div class="modal-body">
+                        <input type="hidden" id="libraryIdEditModal" name="id" th:field="*{id}"/>
+                        <div class="form-group">
+                            <input type="text" class="form-control form-control-user" id="libraryNameEditModal" name="name"
+                                   placeholder="Nombre de la sede" th:field="*{name}" required autofocus/>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control form-control-user" id="libraryAddressEditModal" name="address"
+                                   placeholder="Dirección de la sede" th:field="*{address}" required/>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control form-control-user" id="libraryContactPhoneEditModal" name="contactPhone"
+                                   placeholder="Teléfono de la sede" th:field="*{contactPhone}" required/>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</a>
+                        <input type="submit" class="btn btn-primary" value="Aceptar"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--Fin modal edición de sede-->
+
+    <!--Modal confirmación de eliminación sede-->
+    <div class="modal fade" id="deleteLibraryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">¿Seguro que desea eliminar la sede?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Seleccione aceptar para eliminar la sede</div>
+                <div class="modal-footer">
+                    <form method="delete" id="deleteLibraryModalForm">
+                        <a class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</a>
+                        <input type="submit" class="btn btn-primary" value="Aceptar"/>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Fin modal confirmación de eliminación sede-->
+
+    <div th:replace="/user_no_register/home :: utils"/>
+
+    <!--Bootstrap complementado con JavaScript-->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!--Complemento JavaScript-->
+    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!--Complementos de nivel de página-->
+    <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!--Secuencias de comandos personalizadas a nivel de página-->
+    <script src="/js/demo/datatables-demo.js"></script>
+
+<script th:inline="javascript">
+    //Carga los datos de la biblioteca en la modal de edición
+    $('#editLibraryModal').on('show.bs.modal', event => {
+        let button = $(event.relatedTarget);
+        const libraryId = button.data('library-id');
+        const libraryName = button.data('library-name');
+        const libraryAddress = button.data('library-address');
+        const libraryContactPhone = button.data('library-contactphone');
+        $('#libraryIdEditModal').val(libraryId);
+        $('#libraryNameEditModal').val(libraryName);
+        $('#libraryAddressEditModal').val(libraryAddress);
+        $('#libraryContactPhoneEditModal').val(libraryContactPhone);
+    });
+
+    $('#deleteLibraryModal').on('show.bs.modal', event => {
+        let button = $(event.relatedTarget);
+        const libraryId = button.data('library-id');
+        const libraryName = button.data('library-name');
+        let action = "@{/library/edit?libraryId=" + libraryId + "}";
+        $('deleteLibraryModalForm').attr('th:action', action)
+        $('#libraryIdEditModal').val(libraryId);
+        $('#libraryNameEditModal').val(libraryName);
+
+    });
+</script>
+
+</body>
+
+</html>

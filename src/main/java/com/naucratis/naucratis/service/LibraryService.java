@@ -1,5 +1,6 @@
 package com.naucratis.naucratis.service;
 
+import com.naucratis.naucratis.model.dto.LibraryRequestDto;
 import com.naucratis.naucratis.model.form.CopyBookForm;
 import com.naucratis.naucratis.model.form.RegistrationBookForm;
 import com.naucratis.naucratis.model.library.*;
@@ -219,6 +220,34 @@ public class LibraryService {
     public void save(Library library)
     {
         libraryRepository.save(library);
+    }
+
+    public void save(LibraryRequestDto libraryRequest) {
+        Library library = new Library();
+        library.setName(libraryRequest.getName());
+        library.setAddress(libraryRequest.getAddress());
+        library.setContactPhone(libraryRequest.getContactPhone());
+        libraryRepository.save(library);
+    }
+
+    public Optional<Library> getLibraryById(long libraryId){
+        return libraryRepository.findById(libraryId);
+    }
+
+    public void updateLibrary(LibraryRequestDto libraryRequest) throws Exception {
+        Optional<Library> library = libraryRepository.findById(libraryRequest.getId());
+        if(!library.isPresent()) {
+            throw new Exception("Librería no encontrada");
+        }
+        Library updatedLibrary = library.get();
+        updatedLibrary.setName(libraryRequest.getName());
+        updatedLibrary.setAddress(libraryRequest.getAddress());
+        updatedLibrary.setContactPhone(libraryRequest.getContactPhone());
+        libraryRepository.save(updatedLibrary);
+    }
+
+    public void deleteLibraryById(Long libraryId){
+        libraryRepository.deleteById(libraryId);
     }
 
     public Library findByName(String name)

@@ -1,25 +1,32 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-  <meta charset="UTF-8">
-  <title> Carrito de compras </title>
+  <!--Especificaciones de la pantalla-->
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+  <title>Naucratis</title>
+
   <!--Configuración de estilos-->
-  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
   <link th:href="@{/css/estilos-Naucratis.css}" rel="stylesheet">
-  <link th:href="@{/vendor/datatables/dataTables.bootstrap4.min.css}" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script type="text/javascript" th:src="@{/js/naucratis.js}"></script>
 </head>
-<body>
+
+<body id="page-top">
+
 <div id="wrapper">
+
   <!--Barra de herramientas-->
   <div th:fragment="toolbar">
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
       <!--Titulo y icono-->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="pagina-principal.html">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" th:href="@{/}">
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-book"></i>
         </div>
@@ -29,7 +36,7 @@
       <!--División-->
       <hr class="sidebar-divider my-0">
 
-      <!--Subtiutlo: "Funcionalidades"-->
+      <!--Subtitulo: "Funcionalidades"-->
       <li class="nav-item active">
         <a class="nav-link" href="#">
           <i class="fas fa-address-book"></i>
@@ -44,7 +51,7 @@
 
       <!--Funcionalidad buscar-->
       <li class="nav-item">
-        <a class="nav-link" href="VistaLibro.html">
+        <a class="nav-link" href="blanco.html">
           <i class="fas fa-search"></i>
           <span>Buscar</span></a>
       </li>
@@ -53,10 +60,10 @@
       <hr class="sidebar-divider">
 
       <!--Subtitulo: "Administrador"-->
-      <div class="sidebar-heading">Administrador</div>
+      <div class="sidebar-heading" sec:authorize="hasRole('ROLE_ADMINISTRATOR')">Administrador</div>
 
       <!--Funcionalidad inventario-->
-      <li class="nav-item">
+      <li class="nav-item" sec:authorize="hasRole('ROLE_ADMINISTRATOR')">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
            aria-expanded="true" aria-controls="collapsePages">
           <i class="fas fa-list-ul"></i>
@@ -65,15 +72,31 @@
         <!--Dos enlaces con cada una de las funcionalidades del inventario-->
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="VistaLibro.html">Añadir libro</a>
+            <a class="collapse-item" href="blanco.html">Añadir libro</a>
             <a class="collapse-item" href="inventario.html">Editar libro</a>
+          </div>
+        </div>
+      </li>
+
+      <!--Funcionalidad sedes-->
+      <li class="nav-item" sec:authorize="hasRole('ROLE_ADMINISTRATOR')">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSedePages"
+           aria-expanded="true" aria-controls="collapseSedePages">
+          <i class="far fa-building"></i>
+          <span>Sedes</span>
+        </a>
+        <!--Enlaces con el CRUD de las sedes-->
+        <div id="collapseSedePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" th:href="@{/library/new}">Nueva sede</a>
+            <a class="collapse-item" th:href="@{/library/edit}">Ver y editar sedes</a>
           </div>
         </div>
       </li>
 
       <!--Funcionalidad estadisticas-->
       <li class="nav-item">
-        <a class="nav-link" href="VistaLibro.html">
+        <a class="nav-link" href="blanco.html">
           <i class="fas fa-chart-bar"></i>
           <span>Estadísticas</span></a>
       </li>
@@ -81,272 +104,139 @@
       <!--División-->
       <hr class="sidebar-divider d-none d-md-block">
 
-      <!--Boton para minimizar la barra de herramientas-->
-      <div class="text-center d-none d-md-inline">
-        <button class="rounded-circle border-0" id="sidebarToggle"></button>
-      </div>
-
-      <!--Opcion Pro (solo decorativo)-->
-      <div class="sidebar-card d-none d-lg-flex">
-        <img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="...">
-        <p class="text-center mb-2"><strong>Pásate a Pro: </strong>Consigue una experiencia mas personalizada y amigable.</p>
-        <a class="btn btn-success btn-sm" href="#">Adquirir Pro!</a>
-      </div>
-
     </ul>
+    <!-- Fin barra de herramientas-->
   </div>
-  <!-- Fin barra de herramientas-->
-  <div id="content-wrapper" class="d-flex flex-column">
-    <div id="content">
+
 
   <!--Barra de contenido-->
+  <div id="content-wrapper" class="d-flex flex-column">
+
+    <div id="content">
+
       <div th:fragment="contentbar">
-      <!--Barra de busqueda -->
-      <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+        <!--Barra de busqueda -->
+        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
-        <!--Icono-->
-        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-          <i class="fa fa-bars"></i>
-        </button>
+          <!--Icono-->
+          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+            <i class="fa fa-bars"></i>
+          </button>
 
-        <!--Barra-->
-        <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-          <div class="input-group">
-            <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar..."
-                   aria-label="Search" aria-describedby="basic-addon2">
-            <div class="input-group-append">
-              <button class="btn btn-primary" type="button">
-                <i class="fas fa-search fa-sm"></i>
-              </button>
+          <!--Barra-->
+          <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+            <div class="input-group">
+              <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar..."
+                     aria-label="Search" aria-describedby="basic-addon2">
+              <div class="input-group-append">
+                <button class="btn btn-primary" type="button">
+                  <i class="fas fa-search fa-sm"></i>
+                </button>
+              </div>
             </div>
-          </div>
-        </form>
+          </form>
 
-        <!--Menu desplegable (dispositivos moviles)-->
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item dropdown no-arrow d-sm-none">
-            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fas fa-search fa-fw"></i>
-            </a>
-            <!--Barra de busqueda (dispositivos moviles)-->
-            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                 aria-labelledby="searchDropdown">
-              <form class="form-inline mr-auto w-100 navbar-search">
-                <div class="input-group">
-                  <input type="text" class="form-control bg-light border-0 small"
-                         placeholder="Buscar..." aria-label="Search"
-                         aria-describedby="basic-addon2">
-                  <div class="input-group-append">
-                    <button class="btn btn-primary" type="button">
-                      <i class="fas fa-search fa-sm"></i>
-                    </button>
+          <!--Menu desplegable (dispositivos moviles)-->
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown no-arrow d-sm-none">
+              <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-search fa-fw"></i>
+              </a>
+              <!--Barra de busqueda (dispositivos moviles)-->
+              <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                   aria-labelledby="searchDropdown">
+                <form class="form-inline mr-auto w-100 navbar-search">
+                  <div class="input-group">
+                    <input type="text" class="form-control bg-light border-0 small"
+                           placeholder="Buscar..." aria-label="Search"
+                           aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                      <button class="btn btn-primary" type="button">
+                        <i class="fas fa-search fa-sm"></i>
+                      </button>
+                    </div>
                   </div>
-                </div>
-              </form>
-            </div>
-          </li>
+                </form>
+              </div>
+            </li>
 
-          <!--Notificaciones (no funciona es obcional)-->
-          <li class="nav-item dropdown no-arrow mx-1">
-            <!--Icono en la barra-->
-            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
-               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fas fa-bell fa-fw"></i>
-              <span class="badge badge-danger badge-counter">3+</span>
-            </a>
-            <!--Titulo-->
-            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                 aria-labelledby="alertsDropdown">
-              <h6 class="dropdown-header">Notificaciones</h6>
-              <!--icono de notificacion1-->
-              <a class="dropdown-item d-flex align-items-center" href="#">
-                <div class="mr-3">
-                  <div class="icon-circle bg-primary">
-                    <i class="fas fa-file-alt text-white"></i>
-                  </div>
-                </div>
-                <!--descripción notificación1-->
-                <div>
-                  <div class="small text-gray-500">Junio 5, 2021</div>
-                  <span class="font-weight-bold">Tu autor favorito ha publicado un nuevo libro!</span>
-                </div>
-              </a>
-              <!--icono de notificacion2-->
-              <a class="dropdown-item d-flex align-items-center" href="#">
-                <div class="mr-3">
-                  <div class="icon-circle bg-success">
-                    <i class="fas fa-donate text-white"></i>
-                  </div>
-                </div>
-                <!--descripción notificación2-->
-                <div>
-                  <div class="small text-gray-500">Abril 7, 2021</div>
-                  El libro que reservaste ha sido vendido!
-                </div>
-              </a>
-              <!--icono de notificacion3-->
-              <a class="dropdown-item d-flex align-items-center" href="#">
-                <div class="mr-3">
-                  <div class="icon-circle bg-warning">
-                    <i class="fas fa-exclamation-triangle text-white"></i>
-                  </div>
-                </div>
-                <!--descripción notificación3-->
-                <div>
-                  <div class="small text-gray-500">Junio 2, 2021</div>
-                  llego a la librería el libro que pediste!
-                </div>
-              </a>
-              <a class="dropdown-item text-center small text-gray-500" href="#">Mas notifcaciones</a>
-            </div>
-          </li>
+            <!--División-->
+            <div class="topbar-divider d-none d-sm-block"></div>
 
-          <!--Mensajes (no funciona es obcional)-->
-          <li class="nav-item dropdown no-arrow mx-1">
-            <!--Icono en la barra-->
-            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
-               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fas fa-envelope fa-fw"></i>
-              <span class="badge badge-danger badge-counter">7</span>
-            </a>
-            <!--Titulo-->
-            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                 aria-labelledby="messagesDropdown">
-              <h6 class="dropdown-header">Mensajes</h6>
-              <!--Mensajes predefinidos con icono, contenido, fecha y usuraio que lo envia-->
-              <a class="dropdown-item d-flex align-items-center" href="#">
-                <div class="dropdown-list-image mr-3">
-                  <img class="rounded-circle" src="img/undraw_profile_1.svg"
-                       alt="...">
-                  <div class="status-indicator bg-success"></div>
-                </div>
-                <div class="font-weight-bold">
-                  <div class="text-truncate">Hola encontré el libro que buscabas.</div>
-                  <div class="small text-gray-500">María Jiménez· 58m</div>
-                </div>
-              </a>
-              <a class="dropdown-item d-flex align-items-center" href="#">
-                <div class="dropdown-list-image mr-3">
-                  <img class="rounded-circle" src="img/undraw_profile_2.svg"
-                       alt="...">
-                  <div class="status-indicator"></div>
-                </div>
-                <div>
-                  <div class="text-truncate">Te recomiendo este libro</div>
-                  <div class="small text-gray-500">Julián casallas· 1d</div>
-                </div>
-              </a>
-              <a class="dropdown-item d-flex align-items-center" href="#">
-                <div class="dropdown-list-image mr-3">
-                  <img class="rounded-circle" src="img/undraw_profile_3.svg"
-                       alt="...">
-                  <div class="status-indicator bg-warning"></div>
-                </div>
-                <div>
-                  <div class="text-truncate">Lo siento no encuentro el libro</div>
-                  <div class="small text-gray-500">Fabián Torres· 2d</div>
-                </div>
-              </a>
-              <a class="dropdown-item d-flex align-items-center" href="#">
-                <div class="dropdown-list-image mr-3">
-                  <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
-                       alt="...">
-                  <div class="status-indicator bg-success"></div>
-                </div>
-                <div>
-                  <div class="text-truncate">Ya vendí el libro</div>
-                  <div class="small text-gray-500">·Sonny Niño· 2w</div>
-                </div>
-              </a>
-              <a class="dropdown-item text-center small text-gray-500" href="#">Mas mensajes</a>
-            </div>
-          </li>
-
-          <!--División-->
-          <div class="topbar-divider d-none d-sm-block"></div>
-
-          <!--Informacion de usuraio-->
-          <li class="nav-item dropdown no-arrow">
-            <!--Nombre y icono-->
-            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <span class="mr-2 d-none d-lg-inline text-gray-600 small">Carlos Rubio</span>
-              <img class="img-profile rounded-circle"
-                   src="img/undraw_profile.svg">
-            </a>
-            <!--Obciones de perfil, configuración y cerrar sesión-->
-            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                 aria-labelledby="userDropdown">
-              <a class="dropdown-item" href="#">
-                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                Perfil
-              </a>
-              <a class="dropdown-item" href="#">
-                <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                Configuarción
-              </a>
-              <div class="dropdown-divider"></div>
-              <!--Cerrar sesión es la unica que funciona, despliega una tarjeta para validar el cierre de sesión-->
-              <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                Cerrar Sesión
-              </a>
-            </div>
-          </li>
-        </ul>
-        <!--Fin barra de contenido-->
-      </nav>
-      </div>
-      <!-- Navigation-->
-  <!--    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container px-4 px-lg-5">
-
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Ordenar por</a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="#!">Añadido recientemente</a></li>
-                  <li><hr class="dropdown-divider" /></li>
-                  <li><a class="dropdown-item" href="#!">Más populares</a></li>
-                  <li><a class="dropdown-item" href="#!">Precio(Menor a mayor)</a></li>
-                  <li><a class="dropdown-item" href="#!">Precio(Mayor a menor)</a></li>
-                </ul>
+            <!-- Login -->
+              <li class="nav-item dropdown no-arrow" sec:authorize="isAuthenticated() == false">
+                <a class="nav-link" th:href="@{/login}" id="loginHome" role="button">
+                  <span class="mr-2 d-none d-lg-inline text-black-50 small">Iniciar Sesión</span>
+                </a>
               </li>
-            </ul>   -->
-      <!--Contenido de la pagina-->
-      <nav>
-        <ul>
-          <li th:if="${role == null}">
-            <a th:href="@{/login}"> <button type="button">Iniciar Sesión</button></a>
-            <a th:href="@{/register}"> <button type="button">Registrarse</button></a>
-          </li>
-          <li th:if="${#strings.equals(role,'administrator')}">
-            <a th:href="@{/administrator/libraries}"><button type="button">Librerias</button> </a>
-          </li>
-          <li th:if="${#strings.equals(role,'customer')}">
-            <a th:href="@{/customer/shoppingCart}"><button type="button">Carrito</button> </a>
-          </li>
-          <li th:if="${role != null}">
-            <a th:href="@{'/' + ${role}}"> <button type="button"> Ver perfil </button></a>
-          </li>
-          <li th:if="${role != null}">
-            <form method="POST" th:action="@{/logout}">
-              <input type="submit" value="Cerrar sesión"/>
-            </form>
-          </li>
-        </ul>
-      </nav>
-      ¡Bienvenido!
-      <br>
-      <a th:href="@{/libraries}"> Librerias </a>
-      <!--FIn del contenido de página-->
-          </div>
-        </div>
-</div>
+              <!--División-->
+              <div class="topbar-divider d-none d-sm-block" sec:authorize="isAuthenticated() == false"></div>
+            <!-- Registro -->
+              <li class="nav-item" sec:authorize="isAuthenticated() == false">
+                <a class="nav-link" th:href="@{/register}" id="registerHome" role="button">
+                  <span class="mr-2 d-none d-lg-inline text-black-50 small">Registrarse</span>
+                </a>
+              </li>
 
+            <!-- Informacion de usuario -->
+            <li class="nav-item dropdown no-arrow" sec:authorize="hasAnyRole('ROLE_ADMINISTRATOR', 'ROLE_CUSTOMER')">
+              <!--Nombre y icono-->
+              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small" th:text = "${#authentication.getPrincipal().getName()}"></span>
+                <img class="img-profile rounded-circle"
+                     src="/images/undraw_profile.svg">
+              </a>
+              <!--Opciones de perfil, configuración y cerrar sesión-->
+              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                   aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="#">
+                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Perfil
+                </a>
+                <a class="dropdown-item" href="#">
+                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Configuración
+                </a>
+                <div class="dropdown-divider"></div>
+                <!--Cerrar sesión es la unica que funciona, despliega una tarjeta para validar el cierre de sesión-->
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Cerrar Sesión
+                </a>
+              </div>
+            </li>
+          </ul>
+          <!--Fin barra de contenido-->
+        </nav>
+      </div>
+
+      <!--Contenido de la pagina-->
+      <div class="container-fluid">
+        <div class="text-center">
+          <h2>Bienvenido a Naucratis</h2>
+          <nav>
+            <ul>
+              <li th:if="${#strings.equals(role,'administrator')}">
+                <a th:href="@{/administrator/libraries}"><button type="button">Librerias</button> </a>
+              </li>
+              <li th:if="${#strings.equals(role,'customer')}">
+                <a th:href="@{/customer/shoppingCart}"><button type="button">Carrito</button> </a>
+              </li>
+              <li th:if="${role != null}">
+                <a th:href="@{'/' + ${role}}"> <button type="button"> Ver perfil </button></a>
+              </li>
+            </ul>
+          </nav>
+          <br>
+          <a th:href="@{/libraries}"> Librerias </a>
+        </div>
+      </div>
+      <!--Fin contenido de la pagina-->
+    </div>
+  </div>
+</div>
 
 <div th:fragment="utils">
   <!--Boton de subida rapido-->
@@ -377,22 +267,21 @@
   <!--Fin tarjeta de cierre de sesión-->
 </div>
 <!--Bootstrap complementado con JavaScript-->
-<script src="/vendor/jquery/jquery.min.js"></script>
-<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
 
 <!--Complemento JavaScript-->
-<script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+<script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
 
 <!--Scripts personalizados para todas las páginas-->
-<script src="/js/naucratis.min.js"></script>
+<script th:src="@{/js/naucratis.min.js}"></script>
 
 <!--Complementos de nivel de página-->
-<script src="/vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<script th:src="@{/vendor/datatables/jquery.dataTables.min.js}"></script>
+<script th:src="@{/vendor/datatables/dataTables.bootstrap4.min.js}"></script>
 
 <!--Secuencias de comandos personalizadas a nivel de página-->
-<script src="/js/demo/datatables-demo.js"></script>
+<script th:src="@{/js/demo/datatables-demo.js}"></script>
 </body>
+
 </html>
-
-
