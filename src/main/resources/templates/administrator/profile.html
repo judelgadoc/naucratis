@@ -25,15 +25,6 @@
             <div th:replace="/user_no_register/home :: contentbar"/>
             <!--Barra de contenido-->
 
-            <nav>
-                <ul>
-                    <li th:if="${role != null}">
-                        <form method="POST" th:action="@{/logout}">
-                            <input type="submit" value="Cerrar sesión"/>
-                        </form>
-                    </li>
-                </ul>
-            </nav>
 
             <!-- Perfil -->
             <h1> Administrador </h1>
