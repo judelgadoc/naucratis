@@ -36,28 +36,26 @@
       <!--División-->
       <hr class="sidebar-divider my-0">
 
-      <!--Subtitulo: "Funcionalidades"-->
-      <li class="nav-item active">
-        <a class="nav-link" href="#">
-          <i class="fas fa-address-book"></i>
-          <span>Funcionalidades</span></a>
-      </li>
-
-      <!--División-->
-      <hr class="sidebar-divider">
-
       <!--Subtitulo: "Usuario"-->
-      <div class="sidebar-heading">Usuario</div>
+      <div class="sidebar-heading" sec:authorize="hasRole('ROLE_CUSTOMER') || !isAuthenticated()">Usuario</div>
 
       <!--Funcionalidad buscar-->
-      <li class="nav-item">
+      <li class="nav-item" sec:authorize="hasRole('ROLE_CUSTOMER') || !isAuthenticated()">
         <a class="nav-link" href="blanco.html">
           <i class="fas fa-search"></i>
           <span>Buscar</span></a>
       </li>
 
+      <!--Funcionalidad carrito-->
+      <li class="nav-item" sec:authorize="hasRole('ROLE_CUSTOMER') || !isAuthenticated()">
+        <a class="nav-link" th:href="@{/customer/shoppingCart}">
+          <i class="fas fa-shopping-cart"></i>
+          <span>Carrito</span>
+        </a>
+      </li>
+
       <!--División-->
-      <hr class="sidebar-divider">
+      <hr class="sidebar-divider" sec:authorize="hasRole('ROLE_CUSTOMER') || !isAuthenticated()">
 
       <!--Subtitulo: "Administrador"-->
       <div class="sidebar-heading" sec:authorize="hasRole('ROLE_ADMINISTRATOR')">Administrador</div>
@@ -96,14 +94,14 @@
       </li>
 
       <!--Funcionalidad estadisticas-->
-      <li class="nav-item">
+      <li class="nav-item" sec:authorize="hasRole('ROLE_ADMINISTRATOR')">
         <a class="nav-link" href="blanco.html">
           <i class="fas fa-chart-bar"></i>
           <span>Estadísticas</span></a>
       </li>
 
       <!--División-->
-      <hr class="sidebar-divider d-none d-md-block">
+      <hr class="sidebar-divider d-none d-md-block" sec:authorize="hasRole('ROLE_ADMINISTRATOR')">
 
     </ul>
     <!-- Fin barra de herramientas-->
