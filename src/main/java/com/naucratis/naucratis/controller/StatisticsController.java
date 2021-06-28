@@ -13,6 +13,7 @@ import java.util.*;
 
 @Controller
 @RequestMapping("/estadisticas")
+@SessionAttributes("role")
 public class StatisticsController {
 
     @Autowired

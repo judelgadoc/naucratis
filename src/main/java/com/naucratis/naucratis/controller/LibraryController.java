@@ -13,6 +13,7 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/library")
+@SessionAttributes("role")
 public class LibraryController {
 
     private final String EDIT_LIBRARY_MESSAGE_MODEL = "editLibraryMessage";
