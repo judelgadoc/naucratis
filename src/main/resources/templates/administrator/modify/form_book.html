@@ -3,22 +3,28 @@
     <head>
             <meta charset="UTF-8">
             <title> Formulario modificacion libro </title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!--Configuración de estilos-->
+        <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+              rel="stylesheet">
+        <link th:href="@{/css/estilos-Naucratis.css}" rel="stylesheet">
+        <link th:href="@{/vendor/datatables/dataTables.bootstrap4.min.css}" rel="stylesheet">
     </head>
     <body>
+    <div id="wrapper">
+        <!--barra de herramientas-->
+        <div th:replace="/user_no_register/home :: toolbar"/>
+        <!-- Fin barra de herramientas-->
+        <div id="content-wrapper" class="d-flex flex-column">
 
-
-        <header>
-            <table>
-                <td>
-                    <img width="100px" th:src="@{/images/Naucratis.png}">
-                </td>
-                <td>
-                    <h1> Naucratis </h1>
-                </td>
-            </table>
-        </header>
-
-
+            <div id="content">
+                <!--Barra de contenido-->
+                <div th:replace="/user_no_register/home :: contentbar"/>
+                <!--Barra de contenido-->
+                <center>
+                    <h2>Modificar Libro</h2>
         <nav>
             <ul>
                 <li th:if="${#strings.equals(role,'administrator')}">
@@ -35,11 +41,11 @@
             </ul>
         </nav>
 
-
         <form method="POST" th:action="@{'/modify/'+${name_library}+'/book/'+${copyBook.id}}" id="copyBookForm">
             <input type="hidden" th:value="${copyBook.id}" name="id">
             <input type="hidden" th:value="${copyBook.isbn}" name="isbn">
-            <table>
+            <div class="table-responsive">
+            <table class="table" >
                 <tr>
                     <td><label for="condition">Condición: </label></td>
                     <td><input type="text" name="condition" th:value="${copyBook.condition}"/></td>
@@ -49,16 +55,6 @@
                     <td><input type="text" name="price" th:value="${copyBook.price}"/></td>
                 </tr>
                 <tr>
-                    <td><label for="site">Sitio: </label></td>
-                    <td>
-                        <select name="site">
-                            <div th:each="site: ${sites}">
-                                <option th:value="${site.address}">
-                                    <span th:text="${site.address}"> DIRECCIÓN </span>
-                                </option>
-                            </div>
-                        </select>
-                    </td>
                 </tr>
                 <tr>
                     <td>
@@ -83,9 +79,13 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><button type="submit"> Registrar</button></td>
+                    <td><button type="submit" class="btn btn-success"> Registrar</button></td>
                 </tr>
             </table>
+            </div>
         </form>
+
+
+
     </body>
 </html>

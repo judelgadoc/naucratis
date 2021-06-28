@@ -1,59 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-      <meta charset="UTF-8">
-      <title> Agregar copia </title>
-  </head>
-  <body>
-    <h1> Formulario copia </h1>
-    <form method="POST" th:action="@{/register/copyBookProcess}" id="copyBookForm">
-        <input type="hidden" th:value="${isbn}" name="isbn">
-        <input type="hidden" th:value="${nameLibrary}" name="nameLibrary">
-        <table>
-            <tr>
-                <td><label for="condition">Condición: </label></td>
-                <td><input type="text" name="condition"/></td>
-            </tr>
-            <tr>
-                <td><label for="price">Precio: </label></td>
-                <td><input type="text" name="price"/></td>
-            </tr>
-            <tr>
-                <td><label for="site">Sitio: </label></td>
-                <td>
-                    <select name="site">
-                        <div th:each="site: ${sites}">
-                            <option th:value="${site.address}">
-                                <span th:text="${site.address}"> DIRECCIÓN </span>
-                            </option>
-                        </div>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div>
-                        <input type="radio" id="status" name="status" th:value="${'AVAILABLE'}">
-                        <label for="status"> Disponible </label>
+<head>
+    <meta charset="UTF-8">
+    <title> Agregar copia </title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--Configuración de estilos-->
+    <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+    <link th:href="@{/css/estilos-Naucratis.css}" rel="stylesheet">
+    <link th:href="@{/vendor/datatables/dataTables.bootstrap4.min.css}" rel="stylesheet">
+</head>
+<body>
+<div id="wrapper">
+    <!--barra de herramientas-->
+    <div th:replace="/user_no_register/home :: toolbar"/>
+    <!-- Fin barra de herramientas-->
+
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <div id="content">
+            <!--Barra de contenido-->
+            <div th:replace="/user_no_register/home :: contentbar"/>
+            <!--Barra de contenido-->
+            <center>
+                <h2>Añadir Copia</h2>
+
+                <form method="POST" th:action="@{/register/copyBookProcess}" id="copyBookForm">
+                    <input type="hidden" th:value="${isbn}" name="isbn">
+                    <input type="hidden" th:value="${nameLibrary}" name="nameLibrary">
+                    <div class="table-responsive">
+                    <table>
+                        <tr>
+                            <td><label for="condition">Condición: </label></td>
+                            <td><input type="text" name="condition"/></td>
+                        </tr>
+                        <tr>
+                            <td><label for="price">Precio: </label></td>
+                            <td><input type="text" name="price"/></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div>
+                                    <input type="radio" id="status" name="status" th:value="${'AVAILABLE'}">
+                                    <label for="status"> Disponible </label>
+                                </div>
+                                <div>
+                                    <input type="radio" id="status" name="status" th:value="${'NOAVAILABLE'}">
+                                    <label for="status"> No disponible </label>
+                                </div>
+                                <div>
+                                    <input type="radio" id="status" name="status" th:value="${'SOLD'}">
+                                    <label for="status"> Vendido </label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label for="description">Descripción: </label></td>
+                            <td><textarea name="description"/> </textarea> </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <button type="submit" class="btn btn-success"> Registrar</button>
+                            </td>
+                        </tr>
+                    </table>
                     </div>
-                    <div>
-                        <input type="radio" id="status" name="status" th:value="${'NOAVAILABLE'}">
-                        <label for="status"> No disponible </label>
-                    </div>
-                    <div>
-                        <input type="radio" id="status" name="status" th:value="${'SOLD'}">
-                        <label for="status"> Vendido </label>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td><label for="description">Descripción: </label></td>
-                <td><textarea name="description"/> </textarea> </td>
-            </tr>
-            <tr>
-                <td><button type="submit"> Registrar</button></td>
-            </tr>
-        </table>
-    </form>
-  </body>
+                </form>
+            </center>
+        </div>
+    </div>
+</div>
+<div th:replace="/user_no_register/home :: utils"/>
+
+<!--Bootstrap complementado con JavaScript-->
+<script src="/vendor/jquery/jquery.min.js"></script>
+<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!--Complemento JavaScript-->
+<script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!--Scripts personalizados para todas las páginas-->
+<script src="/js/naucratis.min.js"></script>
+
+<!--Complementos de nivel de página-->
+<script src="/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+<!--Secuencias de comandos personalizadas a nivel de página-->
+<script src="/js/demo/datatables-demo.js"></script>
+
+</body>
 </html>
