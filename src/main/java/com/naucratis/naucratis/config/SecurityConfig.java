@@ -50,6 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                 "/img/**",
                 "/scss/**",
                 "/vendor/**",
+                "/libraries/**",
                 "/").permitAll()
                 .anyRequest().authenticated()
                 .and().formLogin().loginPage("/login").defaultSuccessUrl("/", true).permitAll()

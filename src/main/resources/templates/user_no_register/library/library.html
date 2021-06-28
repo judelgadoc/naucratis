@@ -1,51 +1,94 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <meta charset="UTF-8">
-    <title> Libreria </title>
+    <!--Especificaiones de la pantalla-->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Naucratis</title>
+
+    <!--Configuración de estilos-->
+    <link href="../../../static/vendor/fontawesome-free/css/all.min.css" th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="../../../static/css/estilos-Naucratis.css" th:href="@{/css/estilos-Naucratis.css}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="../../../static/vendor/datatables/dataTables.bootstrap4.min.css" th:href="@{/vendor/datatables/dataTables.bootstrap4.min.css}" rel="stylesheet">
+    <script type="text/javascript" src="../static/js/naucratis.js" th:src="@{/js/naucratis.js}"></script>
 </head>
-<body>
-    <header>
-        <table>
-            <td>
-                <img width="100px" th:src="@{/images/Naucratis.png}">
-            </td>
-            <td>
-                <h1> Naucratis </h1>
-            </td>
-        </table>
-    </header>
 
-    <nav>
-        <ul>
-            <li th:if="${role == null}">
-                <a th:href="@{/login}"> <button type="button">Iniciar Sesión</button></a>
-                <a th:href="@{/register}"> <button type="button">Registrarse</button></a>
-            </li>
-            <li th:if="${#strings.equals(role,'administrator')}">
-                <a th:href="@{/administrator/libraries}"><button type="button">Librerias</button> </a>
-            </li>
-            <li th:if="${#strings.equals(role,'customer')}">
-                <a th:href="@{/customer/shoppingCart}"><button type="button">Carrito</button> </a>
-            </li>
-            <li th:if="${role != null}">
-                <a th:href="@{'/' + ${role}}"> <button type="button"> Ver perfil </button></a>
-            </li>
-            <li th:if="${role != null}">
-                <form method="POST" th:action="@{/logout}">
-                    <input type="submit" value="Cerrar sesión"/>
-                </form>
-            </li>
-        </ul>
-    </nav>
+<body id="page-top">
 
-    <h1> <span th:text="${nameLibrary}"> NOMBRE LIBRERIA </span> </h1>
-    <img width="200px" th:src="'data:image/png;base64,'+${image}">
-    <h2> Libros </h2>
-    <ul>
-        <div th:each="book: ${books}">
-            <li> <a th:href="@{'/libraries/'+${nameLibrary}+'/'+${book.isbn}}"><span th:text="${book.name}"> NOMBRE </span> </a></li>
+<div id="wrapper">
+
+    <!--Barra de herramientas-->
+    <div th:replace="/user_no_register/home :: toolbar"/>
+    <!--Barra de contenido-->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <div id="content">
+
+            <div th:replace="/user_no_register/home :: contentbar"/>
+            <!--Contenido de la pagina-->
+            <div class="container-fluid">
+
+                <!--Titulo de pagina-->
+                <h1 class="h3 mb-2 text-gray-800">Listado de libros en sede</h1>
+
+                <!--Tabla de sedes-->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary"><span th:text="'Sede: ' + ${nameLibrary}"> Nombre Librería</span></h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Autor</th>
+                                    <th>ISBN</th>
+                                    <th>Editorial</th>
+                                    <th>Más información</th>
+                                    <th sec:authorize="hasRole('ROLE_ADMINISTRATOR')">Administrar</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="book: ${books}">
+                                    <td th:text="${book.name}"/>
+                                    <td th:text="${book.author}"/>
+                                    <td th:text="${book.ISBN}"/>
+                                    <td th:text="${book.editorial}"/>
+                                    <td class="text center"><a th:href="@{'/libraries/'+${nameLibrary}+'/'+${book.isbn}}" class="btn btn-info">Ver</a></td>
+                                    <td class="text-center"><a th:href="@{'/libraries/'+${library.id}}" id="libraryBooksButton" class="btn btn-info">Ver</a></td>
+                                    <td class="text-center" sec:authorize="hasRole('ROLE_ADMINISTRATOR')"><a href="#" id="libraryAdmButton"><i class="fas fa-tools"></i></a></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Fin de tabla-->
         </div>
-    </ul>
+    </div>
+</div>
+<div th:replace="/user_no_register/home :: utils"/>
+
+<!--Bootstrap complementado con JavaScript-->
+<script src="/vendor/jquery/jquery.min.js"></script>
+<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!--Complemento JavaScript-->
+<script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!--Complementos de nivel de página-->
+<script src="/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+<!--Secuencias de comandos personalizadas a nivel de página-->
+<script src="/js/demo/datatables-demo.js"></script>
+
 </body>
+
 </html>

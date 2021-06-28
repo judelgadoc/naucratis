@@ -56,6 +56,29 @@
           <span>Buscar</span></a>
       </li>
 
+      <!--Funcionalidad ver sedes-->
+      <li class="nav-item" sec:authorize="hasRole('ROLE_CUSTOMER') || !isAuthenticated()">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSedeCusPages"
+           aria-expanded="true" aria-controls="collapseSedePages">
+          <i class="far fa-building"></i>
+          <span>Sedes</span>
+        </a>
+        <!--Enlaces con el CRUD de las sedes-->
+        <div id="collapseSedeCusPages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" th:href="@{/libraries}">Ver sedes</a>
+          </div>
+        </div>
+      </li>
+
+      <!--Funcionalidad carrito-->
+      <li class="nav-item" sec:authorize="hasRole('ROLE_CUSTOMER') || !isAuthenticated()">
+        <a class="nav-link" th:href="@{/customer/shoppingCart}">
+          <i class="fas fa-shopping-cart"></i>
+          <span>Carrito</span>
+        </a>
+      </li>
+
       <!--División-->
       <hr class="sidebar-divider">
 
@@ -80,23 +103,23 @@
 
       <!--Funcionalidad sedes-->
       <li class="nav-item" sec:authorize="hasRole('ROLE_ADMINISTRATOR')">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSedePages"
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSedeAdmPages"
            aria-expanded="true" aria-controls="collapseSedePages">
           <i class="far fa-building"></i>
           <span>Sedes</span>
         </a>
         <!--Enlaces con el CRUD de las sedes-->
-        <div id="collapseSedePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div id="collapseSedeAdmPages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" th:href="@{/library/new}">Nueva sede</a>
-            <a class="collapse-item" th:href="@{/administrator/libraries}">Ver sedes</a>
+            <a class="collapse-item" th:href="@{/libraries}">Ver sedes</a>
             <a class="collapse-item" th:href="@{/library/edit}">Editar sedes</a>
           </div>
         </div>
       </li>
 
       <!--Funcionalidad estadisticas-->
-      <li class="nav-item">
+      <li class="nav-item" sec:authorize="hasRole('ROLE_ADMINISTRATOR')">
         <a class="nav-link" th:href="@{/estadisticas}">
           <i class="fas fa-chart-bar"></i>
           <span>Estadísticas</span></a>
