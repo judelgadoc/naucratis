@@ -5,6 +5,7 @@ import com.naucratis.naucratis.model.library.CopyBook;
 import com.naucratis.naucratis.model.library.Library;
 import com.naucratis.naucratis.model.library.Site;
 import com.naucratis.naucratis.model.user.Administrator;
+import com.naucratis.naucratis.service.LibraryService;
 import com.naucratis.naucratis.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,9 +23,11 @@ import java.util.ArrayList;
 public class AdministratorController
 {
     private UserService userService;
+    private LibraryService libraryService;
 
-    public AdministratorController(UserService userService) {
+    public AdministratorController(UserService userService, LibraryService libraryService) {
         this.userService = userService;
+        this.libraryService = libraryService;
     }
 
     @GetMapping
@@ -48,18 +51,15 @@ public class AdministratorController
         return "administrator/library/list_libraries";
     }
 
-    @GetMapping("/libraries/{name_library}")
-    public String library(@PathVariable(name = "name_library") String nameLibrary,
+    @GetMapping("/libraries/{libraryId}")
+    public String library(@PathVariable(name = "libraryId") long libraryId,
                           Principal principal,
                           Model model)
     {
         Administrator administrator =
                 (Administrator) userService.findByEmail(principal.getName());
-
-        for(Library library: administrator.getLibraries())
-            if(library.getName().equals(nameLibrary))
-                model.addAttribute("library", library);
-
+        Library library = libraryService.getLibraryById(libraryId).get();
+        model.addAttribute("library", library);
         return "administrator/library/library";
     }
 
