@@ -13,6 +13,7 @@ import java.util.List;
 public class RegistrationBookForm
 {
     private String  nameLibrary;
+    private long libraryId;
 
     private long    isbn;
 
