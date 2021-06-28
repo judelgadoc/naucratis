@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/administrator")
@@ -63,15 +64,18 @@ public class AdministratorController
         return "administrator/library/library";
     }
 
-    @GetMapping("/libraries/{name_library}/books")
-    public String books(@PathVariable(name = "name_library") String nameLibrary,
+    @GetMapping("/libraries/{library_id}/books")
+    public String books(@PathVariable(name = "library_id") long libraryId,
                         Principal principal,
                         Model model) throws Exception {
         Administrator administrator =
                 (Administrator) userService.findByEmail(principal.getName());
 
-        Library library = libraryService.findByName("nameLibrary");
-
+        Optional<Library> libraryOptional = libraryService.getLibraryById(libraryId);
+        if(!libraryOptional.isPresent()){
+            throw new Exception("No se encontro la libreria con id " + libraryId);
+        }
+        Library library = libraryOptional.get();
         model.addAttribute("library", library);
 
         return "administrator/library/list_books";
