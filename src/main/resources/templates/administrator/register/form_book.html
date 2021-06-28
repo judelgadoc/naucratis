@@ -1,32 +1,32 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title>Libro nuevo</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <title>Nuevo libro</title>
+
     <!--Configuración de estilos-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link th:href="@{/css/estilos-Naucratis.css}" rel="stylesheet">
     <link th:href="@{/vendor/datatables/dataTables.bootstrap4.min.css}" rel="stylesheet">
 </head>
+
 <body>
 <div id="wrapper">
-        <!--barra de herramientas-->
-        <div th:replace="/user_no_register/home :: toolbar"/>
-        <!-- Fin barra de herramientas-->
+    <!--Barra de herramientas-->
+    <div th:replace="/user_no_register/home :: toolbar"/>
 
-        <div id="content-wrapper" class="d-flex flex-column">
+    <div id="content-wrapper" class="d-flex flex-column">
 
-            <div id="content">
-                <!--Barra de contenido-->
-                <div th:replace="/user_no_register/home :: contentbar"/>
-                <!--Barra de contenido-->
+        <div id="content">
+            <!--Barra de contenido-->
+            <div th:replace="/user_no_register/home :: contentbar"/>
 
-            <!-- Botones de arriba -->
+            <!--Botones provisionales-->
             <nav>
                 <ul>
                     <li th:if="${#strings.equals(role,'administrator')}">
@@ -46,14 +46,111 @@
                     </li>
                 </ul>
             </nav>
-            <!-- contenido de página-->
+
+            <!--Contenido de la página-->
+            <!--Búsqueda y una imagen?
             <form form method="POST" th:action="@{'/register/search_book/' + ${nameLibrary}}" id="isbn">
                 <label>Buscar libro: </label>
                 <input type="search" name="isbn">
                 <button type="submit"> Buscar</button>
             </form>
-
             <img th:if="${book != null}" width="200px" th:src="'data:image/png;base64,' + ${book.getImageBase64()}">
+            -->
+
+            <!--Título-->
+            <h1 class="h3 mb-2 text-gray-800">Adición de nuevo libro</h1>
+
+            <div class="card shadow mb-4">
+                <!--<div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Agregar libro</h6>
+                </div>-->
+                <div class="card-body">
+                    <form class="user" method="POST" th:action="@{/register/book}" id="registrarionBookForm" enctype="multipart/form-data">
+                        <div class="form_group">
+                            <input type="hidden" th:value="${nameLibrary}" name="nameLibrary">
+                        </div>
+                        <div class="form_group">
+                            <input type="text" th:value="${book != null? book.isbn:''}" id="bookISBN" name="isbn"
+                                   placeholder="ISBN" class="form-control form-control-user">
+                        </div>
+                        <div class="form_group">
+                            <input type="text" th:value="${book != null? book.name:''}" id="bookName" name="name"
+                                   placeholder="Nombre" class="form-control form-control-user">
+                        </div>
+                        <div class="form_group">
+                            <input type="text" th:value="${book != null? book.convertListAuthorsToString():''}" id="list_authors" name="bookAuthors"
+                                   placeholder="Autor(es)" class="form-control form-control-user">
+                        </div>
+                        <div class="form_group">
+                            <input type="text" th:value="${book != null? book.editorial:''}" id="bookEditorial" name="editorial"
+                                   placeholder="Editorial" class="form-control form-control-user">
+                        </div>
+                        <div class="form_group">
+                            <input type="text" th:value="${book != null? book.category:''}" id="bookCategory" name="category"
+                                   placeholder="Categoría" class="form-control form-control-user">
+                        </div>
+                        <div class="form_group">
+                            <input type="text" th:value="${book != null? book.edition:''}" id="bookEdition" name="edition"
+                                   placeholder="Edición" class="form-control form-control-user">
+                        </div>
+                        <div class="form_group">
+                            <input type="text" th:value="${book != null? book.numPages:''}" id="bookNumPages" name="numPages"
+                                   placeholder="Número de páginas" class="form-control form-control-user">
+                        </div>
+
+                        <!--Dimensiones-->
+                        <div class="form_group">
+                            <input type="text" th:value="${book != null? book.length:''}" id="bookLength" name="length"
+                                   placeholder="Largo" class="form-control form-control-user">
+                        </div>
+                        <div class="form_group">
+                            <input type="text" th:value="${book != null? book.width:''}" id="bookWidth" name="width"
+                                   placeholder="Ancho" class="form-control form-control-user">
+                        </div>
+                        <div class="form_group">
+                            <input type="text" th:value="${book != null? book.height:''}" id="bookHeight" name="height"
+                                   placeholder="Alto" class="form-control form-control-user">
+                        </div>
+
+                        <div class="form_group">
+                            <input type="text" id="bookPrice" name="price"
+                                   placeholder="Precio" class="form-control form-control-user">
+                        </div>
+
+                        <div class="form_group">
+                            <label for="site">Sitio: </label>
+                            <select name="site" id="site" class="form-select">
+                                <div th:each="site: ${sites}">
+                                    <option th:value="${site.address}">
+                                        <span th:text="${site.address}"> DIRECCIÓN </span>
+                                    </option>
+                                </div>
+                            </select>
+                        </div>
+
+                        <div class="form_group" th:if="${book == null}">
+                            <label for="cover">Portada: </label> <input type="file" class="form-control-file" name="cover" id="cover"/>
+                        </div>
+
+                        <div class="form_group">
+                            <input type="text" id="bookQuantity" name="quantity"
+                                   placeholder="Cantidad" class="form-control form-control-user">
+                        </div>
+
+                        <!--Botones-->
+                        <div class="form-group row">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <input type="submit" name="new-library-submit" id="new-library-submit" class="btn btn-primary btn-user btn-block" value="Registrar libro">
+                            </div>
+                            <div class="col-sm-6">
+                                <a class="btn btn-secondary btn-user btn-block" th:href="@{/}">Cancelar</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!--Form original
             <center>
                 <form method="POST" th:action="@{/register/book}" id="registrationBookForm"
                       enctype="multipart/form-data">
@@ -138,6 +235,8 @@
 
                 </form>
             </center>
+            -->
+
             <!-- Footer-->
             <footer class="py-5 bg-dark">
                 <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p>
@@ -150,6 +249,7 @@
         </div>
     </div>
 </div>
+
 <div th:replace="/user_no_register/home :: utils"/>
 
 <!--Bootstrap complementado con JavaScript-->
