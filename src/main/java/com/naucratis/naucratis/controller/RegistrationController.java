@@ -100,10 +100,6 @@ public class RegistrationController
     @PostMapping("/book")
     public String processRegistrationBook(RegistrationBookForm registrationBookForm)
     {
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        System.out.println("Processing registration book");
-        System.out.println("RegistrationBookForm: ");
-        System.out.println(registrationBookForm.toString());
         libraryService.addBooks(registrationBookForm);
         return"redirect:/administrator/libraries/"+registrationBookForm.getLibraryId();
     }
