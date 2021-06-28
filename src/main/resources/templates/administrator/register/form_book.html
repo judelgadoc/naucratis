@@ -46,7 +46,7 @@
                 <div class="card-body">
                     <form class="user" method="POST" th:action="@{/register/book}" id="registrarionBookForm" enctype="multipart/form-data">
                         <div class="form_group">
-                            <input type="hidden" th:value="${nameLibrary}" name="nameLibrary">
+                            <input type="hidden" th:value="${libraryId}" name="libraryId">
                         </div>
                         <div class="form_group">
                             <input type="text" th:value="${book != null? book.isbn:''}" id="bookISBN" name="isbn"

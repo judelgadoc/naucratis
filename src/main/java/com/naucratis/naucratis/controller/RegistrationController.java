@@ -2,16 +2,19 @@ package com.naucratis.naucratis.controller;
 
 import com.naucratis.naucratis.model.form.*;
 import com.naucratis.naucratis.model.library.Book;
+import com.naucratis.naucratis.model.library.Library;
 import com.naucratis.naucratis.model.user.Administrator;
 import com.naucratis.naucratis.service.BookService;
 import com.naucratis.naucratis.service.LibraryService;
 import com.naucratis.naucratis.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/register")
@@ -86,19 +89,23 @@ public class RegistrationController
         return "redirect:/administrator";
     }
 
-    @GetMapping("/book/{nameLibrary}")
-    public String registerFormBook(@PathVariable String nameLibrary, Model model)
+    @GetMapping("/book/{libraryId}")
+    public String registerFormBook(@PathVariable long libraryId, Model model)
     {
-        model.addAttribute("nameLibrary", nameLibrary);
-        model.addAttribute("sites", libraryService.findByName(nameLibrary).getSites());
+        model.addAttribute("libraryId", libraryId);
+        model.addAttribute("sites", libraryService.getLibraryById(libraryId).get().getSites());
         return "administrator/register/form_book";
     }
 
     @PostMapping("/book")
     public String processRegistrationBook(RegistrationBookForm registrationBookForm)
     {
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println("Processing registration book");
+        System.out.println("RegistrationBookForm: ");
+        System.out.println(registrationBookForm.toString());
         libraryService.addBooks(registrationBookForm);
-        return"redirect:/administrator/libraries/"+registrationBookForm.getNameLibrary();
+        return"redirect:/administrator/libraries/"+registrationBookForm.getLibraryId();
     }
 
     @GetMapping("/copyBook/{nameLibrary}/{isbn}")
