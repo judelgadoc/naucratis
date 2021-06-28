@@ -40,6 +40,10 @@ public class BookService
         return bookRepository.findById(isbn).get();
     }
 
+    public List<Book> findAll() {
+        return bookRepository.findAll();
+    }
+
     public void save(Book book)
     {
         bookRepository.save(book);

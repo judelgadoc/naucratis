@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <!--Especificaciones de la pantalla-->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Naucratis</title>
+
+    <!--Configuración de estilos-->
+    <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link th:href="@{/css/estilos-Naucratis.css}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/naucratis.js}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.min.js"
+            integrity="sha512-VCHVc5miKoln972iJPvkQrUYYq7XpxXzvqNfiul1H4aZDwGBGC0lq373KNleaB2LpnC2a/iNfE5zoRYmB4TRDQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body id="page-top">
+
+    <div id="wrapper">
+
+        <!--Barra de herramientas-->
+        <div th:replace="/user_no_register/home :: toolbar"/>
+
+        <!--Barra de contenido-->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <div id="content">
+                <div th:replace="/user_no_register/home :: contentbar"/>
+
+                <!--Contenido de la página-->
+                <div class="container-fluid">
+
+                    <!-- Cabeza de pagina -->
+                    <h1 class="h3 mb-2 text-gray-800">Estadísticas</h1>
+                    <p class="mb-4">Bienvenido, en esta sección puede ver una representación grafica de las características y logros de su biblioteca.</p>
+
+                    <div class="row">
+                        <div class="col-xl-8 col-lg-7">
+
+                            <!-- Ventas por año-->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Ventas por año</h6>
+                                </div>
+                                <div class="container">
+                                    <form th:action="@{/estadisticas/show1}" method="post">
+                                        <label>Años</label>
+                                        <select name="selectedYearsYearlySales" class="custom-select" multiple>
+                                            <option th:each="y: ${years}" th:value="${y}" th:text="${y}"></option>
+                                        </select>
+                                        <input type="submit" name="SubmitYearlySales" value="Aceptar"/>
+                                    </form>
+                                </div>
+                                <hr>
+                                <div class="card-body">
+                                    <div class="chart-yearlySales">
+                                        <canvas id="yearlySales"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Ventas de libro mensuales -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Ventas de libro por mes</h6>
+
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-BookSelling">
+                                        <canvas id="bookSellingPerMonth"></canvas>
+                                    </div>
+                                    <hr>
+                                    <form th:action="@{/estadisticas/show2}" method="post">
+                                        <label>Año</label>
+                                        <select name="selectedBookSellingPerMonth" class="custom-select">
+                                            <option th:each="y: ${years}" th:value="${y}" th:text="${y}" th:selected="${y} == ${selectedYearBookSellingPerMonth}"></option>
+                                        </select>
+                                        <label>Libro:</label> <select name="selectedBookIsbn" class="custom-select" onchange="submit()"><option th:each="b : ${books}" th:value="${b.isbn}" th:text="${b.name}" th:selected="${b.isbn} == ${selectedIsbnBookSellingPerMonth}"></option></select>
+                                        <input type="hidden" name="SubmitBookSellingPerMonth" value=""/>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Categorías más vendidas -->
+                        <div class="col-xl-4 col-lg-5">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Géneros populares</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-bestSel">
+                                        <canvas id="bestSellingCategories"></canvas>
+                                    </div>
+                                    <hr>
+                                    <div class="container">
+                                        <form th:action="@{/estadisticas/show3}" method="post">
+                                            <label>Año</label>
+                                            <select name="selectedBestSellingCategories" class="custom-select" onchange="submit()">
+                                                <option th:each="y: ${years}" th:value="${y}" th:text="${y}" th:selected="${y} == ${selectedYearBestSellingCategories}"></option>
+                                            </select>
+                                            <input type="hidden" name="SubmitBestSellingCategories" value=""/>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Fin de contenido de la página-->
+            </div>
+
+        </div>
+
+    </div>
+
+    <div th:replace="/user_no_register/home :: utils"/>
+
+    <!--Bootstrap complementado con JavaScript-->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!--Complemento JavaScript-->
+    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!--Scripts personalizados para todas las páginas-->
+    <script src="/js/naucratis.min.js"></script>
+
+    <!--Complementos de nivel de página-->
+    <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!--Secuencias de comandos personalizadas a nivel de página-->
+    <script src="/js/demo/datatables-demo.js"></script>
+
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        let yrsYearlySales = /*[[${labelsYearlySales}]]*/ 'yrs';
+        let valsYearlySales = /*[[${valsYearlySales}]]*/ 'vals';
+
+        let yrsBookSellingPerMonth = /*[[${labelsBookSellingPerMonth}]]*/ 'yrs';
+        let valsBookSellingPerMonth = /*[[${valsBookSellingPerMonth}]]*/ 'vals';
+
+        let yrsBestSellingCategories = /*[[${labelsBestSellingCategories}]]*/ 'yrs';
+        let valsBestSellingCategories = /*[[${valsBestSellingCategories}]]*/ 'vals';
+
+
+        let myChartYearlySales = document.getElementById('yearlySales').getContext('2d');
+        let myChartBookSellingPerMonth = document.getElementById('bookSellingPerMonth').getContext('2d');
+        let myChartBestSellingCategories = document.getElementById('bestSellingCategories').getContext('2d');
+
+        let barChartYearlySales = new Chart(myChartYearlySales, {
+            type:'bar',
+            data:{
+                labels:yrsYearlySales,
+                datasets:[{
+                    label:'Ventas',
+                    data:valsYearlySales,
+                    backgroundColor: ['rgba(46, 75, 30, 0.8)', 'rgba(3, 63, 99, 0.8)']
+                }]
+            },
+            options:{
+                legend: {
+                    display:false
+                },
+                scales:{
+                    y :{
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        let barChartBookSellingPerMonth = new Chart(myChartBookSellingPerMonth, {
+            type:'bar',
+            data:{
+                labels:yrsBookSellingPerMonth,
+                datasets:[{
+                    label:'Ventas',
+                    data:valsBookSellingPerMonth,
+                    backgroundColor: ['rgba(46, 75, 30, 0.8)', 'rgba(255, 94, 91, 0.8)']
+                }]
+            },
+            options:{
+                legend: {
+                    display:false
+                },
+                scales:{
+                    y :{
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        let barChartBestSellingCategories = new Chart(myChartBestSellingCategories, {
+            type:'bar',
+            data:{
+                labels:yrsBestSellingCategories,
+                datasets:[{
+                    axis: 'y',
+                    label:'Ventas',
+                    data:valsBestSellingCategories,
+                    backgroundColor: ['rgba(46, 75, 30, 0.8)', 'rgba(164, 172, 150, 0.8)']
+                }]
+            },
+            options:{
+                indexAxis: 'y',
+                legend: {
+                    display:false
+                },
+                scales:{
+                    y :{
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        /*]]>*/
+    </script>
+
+</body>
+</html>

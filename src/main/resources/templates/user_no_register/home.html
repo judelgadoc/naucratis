@@ -36,11 +36,21 @@
       <!--División-->
       <hr class="sidebar-divider my-0">
 
+      <!--Subtitulo: "Funcionalidades"-->
+      <li class="nav-item active">
+        <a class="nav-link" href="#">
+          <i class="fas fa-address-book"></i>
+          <span>Funcionalidades</span></a>
+      </li>
+
+      <!--División-->
+      <hr class="sidebar-divider">
+
       <!--Subtitulo: "Usuario"-->
-      <div class="sidebar-heading" sec:authorize="hasRole('ROLE_CUSTOMER') || !isAuthenticated()">Usuario</div>
+      <div class="sidebar-heading">Usuario</div>
 
       <!--Funcionalidad buscar-->
-      <li class="nav-item" sec:authorize="hasRole('ROLE_CUSTOMER') || !isAuthenticated()">
+      <li class="nav-item">
         <a class="nav-link" href="blanco.html">
           <i class="fas fa-search"></i>
           <span>Buscar</span></a>
@@ -70,7 +80,7 @@
       </li>
 
       <!--División-->
-      <hr class="sidebar-divider" sec:authorize="hasRole('ROLE_CUSTOMER') || !isAuthenticated()">
+      <hr class="sidebar-divider">
 
       <!--Subtitulo: "Administrador"-->
       <div class="sidebar-heading" sec:authorize="hasRole('ROLE_ADMINISTRATOR')">Administrador</div>
@@ -116,7 +126,7 @@
       </li>
 
       <!--División-->
-      <hr class="sidebar-divider d-none d-md-block" sec:authorize="hasRole('ROLE_ADMINISTRATOR')">
+      <hr class="sidebar-divider d-none d-md-block">
 
     </ul>
     <!-- Fin barra de herramientas-->
