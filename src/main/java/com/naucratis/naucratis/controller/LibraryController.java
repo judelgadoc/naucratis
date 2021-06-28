@@ -54,6 +54,7 @@ public class LibraryController {
             return "redirect:/library/edit?success";
         } catch (Exception e) {
             model.addAttribute(EDIT_LIBRARY_MESSAGE_MODEL, UNEXPECTED_ERROR);
+            e.printStackTrace();
             return "redirect:/library/edit?failure";
         }
     }
@@ -66,8 +67,7 @@ public class LibraryController {
             System.out.println(exception.getConstraintName());
             return "redirect:/library/new?namealreadyexists";
         } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
-            System.out.println("" + e.getCause());
+            e.printStackTrace();
             return "redirect:/library/new?failure";
         }
         return "redirect:/library/new?success";

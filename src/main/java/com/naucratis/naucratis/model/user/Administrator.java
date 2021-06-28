@@ -14,7 +14,7 @@ import java.util.List;
 @Data
 public class Administrator extends User{
 
-    @ManyToMany(targetEntity = Library.class)
+    @ManyToMany(targetEntity = Library.class, cascade = CascadeType.ALL)
     @JoinTable(name = "administra_a")
     private List<Library> libraries;
 
