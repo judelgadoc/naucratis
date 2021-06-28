@@ -26,11 +26,11 @@
             <div th:replace="/user_no_register/home :: contentbar"/>
             <h1> Lista de libros</h1>
 
-            <a th:href="@{'/register/book/'+${library.name}}">
+            <a th:href="@{'/register/book/'+${library.id}}">
                 <button type="button" class="btn btn-outline-dark flex-shrink-0"  >Agregar libro</button>
             </a>
             <!-- Boton para ver todos los libros (hacerlo funcionar)-->
-            <a th:href="@{'/register/book/'+${library.name}}">
+            <a th:href="@{'/register/book/'+${library.id}}">
                 <button type="button" class="btn btn-outline-dark flex-shrink-0"  disabled="true">Ver todos los libros</button>
             </a>
             <div class="container-fluid">
