@@ -25,50 +25,49 @@
             <div th:replace="/user_no_register/home :: contentbar"/>
             <!--Barra de contenido-->
 
-<nav>
-    <ul>
-        <li th:if="${role != null}">
-            <form method="POST" th:action="@{/logout}">
-                <input type="submit" value="Cerrar sesión"/>
-            </form>
-        </li>
-    </ul>
-</nav>
+            <nav>
+                <ul>
+                    <li th:if="${role != null}">
+                        <form method="POST" th:action="@{/logout}">
+                            <input type="submit" value="Cerrar sesión"/>
+                        </form>
+                    </li>
+                </ul>
+            </nav>
 
-<!-- Perfil -->
-<h1> Administrador </h1>
-<h2> Datos personales:</h2>
+            <!-- Perfil -->
+            <h1> Administrador </h1>
+            <h2> Datos personales:</h2>
 
-<div class="row gx-5 gx-lg-5 align-items-center">
-    <div class="col-md-4"><img class="card-img-top mb-5 mb-md-0"  th:src="'data:image/png;base64,'+${administrator.getImageBase64()}"></div>
-    <div class="col-md-6">
-     <table class="table-responsive">
+            <div class="row gx-5 gx-lg-5 align-items-center">
+                <div class="col-md-4"><img class="card-img-top mb-5 mb-md-0"  th:src="'data:image/png;base64,'+${administrator.getImageBase64()}"></div>
+                <div class="col-md-6">
+                    <table class="table-responsive">
 
-    <tr><img width="200px" th:src="'data:image/png;base64,'+${administrator.getImageBase64()}"></tr>
-    <tr>
-        <td>Nombre: </td>
-        <td><span th:text="${administrator.name}">NOMBRE</span></td>
-    </tr>
-    <tr>
-        <td>Ciudad: </td>
-        <td><span th:text="${administrator.city}">CIUDAD</span></td>
-    </tr>
-    <tr>
-        <td>Dirección: </td>
-        <td><span th:text="${administrator.address}">DIRECCIÓN</span></td>
-    </tr>
-    <tr>
-        <td>Telefono: </td>
-        <td><span th:text="${administrator.phone}">TELEFONO</span></td>
-    </tr>
-    <tr>
-        <td>Correo: </td>
-        <td><span th:text="${administrator.email}">CORREO</span></td>
-    </tr>
-</table>
-    </div>
-</div>
-<h2> <a th:href="@{/administrator/libraries}"> Librerias </a> </h2>
+                        <tr>
+                            <td>Nombre: </td>
+                            <td><span th:text="${administrator.name}">NOMBRE</span></td>
+                        </tr>
+                        <tr>
+                            <td>Ciudad: </td>
+                            <td><span th:text="${administrator.city}">CIUDAD</span></td>
+                        </tr>
+                        <tr>
+                            <td>Dirección: </td>
+                            <td><span th:text="${administrator.address}">DIRECCIÓN</span></td>
+                        </tr>
+                        <tr>
+                            <td>Telefono: </td>
+                            <td><span th:text="${administrator.phone}">TELEFONO</span></td>
+                        </tr>
+                        <tr>
+                            <td>Correo: </td>
+                            <td><span th:text="${administrator.email}">CORREO</span></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <h2> <a th:href="@{/administrator/libraries}"> Librerias </a> </h2>
             <!-- Footer-->
             <footer class="py-5 bg-dark">
                 <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p></div>
@@ -91,14 +90,14 @@
 <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
 
 <!--Scripts personalizados para todas las páginas-->
-<script src="/static/js/naucratis.min.js"></script>
+<script src="/js/naucratis.min.js"></script>
 
 <!--Complementos de nivel de página-->
 <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
 <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
 <!--Secuencias de comandos personalizadas a nivel de página-->
-<script src="/static/js/demo/datatables-demo.js"></script>
+<script src="/js/demo/datatables-demo.js"></script>
 
 
 </body>
