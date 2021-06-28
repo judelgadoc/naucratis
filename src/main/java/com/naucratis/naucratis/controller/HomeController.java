@@ -57,14 +57,14 @@ public class HomeController
     public String list(Model model)
     {
         model.addAttribute("libraries", libraryService.findAll());
-        return "user_no_register/library/list_libraries";
+        return "library/list_libraries";
     }
 
     @GetMapping("libraries/{libraryId}")
     public String librarySpec(@PathVariable long libraryId, Model model) {
         Optional<Library> libraryOptional = libraryService.getLibraryById(libraryId);
         if(!libraryOptional.isPresent()){
-            return "redirect:user_no_register/library/list_libraries";
+            return "redirect:library/list_libraries";
         }
         Library library = libraryOptional.get();
         List<Book> books = new ArrayList<>();

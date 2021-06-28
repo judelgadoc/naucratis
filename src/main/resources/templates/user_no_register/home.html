@@ -80,7 +80,7 @@
       </li>
 
       <!--División-->
-      <hr class="sidebar-divider">
+      <hr class="sidebar-divider" sec:authorize="hasRole('ROLE_ADMINISTRATOR')">
 
       <!--Subtitulo: "Administrador"-->
       <div class="sidebar-heading" sec:authorize="hasRole('ROLE_ADMINISTRATOR')">Administrador</div>

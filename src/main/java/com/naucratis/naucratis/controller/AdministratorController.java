@@ -42,6 +42,7 @@ public class AdministratorController
         return "administrator/profile";
     }
 
+    /*
     @GetMapping("/libraries")
     public String libraries(Principal principal,
                             Model model)
@@ -51,10 +52,11 @@ public class AdministratorController
         model.addAttribute("libraries", administrator.getLibraries());
         return "administrator/library/list_libraries";
     }
+    */
 
     @GetMapping("/libraries/{libraryId}")
     public String library(@PathVariable(name = "libraryId") long libraryId,
-                          Principal principal,
+                          Principal principal, 
                           Model model)
     {
         Administrator administrator =

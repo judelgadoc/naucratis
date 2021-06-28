@@ -57,7 +57,7 @@
                                    placeholder="Nombre" class="form-control form-control-user">
                         </div>
                         <div class="form_group">
-                            <input type="text" th:value="${book != null? book.convertListAuthorsToString():''}" id="list_authors" name="bookAuthors"
+                            <input type="text" th:value="${book != null? book.convertListAuthorsToString():''}" id="list_authors" name="list_authors"
                                    placeholder="Autor(es)" class="form-control form-control-user">
                         </div>
                         <div class="form_group">
@@ -97,6 +97,12 @@
                         </div>
 
                         <div class="form_group">
+                            <input type="text" id="bookQuantity" name="quantity"
+                                   placeholder="Cantidad" class="form-control form-control-user">
+                        </div>
+
+                        <!--El sitio no se está utilizando
+                        <div class="form_group">
                             <label for="site">Sitio: </label>
                             <select name="site" id="site" class="form-select">
                                 <div th:each="site: ${sites}">
@@ -106,14 +112,10 @@
                                 </div>
                             </select>
                         </div>
+                        -->
 
                         <div class="form_group" th:if="${book == null}">
                             <label for="cover">Portada: </label> <input type="file" class="form-control-file" name="cover" id="cover"/>
-                        </div>
-
-                        <div class="form_group">
-                            <input type="text" id="bookQuantity" name="quantity"
-                                   placeholder="Cantidad" class="form-control form-control-user">
                         </div>
 
                         <!--Botones-->
