@@ -70,14 +70,7 @@ public class AdministratorController
         Administrator administrator =
                 (Administrator) userService.findByEmail(principal.getName());
 
-        Library library = null;
-
-        for(Library lib: administrator.getLibraries())
-            if(nameLibrary.equals(lib.getName()))
-                library = lib;
-
-        if(library == null)
-            throw new Exception("La libraria no esta asociada con el administrador de la sesión");
+        Library library = libraryService.findByName("nameLibrary");
 
         model.addAttribute("library", library);
 
