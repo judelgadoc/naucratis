@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
-    <title> Libro</title>
+    <title> Libro </title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!--Configuración de estilos-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link th:href="@{/vendor/fontawesome-free/css/all.min.css}"rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
           rel="stylesheet">
     <link th:href="@{/css/estilos-Naucratis.css}" rel="stylesheet">
@@ -255,52 +255,82 @@
                     </li>
                 </ul>
             </nav>
-            <h1><span th:text="${book.name}"> NOMBRE </span></h1>
-            <img width="200px" th:src="'data:image/png;base64,'+${book.getImageBase64()}">
+            <section class="py-5">
+                <div class="container px-4 px-lg-5 my-5">
+                    <div class="row gx-5 gx-lg-5 align-items-center">
+                        <div class="col-md-4"><img class="card-img-top mb-5 mb-md-0"
+                                                   th:src="'data:image/png;base64,'+${book.getImageBase64()}"></div>
+                        <div class="col-md-6">
+                            <h1><span th:text="${book.name}"> NOMBRE </span></h1>
+                            <p class="lead">
+                            <ul>
+                                <li>
+                                    Autores:
+                                    <ul>
+                                        <li th:each="author: ${book.authors}">
+                                            <span th:text="${author.name}"> AUTOR </span>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>ISBN: <span th:text="${book.isbn}">          ISBN              </span></li>
+                                <li>Editorial: <span th:text="${book.editorial}">     EDITORIAL         </span></li>
+                                <li>Edición: <span th:text="${book.edition}">       EDICIÓN           </span></li>
+                                <li>Categoria: <span th:text="${book.category}">      CATEGORIA         </span></li>
+                                <li>Paginas: <span th:text="${book.getNumPages()}"> NUMERO DE PAGINAS </span></li>
+                                <li>Largo: <span th:text="${book.length}">        LARGO             </span></li>
+                                <li>Ancho: <span th:text="${book.width}">         ANCHO             </span></li>
+                                <li>Alto: <span th:text="${book.height}">        ALTO              </span></li>
+                            </ul>
+                            </p>
+                        </div>
+                        <div class="table-responsive">
+                            <div class="table table-bordered">
+                                <table>
+                                    <tr>
+                                        <td> ID</td>
+                                        <td> Condición</td>
+                                        <td> Estado</td>
+                                        <td> Precio</td>
+                                        <td> Ubicación</td>
+                                        <td> Descripción</td>
+                                    </tr>
+                                    <tr th:each="copy: ${copies}">
+                                        <td><span
+                                                th:text="${copy.id}">                                     ID BOOK     </span>
+                                        </td>
+                                        <td><span
+                                                th:text="${copy.condition}">                              CONDICION   </span>
+                                        </td>
+                                        <td><span th:text="${copy.status.toString()}"> DISPONIBLE </span></td>
+                                        <td><span
+                                                th:text="${copy.price}">                                  PRECIO      </span>
+                                        </td>
+                                        <td><span
+                                                th:text="${copy.site}">                                   UBICACION   </span>
+                                        </td>
+                                        <td><span
+                                                th:text="${copy.description}">                            DESCRIPCION </span>
+                                        </td>
+                                        <td>
+                                            <a th:href="@{'/transaction/start/' + ${nameLibrary} + '/' + ${copy.id}}">
+                                                <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                         fill="currentColor"
+                                                         class="bi bi-cart-fill" viewBox="0 0 16 16">
+                                                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                                                    </svg>
+                                                    Añadir al carrito
+                                                </button>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </table>
 
-            <ul>
-                <li>
-                    Autores:
-                    <ul>
-                        <li th:each="author: ${book.authors}">
-                            <span th:text="${author.name}"> AUTOR </span>
-                        </li>
-                    </ul>
-                </li>
-                <li>ISBN: <span th:text="${book.isbn}">          ISBN              </span></li>
-                <li>Editorial: <span th:text="${book.editorial}">     EDITORIAL         </span></li>
-                <li>Edición: <span th:text="${book.edition}">       EDICIÓN           </span></li>
-                <li>Categoria: <span th:text="${book.category}">      CATEGORIA         </span></li>
-                <li>Paginas: <span th:text="${book.getNumPages()}"> NUMERO DE PAGINAS </span></li>
-                <li>Largo: <span th:text="${book.length}">        LARGO             </span></li>
-                <li>Ancho: <span th:text="${book.width}">         ANCHO             </span></li>
-                <li>Alto: <span th:text="${book.height}">        ALTO              </span></li>
-            </ul>
-
-            <table>
-                <tr>
-                    <td> ID</td>
-                    <td> Condición</td>
-                    <td> Estado</td>
-                    <td> Precio</td>
-                    <td> Ubicación</td>
-                    <td> Descripción</td>
-                </tr>
-                <tr th:each="copy: ${copies}">
-                    <td><span th:text="${copy.id}">                                     ID BOOK     </span></td>
-                    <td><span th:text="${copy.condition}">                              CONDICION   </span></td>
-                    <td><span th:text="${copy.status.toString()}"> DISPONIBLE </span></td>
-                    <td><span th:text="${copy.price}">                                  PRECIO      </span></td>
-                    <td><span th:text="${copy.site}">                                   UBICACION   </span></td>
-                    <td><span th:text="${copy.description}">                            DESCRIPCION </span></td>
-                    <td>
-                        <a th:href="@{'/transaction/start/' + ${nameLibrary} + '/' + ${copy.id}}">
-                            <button type="button"> Agregar al carrito</button>
-                        </a>
-                    </td>
-                </tr>
-            </table>
-
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
     </div>
 </div>
@@ -314,14 +344,14 @@
 <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
 
 <!--Scripts personalizados para todas las páginas-->
-<script src="/static/js/naucratis.min.js"></script>
+<script src="/js/naucratis.min.js"></script>
 
 <!--Complementos de nivel de página-->
 <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
 <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
 <!--Secuencias de comandos personalizadas a nivel de página-->
-<script src="/static/js/demo/datatables-demo.js"></script>
+<script src="/js/demo/datatables-demo.js"></script>
 
 
 </body>
