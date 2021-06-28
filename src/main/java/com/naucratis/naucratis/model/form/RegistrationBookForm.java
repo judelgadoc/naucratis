@@ -68,8 +68,15 @@ public class RegistrationBookForm
     {
         this.authors = new ArrayList<>();
 
-        for(String author: list_authors.split(";"))
-            authors.add(new Author(author));
+        String[] listAuthors = list_authors.split(";");
+
+        if(listAuthors.length > 0) {
+            for (String author : list_authors.split(";")) {
+                authors.add(new Author(author));
+            }
+        } else {
+            authors.add(new Author(list_authors));
+        }
     }
 
     public boolean isAvailable() {

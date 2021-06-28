@@ -26,27 +26,6 @@
             <!--Barra de contenido-->
             <div th:replace="/user_no_register/home :: contentbar"/>
 
-            <!--Botones provisionales-->
-            <nav>
-                <ul>
-                    <li th:if="${#strings.equals(role,'administrator')}">
-                        <a th:href="@{/administrator/libraries}">
-                            <button type="button">Librerias</button>
-                        </a>
-                    </li>
-                    <li th:if="${role != null}">
-                        <a th:href="@{'/' + ${role}}">
-                            <button type="button"> Ver perfil</button>
-                        </a>
-                    </li>
-                    <li th:if="${role != null}">
-                        <form method="POST" th:action="@{/logout}">
-                            <input type="submit" value="Cerrar sesión"/>
-                        </form>
-                    </li>
-                </ul>
-            </nav>
-
             <!--Contenido de la página-->
             <!--Búsqueda y una imagen?
             <form form method="POST" th:action="@{'/register/search_book/' + ${nameLibrary}}" id="isbn">
@@ -236,12 +215,6 @@
                 </form>
             </center>
             -->
-
-            <!-- Footer-->
-            <footer class="py-5 bg-dark">
-                <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p>
-                </div>
-            </footer>
             <!-- Bootstrap core JS-->
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
             <!-- Core theme JS-->
