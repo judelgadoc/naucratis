@@ -15,6 +15,7 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/")
@@ -59,7 +60,28 @@ public class HomeController
         return "user_no_register/library/list_libraries";
     }
 
-    @GetMapping("libraries/{nameLibrary}")
+    @GetMapping("libraries/{libraryId}")
+    public String librarySpec(@PathVariable long libraryId, Model model) {
+        Optional<Library> libraryOptional = libraryService.getLibraryById(libraryId);
+        if(!libraryOptional.isPresent()){
+            return "redirect:user_no_register/library/list_libraries";
+        }
+        Library library = libraryOptional.get();
+        List<Book> books = new ArrayList<>();
+        for(Book bk: library.getBooks())
+            for(CopyBook copyBook: library.getInventory())
+                if(copyBook.getIsbn() == bk.getIsbn() && copyBook.getStatus().equals(CopyBook.Status.AVAILABLE)) {
+                    books.add(bk);
+                    break;
+                }
+        model.addAttribute("books", books);
+        model.addAttribute("nameLibrary", library.getName());
+        model.addAttribute("image", library.getImageBase64());
+        return "user_no_register/library/library";
+        
+    }
+    
+    /*@GetMapping("libraries/{nameLibrary}")
     public String librarySpec(@PathVariable String nameLibrary, Model model)
     {
         Library library = libraryService.findByName(nameLibrary);
@@ -75,7 +97,7 @@ public class HomeController
         model.addAttribute("nameLibrary", library.getName());
         model.addAttribute("image", library.getImageBase64());
         return "user_no_register/library/library";
-    }
+    }*/
 
     @GetMapping("libraries/{nameLibrary}/{isbn}")
     public String libraryBookSpec(@PathVariable String nameLibrary,

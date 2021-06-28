@@ -57,7 +57,7 @@
                                     <td th:text="${library.name}"/>
                                     <td th:text="${library.address}"/>
                                     <td th:text="${library.contactPhone}"/>
-                                    <td class="text-center"><a th:href="@{'/libraries/'+${library.name}}" id="libraryBooksButton" class="btn btn-info">Ver</a></td>
+                                    <td class="text-center"><a th:href="@{'/libraries/'+${library.id}}" id="libraryBooksButton" class="btn btn-info">Ver</a></td>
                                     <td class="text-center" sec:authorize="hasRole('ROLE_ADMINISTRATOR')"><a href="#" id="libraryAdmButton"><i class="fas fa-tools"></i></a></td>
                                 </tr>
                                 </tbody>
@@ -85,32 +85,6 @@
 
 <!--Secuencias de comandos personalizadas a nivel de página-->
 <script src="/js/demo/datatables-demo.js"></script>
-
-<script th:inline="javascript">
-    //Carga los datos de la biblioteca en la modal de edición
-    $('#editLibraryModal').on('show.bs.modal', event => {
-        let button = $(event.relatedTarget);
-        const libraryId = button.data('library-id');
-        const libraryName = button.data('library-name');
-        const libraryAddress = button.data('library-address');
-        const libraryContactPhone = button.data('library-contactphone');
-        $('#libraryIdEditModal').val(libraryId);
-        $('#libraryNameEditModal').val(libraryName);
-        $('#libraryAddressEditModal').val(libraryAddress);
-        $('#libraryContactPhoneEditModal').val(libraryContactPhone);
-    });
-
-    $('#deleteLibraryModal').on('show.bs.modal', event => {
-        let button = $(event.relatedTarget);
-        const libraryId = button.data('library-id');
-        const libraryName = button.data('library-name');
-        let action = "@{/library/edit?libraryId=" + libraryId + "}";
-        $('deleteLibraryModalForm').attr('th:action', action)
-        $('#libraryIdEditModal').val(libraryId);
-        $('#libraryNameEditModal').val(libraryName);
-
-    });
-</script>
 
 </body>
 
