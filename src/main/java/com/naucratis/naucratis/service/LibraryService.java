@@ -51,7 +51,8 @@ public class LibraryService {
 
     public void addBooks(RegistrationBookForm register) {
 
-        Library library = libraryRepository.findByName(register.getNameLibrary());
+        Library library = libraryRepository.findById(register.getLibraryId()).get();
+
         Book book =
                 bookService.exitsByIsbn(Long.parseLong(String.valueOf(register.getIsbn())))? bookService.findById(String.valueOf(register.getIsbn())):null;
 
