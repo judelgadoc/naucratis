@@ -54,10 +54,11 @@
                                 </thead>
                                 <tbody>
                                 <tr th:each="library: ${libraries}">
-                                    <td th:text="${library.name}"/>
+                                    <td><a th:text="${library.name}" th:href="@{'/libraries/'+${library.id}}"/></td>
                                     <td th:text="${library.address}"/>
                                     <td th:text="${library.contactPhone}"/>
-                                    <td class="text-center"><a th:href="@{'/libraries/'+${library.id}}" id="libraryBooksButton" class="btn btn-info">Ver</a></td>
+                                    <!--<td class="text-center"><a th:href="@{'/libraries/'+${library.id}}" id="libraryBooksButton" class="btn btn-info">Ver</a></td>-->
+                                    <td class="text-center"><a th:href="@{'/administrator/libraries/'+${library.id}+'/books'}" id="libraryBooksButton" class="btn btn-info">Ver</a></td>
                                     <td class="text-center" sec:authorize="hasRole('ROLE_ADMINISTRATOR')"><a th:href="@{'/administrator/libraries/'+${library.id}}" id="libraryAdmButton"><i class="fas fa-tools"></i></a></td>
                                 </tr>
                                 </tbody>
