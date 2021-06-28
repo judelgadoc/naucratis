@@ -192,14 +192,14 @@
               <!--Opciones de perfil, configuración y cerrar sesión-->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                    aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" th:href="@{'/' + ${role}}">
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                   Perfil
                 </a>
-                <a class="dropdown-item" href="#">
+                <!--<a class="dropdown-item" href="#">
                   <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                   Configuración
-                </a>
+                </a>-->
                 <div class="dropdown-divider"></div>
                 <!--Cerrar sesión es la unica que funciona, despliega una tarjeta para validar el cierre de sesión-->
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
@@ -224,9 +224,6 @@
               </li>
               <li th:if="${#strings.equals(role,'customer')}">
                 <a th:href="@{/customer/shoppingCart}"><button type="button">Carrito</button> </a>
-              </li>
-              <li th:if="${role != null}">
-                <a th:href="@{'/' + ${role}}"> <button type="button"> Ver perfil </button></a>
               </li>
             </ul>
           </nav>
