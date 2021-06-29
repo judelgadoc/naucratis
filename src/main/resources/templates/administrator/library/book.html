@@ -106,13 +106,13 @@
                                         <td><span th:text="${copy.price}"> PRECIO </span></td>
                                         <td><span th:text="${copy.site}"> UBICACION </span></td>
                                         <td><span th:text="${copy.description}"> DESCRIPCION </span></td>
-                                        <td><a th:href="@{'/modify/'+${nameLibrary}+'/book/'+${copy.id}}">
+                                        <td><a th:href="@{'/modify/'+${libraryId}+'/book/'+${copy.id}}">
                                             <button class="btn btn-outline-dark flex-shrink-0" type="button">
                                                 Modificar
                                             </button>
                                         </a></td>
                                         <td>
-                                            <a th:href="@{'/eliminate/' + ${nameLibrary} + '/book/' + ${copy.id} + '/' + ${copy.isbn}}">
+                                            <a th:href="@{'/eliminate/' + ${libraryId} + '/book/' + ${copy.id} + '/' + ${copy.isbn}}">
                                                 <button class="btn btn-outline-dark flex-shrink-0" type="button">
                                                     Eliminar
                                                 </button>
@@ -125,7 +125,7 @@
                         </p>
                         <div class="d-flex">
                             <br>
-                            <a th:href="@{'/register/copyBook/' + ${nameLibrary} + '/' + ${isbn}}">
+                            <a th:href="@{'/register/copyBook/' + ${libraryId} + '/' + ${isbn}}">
                                 <button class="btn btn-outline-dark flex-shrink-0" type="button">
                                     Agregar Copia
                                 </button>

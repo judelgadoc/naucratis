@@ -42,15 +42,15 @@ public class EliminateController {
         return "redirect:/administrator/libraries/" + nameLibrary;
     }
 
-    @GetMapping("/{name_library}/book/{id_book}/{isbn}")
+    @GetMapping("/{libraryId}/book/{id_book}/{isbn}")
     public String eliminateBook(@PathVariable(name = "id_book") String idBook,
                                 @PathVariable String isbn,
-                                @PathVariable(name = "name_library") String nameLibrary)
+                                @PathVariable(name = "libraryId") long libraryId)
     {
         boolean lastCopy =
-                libraryService.eliminateBook(nameLibrary, Long.parseLong(idBook), Long.parseLong(isbn));
+                libraryService.eliminateBook(libraryId, Long.parseLong(idBook), Long.parseLong(isbn));
 
-        return "redirect:/administrator/libraries/" + nameLibrary + (lastCopy == true ? "/books": "/" + isbn);
+        return "redirect:/administrator/libraries/" + libraryId + (lastCopy == true ? "/books": "/" + isbn);
     }
 
     @GetMapping("/shoppingCart/order/{idOrder}")

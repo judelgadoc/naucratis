@@ -6,6 +6,7 @@ import lombok.Data;
 public class CopyBookForm
 {
     private String nameLibrary;
+    private Long libraryId;
 
     private long id;
     private long isbn;

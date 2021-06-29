@@ -54,7 +54,7 @@
                                 </thead>
                                 <tbody>
                                 <tr th:each="library: ${libraries}">
-                                    <td><a th:text="${library.name}" th:href="@{'/libraries/'+${library.id}}"/></td>
+                                    <td th:text="${library.name}"/>
                                     <td th:text="${library.address}"/>
                                     <td th:text="${library.contactPhone}"/>
                                     <td class="text-center">

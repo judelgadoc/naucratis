@@ -106,9 +106,13 @@ public class LibraryService {
 
     //////////////////////////////////////////////////////////////////////////////////////////////
 
-    public boolean eliminateBook(String nameLibrary, long id, long isbn)
+    public boolean eliminateBook(long libraryId, long id, long isbn)
     {
-        Library library   = libraryRepository.findByName(nameLibrary);
+        Optional<Library> libraryOptional = libraryRepository.findById(libraryId);
+        if(!libraryOptional.isPresent()){
+            return false;
+        }
+        Library library = libraryOptional.get();
         CopyBook copyBook = copyBookService.findById(id);
 
         int count = 0;

@@ -41,7 +41,7 @@
             </ul>
         </nav>
 
-        <form method="POST" th:action="@{'/modify/'+${name_library}+'/book/'+${copyBook.id}}" id="copyBookForm">
+        <form method="POST" th:action="@{'/modify/'+${libraryId}+'/book/'+${copyBook.id}}" id="copyBookForm">
             <input type="hidden" th:value="${copyBook.id}" name="id">
             <input type="hidden" th:value="${copyBook.isbn}" name="isbn">
             <div class="table-responsive">

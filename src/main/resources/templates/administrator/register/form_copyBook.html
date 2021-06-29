@@ -30,6 +30,7 @@
                 <form method="POST" th:action="@{/register/copyBookProcess}" id="copyBookForm">
                     <input type="hidden" th:value="${isbn}" name="isbn">
                     <input type="hidden" th:value="${nameLibrary}" name="nameLibrary">
+                    <input type="hidden" th:value="${libraryId}" name="libraryId">
                     <div class="table-responsive">
                     <table>
                         <tr>

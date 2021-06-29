@@ -104,14 +104,19 @@ public class RegistrationController
         return"redirect:/administrator/libraries/"+registrationBookForm.getLibraryId()+"/books";
     }
 
-    @GetMapping("/copyBook/{nameLibrary}/{isbn}")
-    public String registerCopyBook(@PathVariable String nameLibrary,
+    @GetMapping("/copyBook/{libraryId}/{isbn}")
+    public String registerCopyBook(@PathVariable long libraryId,
                                    @PathVariable String isbn,
-                                   Model model)
-    {
-        model.addAttribute("nameLibrary", nameLibrary);
+                                   Model model) throws Exception {
+        Optional<Library> libraryOptional = libraryService.getLibraryById(libraryId);
+        if(!libraryOptional.isPresent()){
+            throw new Exception("No se encuentra la librería con id " + libraryId);
+        }
+        Library library = libraryOptional.get();
+        model.addAttribute("libraryId", libraryId);
+        model.addAttribute("nameLibrary", library.getName());
         model.addAttribute("isbn", isbn);
-        model.addAttribute("sites", libraryService.findByName(nameLibrary).getSites());
+        model.addAttribute("sites", library.getSites());
 
         return "administrator/register/form_copyBook";
     }
@@ -120,7 +125,7 @@ public class RegistrationController
     public String processRegistrarionCopyBook(CopyBookForm copyBookForm)
     {
         libraryService.addBook(copyBookForm);
-        return "redirect:/administrator/libraries/" + copyBookForm.getNameLibrary() + "/" + copyBookForm.getIsbn();
+        return "redirect:/administrator/libraries/" + copyBookForm.getLibraryId() + "/" + copyBookForm.getIsbn();
     }
 
     @PostMapping("/search_book/{libraryId}")
