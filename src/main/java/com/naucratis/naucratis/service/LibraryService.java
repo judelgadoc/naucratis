@@ -51,6 +51,7 @@ public class LibraryService {
 
     public void addBooks(RegistrationBookForm register) {
 
+        Optional<Library> libraryOptional = libraryRepository.findById(register.getLibraryId());
         Library library = libraryRepository.findById(register.getLibraryId()).get();
 
         Book book =

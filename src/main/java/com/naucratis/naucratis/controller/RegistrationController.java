@@ -101,7 +101,7 @@ public class RegistrationController
     public String processRegistrationBook(RegistrationBookForm registrationBookForm)
     {
         libraryService.addBooks(registrationBookForm);
-        return"redirect:/administrator/libraries/"+registrationBookForm.getLibraryId();
+        return"redirect:/administrator/libraries/"+registrationBookForm.getLibraryId()+"/books";
     }
 
     @GetMapping("/copyBook/{nameLibrary}/{isbn}")

@@ -47,17 +47,18 @@
                 </ul>
             </nav>-->
             <!-- contenido de página-->
-            <form form method="POST" th:action="@{'/register/search_book/' + ${nameLibrary}}" id="isbn">
+            <form class="m-lg-2" method="POST" th:action="@{'/register/search_book/' + ${nameLibrary}}" id="isbn">
                 <label>Buscar libro: </label>
-                <input type="search" name="isbn">
-                <button type="submit"> Buscar</button>
+                <input type="search" name="isbn" placeholder="ISBN">
+                <button class="btn btn-secondary" type="submit"> Buscar</button>
             </form>
 
+            <br>
             <img th:if="${book != null}" width="200px" th:src="'data:image/png;base64,' + ${book.getImageBase64()}">
             <center>
                 <form method="POST" th:action="@{/register/book}" id="registrationBookForm"
                       enctype="multipart/form-data">
-                    <input type="hidden" th:value="${nameLibrary}" name="nameLibrary">
+                    <input type="hidden" th:value="${libraryId}" name="libraryId">
                     <div class="table-responsive">
                         <table>
                             <tr>
@@ -108,18 +109,7 @@
                                 <td><label for="price">Precio: </label></td>
                                 <td><input type="text" name="price"/></td>
                             </tr>
-                            <tr>
-                                <td><label for="site">Sitio: </label></td>
-                                <td>
-                                    <select name="site">
-                                        <div th:each="site: ${sites}">
-                                            <option th:value="${site.address}">
-                                                <span th:text="${site.address}"> DIRECCIÓN </span>
-                                            </option>
-                                        </div>
-                                    </select>
-                                </td>
-                            </tr>
+
                             <tr th:if="${book == null}">
                                 <td><label for="cover">Portada: </label></td>
                                 <td><input type="file" name="cover"/></td>
@@ -138,11 +128,6 @@
 
                 </form>
             </center>
-            <!-- Footer-->
-            <footer class="py-5 bg-dark">
-                <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p>
-                </div>
-            </footer>
             <!-- Bootstrap core JS-->
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
             <!-- Core theme JS-->
