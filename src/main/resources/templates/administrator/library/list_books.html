@@ -72,20 +72,17 @@
                                     <th>Editorial</th>
                                     <th>Edicion</th>
                                     <th>Categoria</th>
-
+                                    <th>Más información</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <div th:each="book: ${library.books}">
                                     <tr>
-                                        <td>
-                                            <a th:href="@{'/administrator/libraries/'+${library.name}+'/'+${book.isbn}}">
-                                                <spam th:text="${book.name}"> NOMBRE LIBRO</spam>
-                                            </a></td>
-
-                                        <td><span th:text="${book.editorial}"></span></td>
-                                        <td><span th:text="${book.edition}"></span></td>
-                                        <td><span th:text="${book.category}"></span></td>
+                                        <td><span th:text="${book.name}">Nombre libro</span></td>
+                                        <td><span th:text="${book.editorial}">Editorial</span></td>
+                                        <td><span th:text="${book.edition}">Edicion</span></td>
+                                        <td><span th:text="${book.category}">Categoria</span></td>
+                                        <td><a th:href="@{'/administrator/libraries/'+${library.id}+'/'+${book.isbn}}" class="btn btn-info">Ver</a></td>
                                     </tr>
                                 </div>
 

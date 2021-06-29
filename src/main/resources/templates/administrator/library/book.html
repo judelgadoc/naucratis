@@ -56,7 +56,7 @@
                 <div class="container px-4 px-lg-5 my-5">
                     <div class="row gx-5 gx-lg-5 align-items-center">
                         <div class="col-md-4"><img class="card-img-top mb-5 mb-md-0"
-                                                   th:src="'data:image/png;base64,'+${book.getImageBase64()}"></div>
+                                                   th:src="(${book.getImageBase64()} == 'noImage') ? ('https://static.vecteezy.com/system/resources/previews/001/235/934/non_2x/template-of-blank-book-cover-free-photo.jpg') : ('data:image/png;base64,'+${book.getImageBase64()})"></div>
 
                         <div class="col-md-6">
 

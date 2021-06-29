@@ -83,8 +83,8 @@ public class AdministratorController
         return "administrator/library/list_books";
     }
 
-    @GetMapping("/libraries/{name_library}/{isbn}")
-    public String book(@PathVariable(name = "name_library") String nameLibrary,
+    @GetMapping("/libraries/{libraryId}/{isbn}")
+    public String book(@PathVariable(name = "libraryId") long libraryId,
                        @PathVariable(name = "isbn") String isbn,
                        Principal principal,
                        Model model) throws Exception {
@@ -92,14 +92,12 @@ public class AdministratorController
         Administrator administrator =
                 (Administrator) userService.findByEmail(principal.getName());
 
-        Library library = null;
+        Optional<Library> libraryOptional = libraryService.getLibraryById(libraryId);
+        if(!libraryOptional.isPresent()) {
+            throw new Exception("No se encuentra librería con id " + libraryId);
+        }
 
-        for(Library lib: administrator.getLibraries())
-            if(nameLibrary.equals(lib.getName()))
-                library = lib;
-
-        if(library == null)
-            throw new Exception("La libraria no esta asociada con el administrador de la sesión");
+        Library library = libraryOptional.get();
 
         Book book = null;
 
@@ -119,7 +117,8 @@ public class AdministratorController
 
         model.addAttribute("book", book);
         model.addAttribute("copies", copies);
-        model.addAttribute("nameLibrary", nameLibrary);
+        model.addAttribute("nameLibrary", library.getName());
+        model.addAttribute("libraryId", libraryId);
 
         return "administrator/library/book";
     }
