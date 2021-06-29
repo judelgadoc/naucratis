@@ -37,7 +37,7 @@
       <hr class="sidebar-divider my-0">
 
       <!--División-->
-      <hr class="sidebar-divider">
+      <hr class="sidebar-divider" sec:authorize="hasRole('ROLE_CUSTOMER') || !isAuthenticated()">
 
       <!--Subtitulo: "Usuario"-->
       <div class="sidebar-heading" sec:authorize="hasRole('ROLE_CUSTOMER') || !isAuthenticated()">Usuario</div>
