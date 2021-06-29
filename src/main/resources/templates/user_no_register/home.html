@@ -36,21 +36,14 @@
       <!--División-->
       <hr class="sidebar-divider my-0">
 
-      <!--Subtitulo: "Funcionalidades"-->
-      <li class="nav-item active">
-        <a class="nav-link" href="#">
-          <i class="fas fa-address-book"></i>
-          <span>Funcionalidades</span></a>
-      </li>
-
       <!--División-->
       <hr class="sidebar-divider">
 
       <!--Subtitulo: "Usuario"-->
-      <div class="sidebar-heading">Usuario</div>
+      <div class="sidebar-heading" sec:authorize="hasRole('ROLE_CUSTOMER') || !isAuthenticated()">Usuario</div>
 
       <!--Funcionalidad buscar-->
-      <li class="nav-item">
+      <li class="nav-item" sec:authorize="hasRole('ROLE_CUSTOMER') || !isAuthenticated()">
         <a class="nav-link" href="blanco.html">
           <i class="fas fa-search"></i>
           <span>Buscar</span></a>

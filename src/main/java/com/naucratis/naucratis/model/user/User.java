@@ -47,7 +47,7 @@ public class User implements UserDetails {
 
     public String getImageBase64()
     {
-        return image == null ?"": Base64.getEncoder().encodeToString(image);
+        return image == null ? "noImage" : Base64.getEncoder().encodeToString(image);
     }
 
     @Override
