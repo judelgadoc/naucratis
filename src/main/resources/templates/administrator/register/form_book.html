@@ -47,15 +47,15 @@
                 </ul>
             </nav>-->
             <!-- contenido de página-->
-            <form class="m-lg-2" method="POST" th:action="@{'/register/search_book/' + ${nameLibrary}}" id="isbn">
+            <form class="m-lg-2" method="POST" th:action="@{'/register/search_book/' + ${libraryId}}" id="isbn">
                 <label>Buscar libro: </label>
                 <input type="search" name="isbn" placeholder="ISBN">
                 <button class="btn btn-secondary" type="submit"> Buscar</button>
             </form>
 
             <br>
-            <img th:if="${book != null}" width="200px" th:src="'data:image/png;base64,' + ${book.getImageBase64()}">
             <center>
+                <img th:if="${book != null}" width="200px" th:src="(${book.getImageBase64()} == 'noImage') ? ('https://static.vecteezy.com/system/resources/previews/001/235/934/non_2x/template-of-blank-book-cover-free-photo.jpg') : ('data:image/png;base64,' + ${book.getImageBase64()})">
                 <form method="POST" th:action="@{/register/book}" id="registrationBookForm"
                       enctype="multipart/form-data">
                     <input type="hidden" th:value="${libraryId}" name="libraryId">

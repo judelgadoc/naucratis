@@ -49,6 +49,9 @@ public class Book
 
     public String getImageBase64()
     {
+        if(coverImage == null) {
+            return "noImage";
+        }
         return Base64.getEncoder().encodeToString(coverImage);
     }
 

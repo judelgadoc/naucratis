@@ -123,13 +123,17 @@ public class RegistrationController
         return "redirect:/administrator/libraries/" + copyBookForm.getNameLibrary() + "/" + copyBookForm.getIsbn();
     }
 
-    @PostMapping("/search_book/{nameLibrary}")
-    public String searchBook(@PathVariable String nameLibrary, String isbn, Model model)
-    {
+    @PostMapping("/search_book/{libraryId}")
+    public String searchBook(@PathVariable long libraryId, String isbn, Model model) throws Exception {
         Book book = bookService.exitsByIsbn(Long.parseLong(isbn))? bookService.findById(isbn):null;
-
-        model.addAttribute("nameLibrary", nameLibrary);
-        model.addAttribute("sites", libraryService.findByName(nameLibrary).getSites());
+        Optional<Library> libraryOptional = libraryService.getLibraryById(libraryId);
+        if(!libraryOptional.isPresent()){
+            throw new Exception("No existe la librería con id " + libraryId);
+        }
+        Library library = libraryOptional.get();
+        model.addAttribute("nameLibrary", library.getName());
+        model.addAttribute("libraryId", libraryId);
+        model.addAttribute("sites", libraryService.getLibraryById(libraryId).get().getSites());
         model.addAttribute("book", book);
 
         return "administrator/register/form_book";

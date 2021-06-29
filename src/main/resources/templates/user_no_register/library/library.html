@@ -90,8 +90,7 @@
                             <div class= "col-sm-6 col-md-4">
                                 <p>
                                 <a class="nav-link" th:href="@{'/libraries/'+${nameLibrary}+'/'+${book.isbn}}" role="button">
-                                    <img width="300px" th:src="'data:image/png;base64,'+${book.getImageBase64()}"
-                                          />
+                                    <img width="300px" th:src="'data:image/png;base64,'+${book.getImageBase64()}"/>
                                 </a>
                                 <span th:text="${book.name}">NOMBRE</span></p>
                             </div>
