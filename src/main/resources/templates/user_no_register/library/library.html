@@ -14,6 +14,54 @@
           rel="stylesheet">
     <link th:href="@{/css/estilos-Naucratis.css}" rel="stylesheet">
     <link th:href="@{/vendor/datatables/dataTables.bootstrap4.min.css}" rel="stylesheet">
+    <style>
+        div.gallery {
+            border: 1px solid #ccc;
+        }
+
+        div.gallery:hover {
+            border: 1px solid #777;
+        }
+
+        div.gallery img {
+            width: 100%;
+            height: auto;
+        }
+
+        div.desc {
+            padding: 15px;
+            text-align: center;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .responsive {
+            padding: 0 6px;
+            float: left;
+            width: 24.99999%;
+        }
+
+        @media only screen and (max-width: 700px) {
+            .responsive {
+                width: 49.99999%;
+                margin: 6px 0;
+            }
+        }
+
+        @media only screen and (max-width: 500px) {
+            .responsive {
+                width: 100%;
+            }
+        }
+
+        .clearfix:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    </style>
 </head>
 <body>
 
@@ -32,29 +80,30 @@
             <div class="container">
 
                 <div class="container-fluid">
-                    <h1 class="text-center">BIBLIOTECA <span th:text="${nameLibrary}"> NOMBRE LIBRERIA </span></h1>
-                    <img width= "200px" th:src="'data:image/png;base64,'+${image}">
+                    <h1 class="text-center">BIBLIOTECA <span th:text="${nameLibrary}"> NOMBRE LIBRERIA </span>
+                        <img width="140px" th:src="'data:image/png;base64,'+${image}"></h1>
                 </div>
 
-            <!--Fila de libros 1-->
-
-                <div class="d-flex justify-content-md-around row">
-                    <div th:each="book: ${books}">
-                        <div class= "container-fluid">
-                            <a class="nav-link" th:href="@{'/libraries/'+${nameLibrary}+'/'+${book.isbn}}" role="button">
-                                <img class="img-thumbnail" th:src="'data:image/png;base64,'+${book.getImageBase64()}"
-                                     style="max-width: 90%; max-height: 100%;"/>
-                            </a>
-                            <p><span th:text="${book.name}">NOMBRE</span></p>
+                <!--Fila de libros 1-->
+                    <div class="d-flex justify-content-md-around row">
+                        <div th:each="book: ${books}">
+                            <div class= "col-sm-6 col-md-4">
+                                <p>
+                                <a class="nav-link" th:href="@{'/libraries/'+${nameLibrary}+'/'+${book.isbn}}" role="button">
+                                    <img width="300px" th:src="'data:image/png;base64,'+${book.getImageBase64()}"
+                                          />
+                                </a>
+                                <span th:text="${book.name}">NOMBRE</span></p>
+                            </div>
                         </div>
                     </div>
-                </div>
+
             </div>
 
         </div>
     </div>
 </div>
-</div>
+
 <div th:replace="/user_no_register/home :: utils"/>
 
 <!--Bootstrap complementado con JavaScript-->
