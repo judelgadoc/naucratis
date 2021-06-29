@@ -80,24 +80,6 @@ public class HomeController
         return "user_no_register/library/library";
         
     }
-    
-    /*@GetMapping("libraries/{nameLibrary}")
-    public String librarySpec(@PathVariable String nameLibrary, Model model)
-    {
-        Library library = libraryService.findByName(nameLibrary);
-        List<Book> books = new ArrayList<>();
-
-        for(Book bk: library.getBooks())
-            for(CopyBook copyBook: library.getInventory())
-                if(copyBook.getIsbn() == bk.getIsbn() && copyBook.getStatus().equals(CopyBook.Status.AVAILABLE)) {
-                    books.add(bk);
-                    break;
-                }
-        model.addAttribute("books", books);
-        model.addAttribute("nameLibrary", library.getName());
-        model.addAttribute("image", library.getImageBase64());
-        return "user_no_register/library/library";
-    }*/
 
     @GetMapping("libraries/{nameLibrary}/{isbn}")
     public String libraryBookSpec(@PathVariable String nameLibrary,
