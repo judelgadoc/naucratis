@@ -60,7 +60,6 @@ public class StatisticsController {
         }
 
         for (Object[] x : bspm) {
-            System.out.println(x[0].getClass());
             labelsBookSellingPerMonth.add( (BigInteger) x[0]);
             valuesBookSellingPerMonth.add( (double) x[1]);
         }
