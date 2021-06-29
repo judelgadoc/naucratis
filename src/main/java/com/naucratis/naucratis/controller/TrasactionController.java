@@ -38,19 +38,23 @@ public class TrasactionController
         return "redirect:/customer";
     }
 
-    @GetMapping("/finishing/{nameLibrary}/{idSale}")
+    @GetMapping("/finishing/{libraryId}/{idSale}")
     public String finishing(@PathVariable String idSale,
-                           @PathVariable String nameLibrary)
+                           @PathVariable long libraryId)
     {
         libraryService.finished(idSale);
-        return "redirect:/administrator/libraries/" + nameLibrary;
+        return "redirect:/administrator/libraries/" + libraryId;
     }
 
-    @GetMapping("/cancelling/{nameLibrary}/{idSale}")
+    @GetMapping("/cancelling/{libraryId}/{idSale}")
     public String cancelling(@PathVariable String idSale,
-                             @PathVariable String nameLibrary)
+                             @PathVariable long libraryId)
     {
-        libraryService.cancelled(idSale, nameLibrary);
-        return "redirect:/administrator/libraries/" + nameLibrary;
+        try {
+            libraryService.cancelled(idSale, libraryId);
+        } catch (Exception e) {
+            return "redirect:/administrator/libraries/" + libraryId + "?failure";
+        }
+        return "redirect:/administrator/libraries/" + libraryId;
     }
 }

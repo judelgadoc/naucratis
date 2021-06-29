@@ -66,8 +66,8 @@
                                     <td th:text="${sale.email}"/>
                                     <td th:text="${sale.status.toString()}"/>
                                     <td th:text="${sale.copyBook.price}"/>
-                                    <td th:if="${sale.status.toString().equals('PROCESSING')}"><a th:href="@{'/transaction/finishing/' + ${library.id} + '/' + ${sale.id}}" class="btn btn-primary">Finalizar</a></td>
-                                    <td th:if="${sale.status.toString().equals('PROCESSING')}"><a th:href="@{'/transaction/cancelling/' + ${library.id} + '/' + ${sale.id}}" class="btn btn-secondary">Cancelar</a></td>
+                                    <td><a th:if="${sale.status.toString().equals('PROCESSING')}" th:href="@{'/transaction/finishing/' + ${library.id} + '/' + ${sale.id}}" class="btn btn-primary">Finalizar</a></td>
+                                    <td><a th:if="${sale.status.toString().equals('PROCESSING')}" th:href="@{'/transaction/cancelling/' + ${library.id} + '/' + ${sale.id}}" class="btn btn-secondary">Cancelar</a></td>
                                 </tr>
                                 </tbody>
                             </table>
