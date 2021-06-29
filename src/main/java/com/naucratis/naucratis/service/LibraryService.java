@@ -195,12 +195,14 @@ public class LibraryService {
         purchaseRepository.save(purchase);
     }
 
-    public void cancelled(String idSale, String nameLibrary)
-    {
+    public void cancelled(String idSale, long libraryId) throws Exception {
         Sale sale         = saleRepository.findById(Long.valueOf(idSale)).get();
         Purchase purchase = purchaseRepository.findById(sale.getIdPurchase()).get();
-        Library library   = libraryRepository.findByName(nameLibrary);
-
+        Optional<Library> libraryOptional = libraryRepository.findById(libraryId);
+        if(!libraryOptional.isPresent()){
+            throw new Exception("No existe la librería con id " + libraryId);
+        }
+        Library library = libraryOptional.get();
         CopyBook copyBook = copyBookService.findById(sale.getCopyBook().getId());
         copyBook.setStatus(CopyBook.Status.AVAILABLE);
 
