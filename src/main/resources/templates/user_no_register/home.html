@@ -43,11 +43,11 @@
       <div class="sidebar-heading" sec:authorize="hasRole('ROLE_CUSTOMER') || !isAuthenticated()">Usuario</div>
 
       <!--Funcionalidad buscar-->
-      <li class="nav-item" sec:authorize="hasRole('ROLE_CUSTOMER') || !isAuthenticated()">
+      <!-- li class="nav-item" sec:authorize="hasRole('ROLE_CUSTOMER') || !isAuthenticated()">
         <a class="nav-link" href="blanco.html">
           <i class="fas fa-search"></i>
           <span>Buscar</span></a>
-      </li>
+      </li -->
 
       <!--Funcionalidad ver sedes-->
       <li class="nav-item" sec:authorize="hasRole('ROLE_CUSTOMER') || !isAuthenticated()">
@@ -79,20 +79,20 @@
       <div class="sidebar-heading" sec:authorize="hasRole('ROLE_ADMINISTRATOR')">Administrador</div>
 
       <!--Funcionalidad inventario-->
-      <li class="nav-item" sec:authorize="hasRole('ROLE_ADMINISTRATOR')">
+      <!-- li class="nav-item" sec:authorize="hasRole('ROLE_ADMINISTRATOR')">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
            aria-expanded="true" aria-controls="collapsePages">
           <i class="fas fa-list-ul"></i>
           <span>Inventario</span>
-        </a>
+        </a-->
         <!--Dos enlaces con cada una de las funcionalidades del inventario-->
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <!--div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="blanco.html">Añadir libro</a>
             <a class="collapse-item" href="inventario.html">Editar libro</a>
           </div>
         </div>
-      </li>
+      </li-->
 
       <!--Funcionalidad sedes-->
       <li class="nav-item" sec:authorize="hasRole('ROLE_ADMINISTRATOR')">
